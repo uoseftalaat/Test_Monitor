@@ -3,15 +3,15 @@
   "projectName": "ARM",
   "description": "Asset & Resource Management Platform",
   "repoUrl": "https://github.com/Areeb-Innovative-Technologies/arm_test",
-  "lastUpdated": "2026-10-15T12:17:18.089Z",
+  "lastUpdated": "2026-10-15T13:22:24.651Z",
   "retentionDays": 30,
   "summary": {
-    "total": 15,
-    "passed": 10,
+    "total": 880,
+    "passed": 869,
     "failed": 3,
     "flaky": 2,
-    "skipped": 0,
-    "passRate": 66.7
+    "skipped": 6,
+    "passRate": 98.8
   },
   "layers": {
     "web": {
@@ -25,12 +25,12 @@
     },
     "api": {
       "name": "API",
-      "total": 5,
-      "passed": 3,
+      "total": 870,
+      "passed": 862,
       "failed": 1,
       "flaky": 1,
-      "skipped": 0,
-      "passRate": 60
+      "skipped": 6,
+      "passRate": 99.1
     },
     "mobile": {
       "name": "Mobile",
