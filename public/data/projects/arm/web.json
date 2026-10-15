@@ -1,1 +1,1022 @@
-
+{
+  "projectId": "arm",
+  "projectName": "ARM",
+  "layer": "web",
+  "layerName": "Web",
+  "lastUpdated": "2026-10-15T13:42:21.441Z",
+  "summary": {
+    "total": 51,
+    "passed": 45,
+    "failed": 5,
+    "flaky": 1,
+    "skipped": 0,
+    "passRate": 88.2
+  },
+  "tests": [
+    {
+      "id": "arm-web-462a82ccafe9165a5857-c93eb8553a3d95488620",
+      "layer": "web",
+      "suite": "web/common/auth.spec.ts > Admin login & logout",
+      "title": "valid admin login lands on the dashboard",
+      "file": "web/common/auth.spec.ts",
+      "currentStatus": "passed",
+      "lastRunAt": "2026-10-15T13:42:21.441Z",
+      "durationMs": 3630,
+      "latestError": null,
+      "history30d": [
+        {
+          "date": "2026-10-15",
+          "runId": "38742263279",
+          "status": "passed",
+          "durationMs": 3630
+        }
+      ]
+    },
+    {
+      "id": "arm-web-462a82ccafe9165a5857-6e2415c95a2027aa0ebd",
+      "layer": "web",
+      "suite": "web/common/auth.spec.ts > Admin login & logout",
+      "title": "login refuses malformed email invalid-email",
+      "file": "web/common/auth.spec.ts",
+      "currentStatus": "passed",
+      "lastRunAt": "2026-10-15T13:42:21.441Z",
+      "durationMs": 2686,
+      "latestError": null,
+      "history30d": [
+        {
+          "date": "2026-10-15",
+          "runId": "38742263279",
+          "status": "passed",
+          "durationMs": 2686
+        }
+      ]
+    },
+    {
+      "id": "arm-web-462a82ccafe9165a5857-7a1ac568cbf8b1c1ff86",
+      "layer": "web",
+      "suite": "web/common/auth.spec.ts > Admin login & logout",
+      "title": "login refuses malformed email @domain.com",
+      "file": "web/common/auth.spec.ts",
+      "currentStatus": "passed",
+      "lastRunAt": "2026-10-15T13:42:21.441Z",
+      "durationMs": 2109,
+      "latestError": null,
+      "history30d": [
+        {
+          "date": "2026-10-15",
+          "runId": "38742263279",
+          "status": "passed",
+          "durationMs": 2109
+        }
+      ]
+    },
+    {
+      "id": "arm-web-462a82ccafe9165a5857-bf58d4ecee9aab253a76",
+      "layer": "web",
+      "suite": "web/common/auth.spec.ts > Admin login & logout",
+      "title": "login refuses malformed email user@",
+      "file": "web/common/auth.spec.ts",
+      "currentStatus": "passed",
+      "lastRunAt": "2026-10-15T13:42:21.441Z",
+      "durationMs": 1824,
+      "latestError": null,
+      "history30d": [
+        {
+          "date": "2026-10-15",
+          "runId": "38742263279",
+          "status": "passed",
+          "durationMs": 1824
+        }
+      ]
+    },
+    {
+      "id": "arm-web-462a82ccafe9165a5857-d5df338c680fbc86135b",
+      "layer": "web",
+      "suite": "web/common/auth.spec.ts > Admin login & logout",
+      "title": "login refuses a password shorter than 8 characters",
+      "file": "web/common/auth.spec.ts",
+      "currentStatus": "passed",
+      "lastRunAt": "2026-10-15T13:42:21.441Z",
+      "durationMs": 1747,
+      "latestError": null,
+      "history30d": [
+        {
+          "date": "2026-10-15",
+          "runId": "38742263279",
+          "status": "passed",
+          "durationMs": 1747
+        }
+      ]
+    },
+    {
+      "id": "arm-web-462a82ccafe9165a5857-8495f58508960cbc9a6f",
+      "layer": "web",
+      "suite": "web/common/auth.spec.ts > Admin login & logout",
+      "title": "login refuses an unknown well-formed email",
+      "file": "web/common/auth.spec.ts",
+      "currentStatus": "passed",
+      "lastRunAt": "2026-10-15T13:42:21.441Z",
+      "durationMs": 3045,
+      "latestError": null,
+      "history30d": [
+        {
+          "date": "2026-10-15",
+          "runId": "38742263279",
+          "status": "passed",
+          "durationMs": 3045
+        }
+      ]
+    },
+    {
+      "id": "arm-web-462a82ccafe9165a5857-bfa1b2c424320a202a3e",
+      "layer": "web",
+      "suite": "web/common/auth.spec.ts > Admin login & logout",
+      "title": "sign out from the admin panel returns to login",
+      "file": "web/common/auth.spec.ts",
+      "currentStatus": "passed",
+      "lastRunAt": "2026-10-15T13:42:21.441Z",
+      "durationMs": 3668,
+      "latestError": null,
+      "history30d": [
+        {
+          "date": "2026-10-15",
+          "runId": "38742263279",
+          "status": "passed",
+          "durationMs": 3668
+        }
+      ]
+    },
+    {
+      "id": "arm-web-b749897ab965aa16ab42-597dbfc049ca0ff9400e",
+      "layer": "web",
+      "suite": "web/common/encryption.spec.ts > Encryption unlock / lock",
+      "title": "unlock with the configured key decrypts the session",
+      "file": "web/common/encryption.spec.ts",
+      "currentStatus": "passed",
+      "lastRunAt": "2026-10-15T13:42:21.441Z",
+      "durationMs": 5665,
+      "latestError": null,
+      "history30d": [
+        {
+          "date": "2026-10-15",
+          "runId": "38742263279",
+          "status": "passed",
+          "durationMs": 5665
+        }
+      ]
+    },
+    {
+      "id": "arm-web-b749897ab965aa16ab42-9d654f46042c1f81e8c2",
+      "layer": "web",
+      "suite": "web/common/encryption.spec.ts > Encryption unlock / lock",
+      "title": "lock data re-encrypts this browser session",
+      "file": "web/common/encryption.spec.ts",
+      "currentStatus": "passed",
+      "lastRunAt": "2026-10-15T13:42:21.441Z",
+      "durationMs": 7020,
+      "latestError": null,
+      "history30d": [
+        {
+          "date": "2026-10-15",
+          "runId": "38742263279",
+          "status": "passed",
+          "durationMs": 7020
+        }
+      ]
+    },
+    {
+      "id": "arm-web-42b5b7b9e9b33cac3607-5dddf4b55e6c12600106",
+      "layer": "web",
+      "suite": "web/organization/user-roles.spec.ts > User roles",
+      "title": "create Admin with valid data",
+      "file": "web/organization/user-roles.spec.ts",
+      "currentStatus": "passed",
+      "lastRunAt": "2026-10-15T13:42:21.441Z",
+      "durationMs": 7135,
+      "latestError": null,
+      "history30d": [
+        {
+          "date": "2026-10-15",
+          "runId": "38742263279",
+          "status": "passed",
+          "durationMs": 7135
+        }
+      ]
+    },
+    {
+      "id": "arm-web-42b5b7b9e9b33cac3607-969d1590613a19eac7db",
+      "layer": "web",
+      "suite": "web/organization/user-roles.spec.ts > User roles",
+      "title": "create Manager with assigned departments",
+      "file": "web/organization/user-roles.spec.ts",
+      "currentStatus": "passed",
+      "lastRunAt": "2026-10-15T13:42:21.441Z",
+      "durationMs": 8293,
+      "latestError": null,
+      "history30d": [
+        {
+          "date": "2026-10-15",
+          "runId": "38742263279",
+          "status": "passed",
+          "durationMs": 8293
+        }
+      ]
+    },
+    {
+      "id": "arm-web-42b5b7b9e9b33cac3607-6a921de0fe7622e73c07",
+      "layer": "web",
+      "suite": "web/organization/user-roles.spec.ts > User roles",
+      "title": "edit admin name keep email keep password keep",
+      "file": "web/organization/user-roles.spec.ts",
+      "currentStatus": "passed",
+      "lastRunAt": "2026-10-15T13:42:21.441Z",
+      "durationMs": 11481,
+      "latestError": null,
+      "history30d": [
+        {
+          "date": "2026-10-15",
+          "runId": "38742263279",
+          "status": "passed",
+          "durationMs": 11481
+        }
+      ]
+    },
+    {
+      "id": "arm-web-42b5b7b9e9b33cac3607-eed696e7f33ec773ee81",
+      "layer": "web",
+      "suite": "web/organization/user-roles.spec.ts > User roles",
+      "title": "edit admin name keep email keep password new",
+      "file": "web/organization/user-roles.spec.ts",
+      "currentStatus": "passed",
+      "lastRunAt": "2026-10-15T13:42:21.441Z",
+      "durationMs": 11920,
+      "latestError": null,
+      "history30d": [
+        {
+          "date": "2026-10-15",
+          "runId": "38742263279",
+          "status": "passed",
+          "durationMs": 11920
+        }
+      ]
+    },
+    {
+      "id": "arm-web-42b5b7b9e9b33cac3607-e554dc61802488168f85",
+      "layer": "web",
+      "suite": "web/organization/user-roles.spec.ts > User roles",
+      "title": "edit admin name keep email new password keep",
+      "file": "web/organization/user-roles.spec.ts",
+      "currentStatus": "passed",
+      "lastRunAt": "2026-10-15T13:42:21.441Z",
+      "durationMs": 14861,
+      "latestError": null,
+      "history30d": [
+        {
+          "date": "2026-10-15",
+          "runId": "38742263279",
+          "status": "passed",
+          "durationMs": 14861
+        }
+      ]
+    },
+    {
+      "id": "arm-web-42b5b7b9e9b33cac3607-928948da27b04caa0438",
+      "layer": "web",
+      "suite": "web/organization/user-roles.spec.ts > User roles",
+      "title": "edit admin name keep email new password new",
+      "file": "web/organization/user-roles.spec.ts",
+      "currentStatus": "passed",
+      "lastRunAt": "2026-10-15T13:42:21.441Z",
+      "durationMs": 14189,
+      "latestError": null,
+      "history30d": [
+        {
+          "date": "2026-10-15",
+          "runId": "38742263279",
+          "status": "passed",
+          "durationMs": 14189
+        }
+      ]
+    },
+    {
+      "id": "arm-web-42b5b7b9e9b33cac3607-3f34bcb1b6f7fe5e6b0e",
+      "layer": "web",
+      "suite": "web/organization/user-roles.spec.ts > User roles",
+      "title": "edit admin name new email keep password keep",
+      "file": "web/organization/user-roles.spec.ts",
+      "currentStatus": "passed",
+      "lastRunAt": "2026-10-15T13:42:21.441Z",
+      "durationMs": 12179,
+      "latestError": null,
+      "history30d": [
+        {
+          "date": "2026-10-15",
+          "runId": "38742263279",
+          "status": "passed",
+          "durationMs": 12179
+        }
+      ]
+    },
+    {
+      "id": "arm-web-42b5b7b9e9b33cac3607-d52f863e051bcc33a546",
+      "layer": "web",
+      "suite": "web/organization/user-roles.spec.ts > User roles",
+      "title": "edit admin name new email keep password new",
+      "file": "web/organization/user-roles.spec.ts",
+      "currentStatus": "passed",
+      "lastRunAt": "2026-10-15T13:42:21.441Z",
+      "durationMs": 10640,
+      "latestError": null,
+      "history30d": [
+        {
+          "date": "2026-10-15",
+          "runId": "38742263279",
+          "status": "passed",
+          "durationMs": 10640
+        }
+      ]
+    },
+    {
+      "id": "arm-web-42b5b7b9e9b33cac3607-688f5ee63ee91064e6c9",
+      "layer": "web",
+      "suite": "web/organization/user-roles.spec.ts > User roles",
+      "title": "edit admin name new email new password keep",
+      "file": "web/organization/user-roles.spec.ts",
+      "currentStatus": "passed",
+      "lastRunAt": "2026-10-15T13:42:21.441Z",
+      "durationMs": 12861,
+      "latestError": null,
+      "history30d": [
+        {
+          "date": "2026-10-15",
+          "runId": "38742263279",
+          "status": "passed",
+          "durationMs": 12861
+        }
+      ]
+    },
+    {
+      "id": "arm-web-42b5b7b9e9b33cac3607-4f9ed8c6ccac21e70684",
+      "layer": "web",
+      "suite": "web/organization/user-roles.spec.ts > User roles",
+      "title": "edit admin name new email new password new",
+      "file": "web/organization/user-roles.spec.ts",
+      "currentStatus": "passed",
+      "lastRunAt": "2026-10-15T13:42:21.441Z",
+      "durationMs": 11321,
+      "latestError": null,
+      "history30d": [
+        {
+          "date": "2026-10-15",
+          "runId": "38742263279",
+          "status": "passed",
+          "durationMs": 11321
+        }
+      ]
+    },
+    {
+      "id": "arm-web-42b5b7b9e9b33cac3607-4e0cdefd751faac524c6",
+      "layer": "web",
+      "suite": "web/organization/user-roles.spec.ts > User roles",
+      "title": "edit manager name keep email keep password keep dept leave",
+      "file": "web/organization/user-roles.spec.ts",
+      "currentStatus": "passed",
+      "lastRunAt": "2026-10-15T13:42:21.441Z",
+      "durationMs": 13131,
+      "latestError": null,
+      "history30d": [
+        {
+          "date": "2026-10-15",
+          "runId": "38742263279",
+          "status": "passed",
+          "durationMs": 13131
+        }
+      ]
+    },
+    {
+      "id": "arm-web-42b5b7b9e9b33cac3607-efd531a2c02e71b3200a",
+      "layer": "web",
+      "suite": "web/organization/user-roles.spec.ts > User roles",
+      "title": "edit manager name keep email keep password new dept CEO Office",
+      "file": "web/organization/user-roles.spec.ts",
+      "currentStatus": "passed",
+      "lastRunAt": "2026-10-15T13:42:21.441Z",
+      "durationMs": 13682,
+      "latestError": null,
+      "history30d": [
+        {
+          "date": "2026-10-15",
+          "runId": "38742263279",
+          "status": "passed",
+          "durationMs": 13682
+        }
+      ]
+    },
+    {
+      "id": "arm-web-42b5b7b9e9b33cac3607-bc2b399dc12a4c690b10",
+      "layer": "web",
+      "suite": "web/organization/user-roles.spec.ts > User roles",
+      "title": "edit manager name keep email new password keep dept leave",
+      "file": "web/organization/user-roles.spec.ts",
+      "currentStatus": "passed",
+      "lastRunAt": "2026-10-15T13:42:21.441Z",
+      "durationMs": 15547,
+      "latestError": null,
+      "history30d": [
+        {
+          "date": "2026-10-15",
+          "runId": "38742263279",
+          "status": "passed",
+          "durationMs": 15547
+        }
+      ]
+    },
+    {
+      "id": "arm-web-42b5b7b9e9b33cac3607-c51ea26d81c25e9a5f13",
+      "layer": "web",
+      "suite": "web/organization/user-roles.spec.ts > User roles",
+      "title": "edit manager name keep email new password new dept CEO Office",
+      "file": "web/organization/user-roles.spec.ts",
+      "currentStatus": "passed",
+      "lastRunAt": "2026-10-15T13:42:21.441Z",
+      "durationMs": 16751,
+      "latestError": null,
+      "history30d": [
+        {
+          "date": "2026-10-15",
+          "runId": "38742263279",
+          "status": "passed",
+          "durationMs": 16751
+        }
+      ]
+    },
+    {
+      "id": "arm-web-42b5b7b9e9b33cac3607-abe2a854f16618aa643f",
+      "layer": "web",
+      "suite": "web/organization/user-roles.spec.ts > User roles",
+      "title": "edit manager name new email keep password keep dept leave",
+      "file": "web/organization/user-roles.spec.ts",
+      "currentStatus": "passed",
+      "lastRunAt": "2026-10-15T13:42:21.441Z",
+      "durationMs": 11162,
+      "latestError": null,
+      "history30d": [
+        {
+          "date": "2026-10-15",
+          "runId": "38742263279",
+          "status": "passed",
+          "durationMs": 11162
+        }
+      ]
+    },
+    {
+      "id": "arm-web-42b5b7b9e9b33cac3607-cd248c46793437954721",
+      "layer": "web",
+      "suite": "web/organization/user-roles.spec.ts > User roles",
+      "title": "edit manager name new email keep password new dept CEO Office",
+      "file": "web/organization/user-roles.spec.ts",
+      "currentStatus": "passed",
+      "lastRunAt": "2026-10-15T13:42:21.441Z",
+      "durationMs": 13902,
+      "latestError": null,
+      "history30d": [
+        {
+          "date": "2026-10-15",
+          "runId": "38742263279",
+          "status": "passed",
+          "durationMs": 13902
+        }
+      ]
+    },
+    {
+      "id": "arm-web-42b5b7b9e9b33cac3607-4d83342346fabc1bc670",
+      "layer": "web",
+      "suite": "web/organization/user-roles.spec.ts > User roles",
+      "title": "edit manager name new email new password keep dept leave",
+      "file": "web/organization/user-roles.spec.ts",
+      "currentStatus": "passed",
+      "lastRunAt": "2026-10-15T13:42:21.441Z",
+      "durationMs": 15416,
+      "latestError": null,
+      "history30d": [
+        {
+          "date": "2026-10-15",
+          "runId": "38742263279",
+          "status": "passed",
+          "durationMs": 15416
+        }
+      ]
+    },
+    {
+      "id": "arm-web-42b5b7b9e9b33cac3607-ba080df0a620905db44c",
+      "layer": "web",
+      "suite": "web/organization/user-roles.spec.ts > User roles",
+      "title": "edit manager name new email new password new dept CEO Office",
+      "file": "web/organization/user-roles.spec.ts",
+      "currentStatus": "passed",
+      "lastRunAt": "2026-10-15T13:42:21.441Z",
+      "durationMs": 14533,
+      "latestError": null,
+      "history30d": [
+        {
+          "date": "2026-10-15",
+          "runId": "38742263279",
+          "status": "passed",
+          "durationMs": 14533
+        }
+      ]
+    },
+    {
+      "id": "arm-web-42b5b7b9e9b33cac3607-0d6ae165d7d4302639ee",
+      "layer": "web",
+      "suite": "web/organization/user-roles.spec.ts > User roles",
+      "title": "delete a user via checkbox and confirm",
+      "file": "web/organization/user-roles.spec.ts",
+      "currentStatus": "passed",
+      "lastRunAt": "2026-10-15T13:42:21.441Z",
+      "durationMs": 9699,
+      "latestError": null,
+      "history30d": [
+        {
+          "date": "2026-10-15",
+          "runId": "38742263279",
+          "status": "passed",
+          "durationMs": 9699
+        }
+      ]
+    },
+    {
+      "id": "arm-web-42b5b7b9e9b33cac3607-e23f9c0cd288d6010c4c",
+      "layer": "web",
+      "suite": "web/organization/user-roles.spec.ts > User roles",
+      "title": "log in as a freshly created Admin",
+      "file": "web/organization/user-roles.spec.ts",
+      "currentStatus": "passed",
+      "lastRunAt": "2026-10-15T13:42:21.441Z",
+      "durationMs": 12441,
+      "latestError": null,
+      "history30d": [
+        {
+          "date": "2026-10-15",
+          "runId": "38742263279",
+          "status": "passed",
+          "durationMs": 12441
+        }
+      ]
+    },
+    {
+      "id": "arm-web-8af8fcc1882794401c3a-a87a551723153e5d0be6",
+      "layer": "web",
+      "suite": "web/project_management/accounts.spec.ts > Accounts create, edit, view",
+      "title": "create an account with required and optional fields",
+      "file": "web/project_management/accounts.spec.ts",
+      "currentStatus": "passed",
+      "lastRunAt": "2026-10-15T13:42:21.441Z",
+      "durationMs": 8154,
+      "latestError": null,
+      "history30d": [
+        {
+          "date": "2026-10-15",
+          "runId": "38742263279",
+          "status": "passed",
+          "durationMs": 8154
+        }
+      ]
+    },
+    {
+      "id": "arm-web-8af8fcc1882794401c3a-45ddf5f21ecdd79573c5",
+      "layer": "web",
+      "suite": "web/project_management/accounts.spec.ts > Accounts create, edit, view",
+      "title": "create an account then edit name, company, size, country, industry and website",
+      "file": "web/project_management/accounts.spec.ts",
+      "currentStatus": "passed",
+      "lastRunAt": "2026-10-15T13:42:21.441Z",
+      "durationMs": 10295,
+      "latestError": null,
+      "history30d": [
+        {
+          "date": "2026-10-15",
+          "runId": "38742263279",
+          "status": "passed",
+          "durationMs": 10295
+        }
+      ]
+    },
+    {
+      "id": "arm-web-8af8fcc1882794401c3a-d66ec7cd8307fb6aed33",
+      "layer": "web",
+      "suite": "web/project_management/accounts.spec.ts > Accounts create, edit, view",
+      "title": "create an account with required fields only",
+      "file": "web/project_management/accounts.spec.ts",
+      "currentStatus": "passed",
+      "lastRunAt": "2026-10-15T13:42:21.441Z",
+      "durationMs": 7023,
+      "latestError": null,
+      "history30d": [
+        {
+          "date": "2026-10-15",
+          "runId": "38742263279",
+          "status": "passed",
+          "durationMs": 7023
+        }
+      ]
+    },
+    {
+      "id": "arm-web-8af8fcc1882794401c3a-594fc1ac8f251a5eb720",
+      "layer": "web",
+      "suite": "web/project_management/accounts.spec.ts > Accounts create, edit, view",
+      "title": "view a created account and land on its contacts page",
+      "file": "web/project_management/accounts.spec.ts",
+      "currentStatus": "passed",
+      "lastRunAt": "2026-10-15T13:42:21.441Z",
+      "durationMs": 7609,
+      "latestError": null,
+      "history30d": [
+        {
+          "date": "2026-10-15",
+          "runId": "38742263279",
+          "status": "passed",
+          "durationMs": 7609
+        }
+      ]
+    },
+    {
+      "id": "arm-web-219c06b41ac294f50864-c5fcf69b355823ed7489",
+      "layer": "web",
+      "suite": "web/project_management/contacts.spec.ts > Account contacts",
+      "title": "add a contact with required fields and see it on the account contacts page",
+      "file": "web/project_management/contacts.spec.ts",
+      "currentStatus": "passed",
+      "lastRunAt": "2026-10-15T13:42:21.441Z",
+      "durationMs": 8048,
+      "latestError": null,
+      "history30d": [
+        {
+          "date": "2026-10-15",
+          "runId": "38742263279",
+          "status": "passed",
+          "durationMs": 8048
+        }
+      ]
+    },
+    {
+      "id": "arm-web-dfa3f219085faabb3804-ee5eda72e93f6aa49929",
+      "layer": "web",
+      "suite": "web/project_management/contract-details.spec.ts > Project Contracts Details",
+      "title": "General Agreement: add, view, edit, view again",
+      "file": "web/project_management/contract-details.spec.ts",
+      "currentStatus": "failed",
+      "lastRunAt": "2026-10-15T13:42:21.441Z",
+      "durationMs": 39645,
+      "latestError": {
+        "message": "Error: \u001b[2mexpect(\u001b[22m\u001b[31mpage\u001b[39m\u001b[2m).\u001b[22mtoHaveURL\u001b[2m(\u001b[22m\u001b[32mexpected\u001b[39m\u001b[2m)\u001b[22m failed\n\nExpected pattern: \u001b[32m/\\/projects\\/view\\/\\d+#contracts$/\u001b[39m\nReceived string:  \u001b[31m\"http://localhost:4200/contracts/view/5/5#contract-details\"\u001b[39m\nTimeout: 30000ms\n\nCall log:\n\u001b[2m  - Expect \"toHaveURL\" with timeout 30000ms\u001b[22m\n\u001b[2m    3 × locator resolved to <html lang=\"en\" data-beasties-container=\"\">…</html>\u001b[22m\n\u001b[2m      - unexpected value \"http://localhost:4200/projects/view/5/contracts/edit/5\"\u001b[22m\n\u001b[2m    59 × locator resolved to <html lang=\"en\" data-beasties-container=\"\">…</html>\u001b[22m\n\u001b[2m       - unexpected value \"http://localhost:4200/contracts/view/5/5#contract-details\"\u001b[22m\n",
+        "stack": "Error: \u001b[2mexpect(\u001b[22m\u001b[31mpage\u001b[39m\u001b[2m).\u001b[22mtoHaveURL\u001b[2m(\u001b[22m\u001b[32mexpected\u001b[39m\u001b[2m)\u001b[22m failed\n\nExpected pattern: \u001b[32m/\\/projects\\/view\\/\\d+#contracts$/\u001b[39m\nReceived string:  \u001b[31m\"http://localhost:4200/contracts/view/5/5#contract-details\"\u001b[39m\nTimeout: 30000ms\n\nCall log:\n\u001b[2m  - Expect \"toHaveURL\" with timeout 30000ms\u001b[22m\n\u001b[2m    3 × locator resolved to <html lang=\"en\" data-beasties-container=\"\">…</html>\u001b[22m\n\u001b[2m      - unexpected value \"http://localhost:4200/projects/view/5/contracts/edit/5\"\u001b[22m\n\u001b[2m    59 × locator resolved to <html lang=\"en\" data-beasties-container=\"\">…</html>\u001b[22m\n\u001b[2m       - unexpected value \"http://localhost:4200/contracts/view/5/5#contract-details\"\u001b[22m\n\n    at ContractsPage.submitEditForm (/home/runner/work/arm_test/arm_test/arm_test/automation_tests/tests_support/core/pages/contracts.page.ts:260:29)\n    at /home/runner/work/arm_test/arm_test/arm_test/automation_tests/tests/web/project_management/contract-details.spec.ts:100:5",
+        "step": "   at ../tests_support/core/pages/contracts.page.ts:260\n\n\u001b[0m \u001b[90m 258 |\u001b[39m     \u001b[36mawait\u001b[39m \u001b[36mthis\u001b[39m\u001b[33m.\u001b[39mensureFilled()\u001b[33m;\u001b[39m\n \u001b[90m 259 |\u001b[39m     \u001b[36mawait\u001b[39m \u001b[36mthis\u001b[39m\u001b[33m.\u001b[39msubmitEdit\u001b[33m.\u001b[39mclick()\u001b[33m;\u001b[39m\n\u001b[31m\u001b[1m>\u001b[22m\u001b[39m\u001b[90m 260 |\u001b[39m     \u001b[36mawait\u001b[39m expect(\u001b[36mthis\u001b[39m\u001b[33m.\u001b[39mpage)\u001b[33m.\u001b[39mtoHaveURL(\u001b[35m/\\/projects\\/view\\/\\d+#contracts$/\u001b[39m)\u001b[33m;\u001b[39m\n \u001b[90m     |\u001b[39m                             \u001b[31m\u001b[1m^\u001b[22m\u001b[39m\n \u001b[90m 261 |\u001b[39m   }\n \u001b[90m 262 |\u001b[39m\n \u001b[90m 263 |\u001b[39m   \u001b[90m/**\u001b[39m\u001b[0m"
+      },
+      "history30d": [
+        {
+          "date": "2026-10-15",
+          "runId": "38742263279",
+          "status": "failed",
+          "durationMs": 39645,
+          "error": "Error: \u001b[2mexpect(\u001b[22m\u001b[31mpage\u001b[39m\u001b[2m).\u001b[22mtoHaveURL\u001b[2m(\u001b[22m\u001b[32mexpected\u001b[39m\u001b[2m)\u001b[22m failed\n\nExpected pattern: \u001b[32m/\\/projects\\/view\\/\\d+#contracts$/\u001b[39m\nReceived string:  \u001b[31m\"http://localhost:4200/contracts/view/5/5#contract-details\"\u001b[39m\nTimeout: 30000ms\n\nCall log:\n\u001b[2m  - Expect \"toHaveURL\" with timeout 30000ms\u001b[22m\n\u001b[2m    3 × locator resolved to <html lang=\"en\" data-beasties-container=\"\">…</html>\u001b[22m\n\u001b[2m      - unexpected value \"http://localhost:4200/projects/view/5/contracts/edit/5\"\u001b[22m\n\u001b[2m    59 × locator resolved to <html lang=\"en\" data-beasties-container=\"\">…</html>\u001b[22m\n\u001b[2m       - unexpected value \"http://localhost:4200/contracts/view/5/5#contract-details\"\u001b[22m\n"
+        }
+      ]
+    },
+    {
+      "id": "arm-web-dfa3f219085faabb3804-a8771f280d14dea4bd01",
+      "layer": "web",
+      "suite": "web/project_management/contract-details.spec.ts > Project Contracts Details",
+      "title": "Support: add, view, edit, view again (encryption unlocked)",
+      "file": "web/project_management/contract-details.spec.ts",
+      "currentStatus": "failed",
+      "lastRunAt": "2026-10-15T13:42:21.441Z",
+      "durationMs": 47258,
+      "latestError": {
+        "message": "Error: \u001b[2mexpect(\u001b[22m\u001b[31mpage\u001b[39m\u001b[2m).\u001b[22mtoHaveURL\u001b[2m(\u001b[22m\u001b[32mexpected\u001b[39m\u001b[2m)\u001b[22m failed\n\nExpected pattern: \u001b[32m/\\/projects\\/view\\/\\d+#contracts$/\u001b[39m\nReceived string:  \u001b[31m\"http://localhost:4200/contracts/view/6/6#contract-details\"\u001b[39m\nTimeout: 30000ms\n\nCall log:\n\u001b[2m  - Expect \"toHaveURL\" with timeout 30000ms\u001b[22m\n\u001b[2m    5 × locator resolved to <html lang=\"en\" data-beasties-container=\"\">…</html>\u001b[22m\n\u001b[2m      - unexpected value \"http://localhost:4200/projects/view/6/contracts/edit/6\"\u001b[22m\n\u001b[2m    57 × locator resolved to <html lang=\"en\" data-beasties-container=\"\">…</html>\u001b[22m\n\u001b[2m       - unexpected value \"http://localhost:4200/contracts/view/6/6#contract-details\"\u001b[22m\n",
+        "stack": "Error: \u001b[2mexpect(\u001b[22m\u001b[31mpage\u001b[39m\u001b[2m).\u001b[22mtoHaveURL\u001b[2m(\u001b[22m\u001b[32mexpected\u001b[39m\u001b[2m)\u001b[22m failed\n\nExpected pattern: \u001b[32m/\\/projects\\/view\\/\\d+#contracts$/\u001b[39m\nReceived string:  \u001b[31m\"http://localhost:4200/contracts/view/6/6#contract-details\"\u001b[39m\nTimeout: 30000ms\n\nCall log:\n\u001b[2m  - Expect \"toHaveURL\" with timeout 30000ms\u001b[22m\n\u001b[2m    5 × locator resolved to <html lang=\"en\" data-beasties-container=\"\">…</html>\u001b[22m\n\u001b[2m      - unexpected value \"http://localhost:4200/projects/view/6/contracts/edit/6\"\u001b[22m\n\u001b[2m    57 × locator resolved to <html lang=\"en\" data-beasties-container=\"\">…</html>\u001b[22m\n\u001b[2m       - unexpected value \"http://localhost:4200/contracts/view/6/6#contract-details\"\u001b[22m\n\n    at ContractsPage.submitEditForm (/home/runner/work/arm_test/arm_test/arm_test/automation_tests/tests_support/core/pages/contracts.page.ts:260:29)\n    at /home/runner/work/arm_test/arm_test/arm_test/automation_tests/tests/web/project_management/contract-details.spec.ts:175:5",
+        "step": "   at ../tests_support/core/pages/contracts.page.ts:260\n\n\u001b[0m \u001b[90m 258 |\u001b[39m     \u001b[36mawait\u001b[39m \u001b[36mthis\u001b[39m\u001b[33m.\u001b[39mensureFilled()\u001b[33m;\u001b[39m\n \u001b[90m 259 |\u001b[39m     \u001b[36mawait\u001b[39m \u001b[36mthis\u001b[39m\u001b[33m.\u001b[39msubmitEdit\u001b[33m.\u001b[39mclick()\u001b[33m;\u001b[39m\n\u001b[31m\u001b[1m>\u001b[22m\u001b[39m\u001b[90m 260 |\u001b[39m     \u001b[36mawait\u001b[39m expect(\u001b[36mthis\u001b[39m\u001b[33m.\u001b[39mpage)\u001b[33m.\u001b[39mtoHaveURL(\u001b[35m/\\/projects\\/view\\/\\d+#contracts$/\u001b[39m)\u001b[33m;\u001b[39m\n \u001b[90m     |\u001b[39m                             \u001b[31m\u001b[1m^\u001b[22m\u001b[39m\n \u001b[90m 261 |\u001b[39m   }\n \u001b[90m 262 |\u001b[39m\n \u001b[90m 263 |\u001b[39m   \u001b[90m/**\u001b[39m\u001b[0m"
+      },
+      "history30d": [
+        {
+          "date": "2026-10-15",
+          "runId": "38742263279",
+          "status": "failed",
+          "durationMs": 47258,
+          "error": "Error: \u001b[2mexpect(\u001b[22m\u001b[31mpage\u001b[39m\u001b[2m).\u001b[22mtoHaveURL\u001b[2m(\u001b[22m\u001b[32mexpected\u001b[39m\u001b[2m)\u001b[22m failed\n\nExpected pattern: \u001b[32m/\\/projects\\/view\\/\\d+#contracts$/\u001b[39m\nReceived string:  \u001b[31m\"http://localhost:4200/contracts/view/6/6#contract-details\"\u001b[39m\nTimeout: 30000ms\n\nCall log:\n\u001b[2m  - Expect \"toHaveURL\" with timeout 30000ms\u001b[22m\n\u001b[2m    5 × locator resolved to <html lang=\"en\" data-beasties-container=\"\">…</html>\u001b[22m\n\u001b[2m      - unexpected value \"http://localhost:4200/projects/view/6/contracts/edit/6\"\u001b[22m\n\u001b[2m    57 × locator resolved to <html lang=\"en\" data-beasties-container=\"\">…</html>\u001b[22m\n\u001b[2m       - unexpected value \"http://localhost:4200/contracts/view/6/6#contract-details\"\u001b[22m\n"
+        }
+      ]
+    },
+    {
+      "id": "arm-web-dfa3f219085faabb3804-fad172ec09af3ce41300",
+      "layer": "web",
+      "suite": "web/project_management/contract-details.spec.ts > Project Contracts Details",
+      "title": "Dedicated Team: add, view, edit, view again",
+      "file": "web/project_management/contract-details.spec.ts",
+      "currentStatus": "failed",
+      "lastRunAt": "2026-10-15T13:42:21.441Z",
+      "durationMs": 51863,
+      "latestError": {
+        "message": "Error: \u001b[2mexpect(\u001b[22m\u001b[31mpage\u001b[39m\u001b[2m).\u001b[22mtoHaveURL\u001b[2m(\u001b[22m\u001b[32mexpected\u001b[39m\u001b[2m)\u001b[22m failed\n\nExpected pattern: \u001b[32m/\\/projects\\/view\\/\\d+#contracts$/\u001b[39m\nReceived string:  \u001b[31m\"http://localhost:4200/contracts/view/11/11#contract-details\"\u001b[39m\nTimeout: 30000ms\n\nCall log:\n\u001b[2m  - Expect \"toHaveURL\" with timeout 30000ms\u001b[22m\n\u001b[2m    3 × locator resolved to <html lang=\"en\" data-beasties-container=\"\">…</html>\u001b[22m\n\u001b[2m      - unexpected value \"http://localhost:4200/projects/view/11/contracts/edit/11\"\u001b[22m\n\u001b[2m    59 × locator resolved to <html lang=\"en\" data-beasties-container=\"\">…</html>\u001b[22m\n\u001b[2m       - unexpected value \"http://localhost:4200/contracts/view/11/11#contract-details\"\u001b[22m\n",
+        "stack": "Error: \u001b[2mexpect(\u001b[22m\u001b[31mpage\u001b[39m\u001b[2m).\u001b[22mtoHaveURL\u001b[2m(\u001b[22m\u001b[32mexpected\u001b[39m\u001b[2m)\u001b[22m failed\n\nExpected pattern: \u001b[32m/\\/projects\\/view\\/\\d+#contracts$/\u001b[39m\nReceived string:  \u001b[31m\"http://localhost:4200/contracts/view/11/11#contract-details\"\u001b[39m\nTimeout: 30000ms\n\nCall log:\n\u001b[2m  - Expect \"toHaveURL\" with timeout 30000ms\u001b[22m\n\u001b[2m    3 × locator resolved to <html lang=\"en\" data-beasties-container=\"\">…</html>\u001b[22m\n\u001b[2m      - unexpected value \"http://localhost:4200/projects/view/11/contracts/edit/11\"\u001b[22m\n\u001b[2m    59 × locator resolved to <html lang=\"en\" data-beasties-container=\"\">…</html>\u001b[22m\n\u001b[2m       - unexpected value \"http://localhost:4200/contracts/view/11/11#contract-details\"\u001b[22m\n\n    at ContractsPage.submitEditForm (/home/runner/work/arm_test/arm_test/arm_test/automation_tests/tests_support/core/pages/contracts.page.ts:260:29)\n    at /home/runner/work/arm_test/arm_test/arm_test/automation_tests/tests/web/project_management/contract-details.spec.ts:244:5",
+        "step": "   at ../tests_support/core/pages/contracts.page.ts:260\n\n\u001b[0m \u001b[90m 258 |\u001b[39m     \u001b[36mawait\u001b[39m \u001b[36mthis\u001b[39m\u001b[33m.\u001b[39mensureFilled()\u001b[33m;\u001b[39m\n \u001b[90m 259 |\u001b[39m     \u001b[36mawait\u001b[39m \u001b[36mthis\u001b[39m\u001b[33m.\u001b[39msubmitEdit\u001b[33m.\u001b[39mclick()\u001b[33m;\u001b[39m\n\u001b[31m\u001b[1m>\u001b[22m\u001b[39m\u001b[90m 260 |\u001b[39m     \u001b[36mawait\u001b[39m expect(\u001b[36mthis\u001b[39m\u001b[33m.\u001b[39mpage)\u001b[33m.\u001b[39mtoHaveURL(\u001b[35m/\\/projects\\/view\\/\\d+#contracts$/\u001b[39m)\u001b[33m;\u001b[39m\n \u001b[90m     |\u001b[39m                             \u001b[31m\u001b[1m^\u001b[22m\u001b[39m\n \u001b[90m 261 |\u001b[39m   }\n \u001b[90m 262 |\u001b[39m\n \u001b[90m 263 |\u001b[39m   \u001b[90m/**\u001b[39m\u001b[0m"
+      },
+      "history30d": [
+        {
+          "date": "2026-10-15",
+          "runId": "38742263279",
+          "status": "failed",
+          "durationMs": 51863,
+          "error": "Error: \u001b[2mexpect(\u001b[22m\u001b[31mpage\u001b[39m\u001b[2m).\u001b[22mtoHaveURL\u001b[2m(\u001b[22m\u001b[32mexpected\u001b[39m\u001b[2m)\u001b[22m failed\n\nExpected pattern: \u001b[32m/\\/projects\\/view\\/\\d+#contracts$/\u001b[39m\nReceived string:  \u001b[31m\"http://localhost:4200/contracts/view/11/11#contract-details\"\u001b[39m\nTimeout: 30000ms\n\nCall log:\n\u001b[2m  - Expect \"toHaveURL\" with timeout 30000ms\u001b[22m\n\u001b[2m    3 × locator resolved to <html lang=\"en\" data-beasties-container=\"\">…</html>\u001b[22m\n\u001b[2m      - unexpected value \"http://localhost:4200/projects/view/11/contracts/edit/11\"\u001b[22m\n\u001b[2m    59 × locator resolved to <html lang=\"en\" data-beasties-container=\"\">…</html>\u001b[22m\n\u001b[2m       - unexpected value \"http://localhost:4200/contracts/view/11/11#contract-details\"\u001b[22m\n"
+        }
+      ]
+    },
+    {
+      "id": "arm-web-dfa3f219085faabb3804-8c318d9eb6b0228809fd",
+      "layer": "web",
+      "suite": "web/project_management/contract-details.spec.ts > Project Contracts Details",
+      "title": "Lump Sum: add, view (Stages), edit, view again (encryption unlocked)",
+      "file": "web/project_management/contract-details.spec.ts",
+      "currentStatus": "failed",
+      "lastRunAt": "2026-10-15T13:42:21.441Z",
+      "durationMs": 56652,
+      "latestError": {
+        "message": "Error: \u001b[2mexpect(\u001b[22m\u001b[31mpage\u001b[39m\u001b[2m).\u001b[22mtoHaveURL\u001b[2m(\u001b[22m\u001b[32mexpected\u001b[39m\u001b[2m)\u001b[22m failed\n\nExpected pattern: \u001b[32m/\\/projects\\/view\\/\\d+#contracts$/\u001b[39m\nReceived string:  \u001b[31m\"http://localhost:4200/contracts/view/12/12#contract-details\"\u001b[39m\nTimeout: 30000ms\n\nCall log:\n\u001b[2m  - Expect \"toHaveURL\" with timeout 30000ms\u001b[22m\n\u001b[2m    6 × locator resolved to <html lang=\"en\" data-beasties-container=\"\">…</html>\u001b[22m\n\u001b[2m      - unexpected value \"http://localhost:4200/projects/view/12/contracts/edit/12\"\u001b[22m\n\u001b[2m    56 × locator resolved to <html lang=\"en\" data-beasties-container=\"\">…</html>\u001b[22m\n\u001b[2m       - unexpected value \"http://localhost:4200/contracts/view/12/12#contract-details\"\u001b[22m\n",
+        "stack": "Error: \u001b[2mexpect(\u001b[22m\u001b[31mpage\u001b[39m\u001b[2m).\u001b[22mtoHaveURL\u001b[2m(\u001b[22m\u001b[32mexpected\u001b[39m\u001b[2m)\u001b[22m failed\n\nExpected pattern: \u001b[32m/\\/projects\\/view\\/\\d+#contracts$/\u001b[39m\nReceived string:  \u001b[31m\"http://localhost:4200/contracts/view/12/12#contract-details\"\u001b[39m\nTimeout: 30000ms\n\nCall log:\n\u001b[2m  - Expect \"toHaveURL\" with timeout 30000ms\u001b[22m\n\u001b[2m    6 × locator resolved to <html lang=\"en\" data-beasties-container=\"\">…</html>\u001b[22m\n\u001b[2m      - unexpected value \"http://localhost:4200/projects/view/12/contracts/edit/12\"\u001b[22m\n\u001b[2m    56 × locator resolved to <html lang=\"en\" data-beasties-container=\"\">…</html>\u001b[22m\n\u001b[2m       - unexpected value \"http://localhost:4200/contracts/view/12/12#contract-details\"\u001b[22m\n\n    at ContractsPage.submitEditForm (/home/runner/work/arm_test/arm_test/arm_test/automation_tests/tests_support/core/pages/contracts.page.ts:260:29)\n    at /home/runner/work/arm_test/arm_test/arm_test/automation_tests/tests/web/project_management/contract-details.spec.ts:325:5",
+        "step": "   at ../tests_support/core/pages/contracts.page.ts:260\n\n\u001b[0m \u001b[90m 258 |\u001b[39m     \u001b[36mawait\u001b[39m \u001b[36mthis\u001b[39m\u001b[33m.\u001b[39mensureFilled()\u001b[33m;\u001b[39m\n \u001b[90m 259 |\u001b[39m     \u001b[36mawait\u001b[39m \u001b[36mthis\u001b[39m\u001b[33m.\u001b[39msubmitEdit\u001b[33m.\u001b[39mclick()\u001b[33m;\u001b[39m\n\u001b[31m\u001b[1m>\u001b[22m\u001b[39m\u001b[90m 260 |\u001b[39m     \u001b[36mawait\u001b[39m expect(\u001b[36mthis\u001b[39m\u001b[33m.\u001b[39mpage)\u001b[33m.\u001b[39mtoHaveURL(\u001b[35m/\\/projects\\/view\\/\\d+#contracts$/\u001b[39m)\u001b[33m;\u001b[39m\n \u001b[90m     |\u001b[39m                             \u001b[31m\u001b[1m^\u001b[22m\u001b[39m\n \u001b[90m 261 |\u001b[39m   }\n \u001b[90m 262 |\u001b[39m\n \u001b[90m 263 |\u001b[39m   \u001b[90m/**\u001b[39m\u001b[0m"
+      },
+      "history30d": [
+        {
+          "date": "2026-10-15",
+          "runId": "38742263279",
+          "status": "failed",
+          "durationMs": 56652,
+          "error": "Error: \u001b[2mexpect(\u001b[22m\u001b[31mpage\u001b[39m\u001b[2m).\u001b[22mtoHaveURL\u001b[2m(\u001b[22m\u001b[32mexpected\u001b[39m\u001b[2m)\u001b[22m failed\n\nExpected pattern: \u001b[32m/\\/projects\\/view\\/\\d+#contracts$/\u001b[39m\nReceived string:  \u001b[31m\"http://localhost:4200/contracts/view/12/12#contract-details\"\u001b[39m\nTimeout: 30000ms\n\nCall log:\n\u001b[2m  - Expect \"toHaveURL\" with timeout 30000ms\u001b[22m\n\u001b[2m    6 × locator resolved to <html lang=\"en\" data-beasties-container=\"\">…</html>\u001b[22m\n\u001b[2m      - unexpected value \"http://localhost:4200/projects/view/12/contracts/edit/12\"\u001b[22m\n\u001b[2m    56 × locator resolved to <html lang=\"en\" data-beasties-container=\"\">…</html>\u001b[22m\n\u001b[2m       - unexpected value \"http://localhost:4200/contracts/view/12/12#contract-details\"\u001b[22m\n"
+        }
+      ]
+    },
+    {
+      "id": "arm-web-66aaad4e313991463648-53480ec652d667111729",
+      "layer": "web",
+      "suite": "web/project_management/invoices.spec.ts > Contract Invoices",
+      "title": "Create Invoice - Draft Status",
+      "file": "web/project_management/invoices.spec.ts",
+      "currentStatus": "passed",
+      "lastRunAt": "2026-10-15T13:42:21.441Z",
+      "durationMs": 28897,
+      "latestError": null,
+      "history30d": [
+        {
+          "date": "2026-10-15",
+          "runId": "38742263279",
+          "status": "passed",
+          "durationMs": 28897
+        }
+      ]
+    },
+    {
+      "id": "arm-web-66aaad4e313991463648-8be86cfad90a731921c9",
+      "layer": "web",
+      "suite": "web/project_management/invoices.spec.ts > Contract Invoices",
+      "title": "Create Invoice - Sent to Customer Status",
+      "file": "web/project_management/invoices.spec.ts",
+      "currentStatus": "passed",
+      "lastRunAt": "2026-10-15T13:42:21.441Z",
+      "durationMs": 28816,
+      "latestError": null,
+      "history30d": [
+        {
+          "date": "2026-10-15",
+          "runId": "38742263279",
+          "status": "passed",
+          "durationMs": 28816
+        }
+      ]
+    },
+    {
+      "id": "arm-web-66aaad4e313991463648-79cff1f6892ebebd5d2d",
+      "layer": "web",
+      "suite": "web/project_management/invoices.spec.ts > Contract Invoices",
+      "title": "Create Invoice - Officially Issued Status",
+      "file": "web/project_management/invoices.spec.ts",
+      "currentStatus": "passed",
+      "lastRunAt": "2026-10-15T13:42:21.441Z",
+      "durationMs": 41235,
+      "latestError": null,
+      "history30d": [
+        {
+          "date": "2026-10-15",
+          "runId": "38742263279",
+          "status": "passed",
+          "durationMs": 41235
+        }
+      ]
+    },
+    {
+      "id": "arm-web-66aaad4e313991463648-0655ccad82f7ea59101a",
+      "layer": "web",
+      "suite": "web/project_management/invoices.spec.ts > Contract Invoices",
+      "title": "Create Invoice - Paid Status",
+      "file": "web/project_management/invoices.spec.ts",
+      "currentStatus": "passed",
+      "lastRunAt": "2026-10-15T13:42:21.441Z",
+      "durationMs": 55913,
+      "latestError": null,
+      "history30d": [
+        {
+          "date": "2026-10-15",
+          "runId": "38742263279",
+          "status": "passed",
+          "durationMs": 55913
+        }
+      ]
+    },
+    {
+      "id": "arm-web-66aaad4e313991463648-830eb88d43d3f2597e64",
+      "layer": "web",
+      "suite": "web/project_management/invoices.spec.ts > Contract Invoices",
+      "title": "Filter, Sort, and Search Invoices",
+      "file": "web/project_management/invoices.spec.ts",
+      "currentStatus": "flaky",
+      "lastRunAt": "2026-10-15T13:42:21.441Z",
+      "durationMs": 30044,
+      "latestError": null,
+      "history30d": [
+        {
+          "date": "2026-10-15",
+          "runId": "38742263279",
+          "status": "flaky",
+          "durationMs": 30044
+        }
+      ]
+    },
+    {
+      "id": "arm-web-f538b080a9b8ad110e2d-b3e9889ba1755375697d",
+      "layer": "web",
+      "suite": "web/project_management/opportunities.spec.ts > Opportunities create",
+      "title": "create an opportunity with minimum required fields",
+      "file": "web/project_management/opportunities.spec.ts",
+      "currentStatus": "passed",
+      "lastRunAt": "2026-10-15T13:42:21.441Z",
+      "durationMs": 12634,
+      "latestError": null,
+      "history30d": [
+        {
+          "date": "2026-10-15",
+          "runId": "38742263279",
+          "status": "passed",
+          "durationMs": 12634
+        }
+      ]
+    },
+    {
+      "id": "arm-web-3d5cfec9ba9aeebbb7fc-6258e30a6a7ed23d18fd",
+      "layer": "web",
+      "suite": "web/project_management/outsources.spec.ts > Outsources CRUD",
+      "title": "Create and Edit an Outsource",
+      "file": "web/project_management/outsources.spec.ts",
+      "currentStatus": "passed",
+      "lastRunAt": "2026-10-15T13:42:21.441Z",
+      "durationMs": 11774,
+      "latestError": null,
+      "history30d": [
+        {
+          "date": "2026-10-15",
+          "runId": "38742263279",
+          "status": "passed",
+          "durationMs": 11774
+        }
+      ]
+    },
+    {
+      "id": "arm-web-b004091168aef9b2bd50-127c51d3f3541d2d2d20",
+      "layer": "web",
+      "suite": "web/project_management/projects.spec.ts > Projects create, edit, view",
+      "title": "create a project with minimum required fields",
+      "file": "web/project_management/projects.spec.ts",
+      "currentStatus": "passed",
+      "lastRunAt": "2026-10-15T13:42:21.441Z",
+      "durationMs": 5132,
+      "latestError": null,
+      "history30d": [
+        {
+          "date": "2026-10-15",
+          "runId": "38742263279",
+          "status": "passed",
+          "durationMs": 5132
+        }
+      ]
+    },
+    {
+      "id": "arm-web-b004091168aef9b2bd50-257710161b5fc44a5f9e",
+      "layer": "web",
+      "suite": "web/project_management/projects.spec.ts > Projects create, edit, view",
+      "title": "create a project, then edit its name",
+      "file": "web/project_management/projects.spec.ts",
+      "currentStatus": "passed",
+      "lastRunAt": "2026-10-15T13:42:21.441Z",
+      "durationMs": 11593,
+      "latestError": null,
+      "history30d": [
+        {
+          "date": "2026-10-15",
+          "runId": "38742263279",
+          "status": "passed",
+          "durationMs": 11593
+        }
+      ]
+    },
+    {
+      "id": "arm-web-b004091168aef9b2bd50-30bada6781ff133b6c2c",
+      "layer": "web",
+      "suite": "web/project_management/projects.spec.ts > Projects create, edit, view",
+      "title": "view a project and read its Project Details tab",
+      "file": "web/project_management/projects.spec.ts",
+      "currentStatus": "passed",
+      "lastRunAt": "2026-10-15T13:42:21.441Z",
+      "durationMs": 7888,
+      "latestError": null,
+      "history30d": [
+        {
+          "date": "2026-10-15",
+          "runId": "38742263279",
+          "status": "passed",
+          "durationMs": 7888
+        }
+      ]
+    },
+    {
+      "id": "arm-web-7c017ac3a63763022ab6-64aa0be6eddc23af756f",
+      "layer": "web",
+      "suite": "web/project_management/standalone-estimations.spec.ts > Standalone Estimation",
+      "title": "adjust the Profit default, add a priced job title, and create an estimation that uses both",
+      "file": "web/project_management/standalone-estimations.spec.ts",
+      "currentStatus": "passed",
+      "lastRunAt": "2026-10-15T13:42:21.441Z",
+      "durationMs": 11705,
+      "latestError": null,
+      "history30d": [
+        {
+          "date": "2026-10-15",
+          "runId": "38742263279",
+          "status": "passed",
+          "durationMs": 11705
+        }
+      ]
+    },
+    {
+      "id": "arm-web-7c017ac3a63763022ab6-5487ad23c0e2da866e08",
+      "layer": "web",
+      "suite": "web/project_management/standalone-estimations.spec.ts > Standalone Estimation",
+      "title": "create a multi-resource estimation across two job titles, add a second version, and confirm it on every overview surface",
+      "file": "web/project_management/standalone-estimations.spec.ts",
+      "currentStatus": "passed",
+      "lastRunAt": "2026-10-15T13:42:21.441Z",
+      "durationMs": 20431,
+      "latestError": null,
+      "history30d": [
+        {
+          "date": "2026-10-15",
+          "runId": "38742263279",
+          "status": "passed",
+          "durationMs": 20431
+        }
+      ]
+    },
+    {
+      "id": "arm-web-7c017ac3a63763022ab6-cc9c95805d096a30eabe",
+      "layer": "web",
+      "suite": "web/project_management/standalone-estimations.spec.ts > Standalone Estimation",
+      "title": "edit an existing job title's salary, adjust the Days Per Month default, and confirm the baseline duration arithmetic on a new estimation",
+      "file": "web/project_management/standalone-estimations.spec.ts",
+      "currentStatus": "failed",
+      "lastRunAt": "2026-10-15T13:42:21.441Z",
+      "durationMs": 43436,
+      "latestError": {
+        "message": "Error: \u001b[2mexpect(\u001b[22m\u001b[31mlocator\u001b[39m\u001b[2m).\u001b[22mtoContainText\u001b[2m(\u001b[22m\u001b[32mexpected\u001b[39m\u001b[2m)\u001b[22m failed\n\nLocator: locator('#estimation_result_duration_section').getByRole('paragraph').first()\nTimeout: 30000ms\n\u001b[32m- Expected substring  - 1\u001b[39m\n\u001b[31m+ Received string     + 8\u001b[39m\n\n\u001b[32m- 1 buffer\u001b[39m\n\u001b[31m+\u001b[39m\n\u001b[31m+ \u001b[43m        \u001b[49m\u001b[39m\n\u001b[31m+           10\u001b[39m\n\u001b[31m+ \u001b[43m        \u001b[49m\u001b[39m\n\u001b[31m+ \u001b[43m        \u001b[49m\u001b[39m\n\u001b[31m+           days\u001b[39m\n\u001b[31m+ \u001b[43m        \u001b[49m\u001b[39m\n\u001b[31m+ \u001b[43m      \u001b[49m\u001b[39m\n\nCall log:\n\u001b[2m  - Expect \"toContainText\" locator('#estimation_result_duration_section').getByRole('paragraph').first() with timeout 30000ms\u001b[22m\n\u001b[2m  - waiting for locator('#estimation_result_duration_section').getByRole('paragraph').first()\u001b[22m\n\u001b[2m    64 × locator resolved to <p class=\"col-start-1 row-start-1 mb-[3%] flex flex-col items-center self-end leading-none\">…</p>\u001b[22m\n\u001b[2m       - unexpected value \"\u001b[22m\n\u001b[2m        \u001b[22m\n\u001b[2m          10\u001b[22m\n\u001b[2m        \u001b[22m\n\u001b[2m        \u001b[22m\n\u001b[2m          days\u001b[22m\n\u001b[2m        \u001b[22m\n\u001b[2m      \"\u001b[22m\n",
+        "stack": "Error: \u001b[2mexpect(\u001b[22m\u001b[31mlocator\u001b[39m\u001b[2m).\u001b[22mtoContainText\u001b[2m(\u001b[22m\u001b[32mexpected\u001b[39m\u001b[2m)\u001b[22m failed\n\nLocator: locator('#estimation_result_duration_section').getByRole('paragraph').first()\nTimeout: 30000ms\n\u001b[32m- Expected substring  - 1\u001b[39m\n\u001b[31m+ Received string     + 8\u001b[39m\n\n\u001b[32m- 1 buffer\u001b[39m\n\u001b[31m+\u001b[39m\n\u001b[31m+ \u001b[43m        \u001b[49m\u001b[39m\n\u001b[31m+           10\u001b[39m\n\u001b[31m+ \u001b[43m        \u001b[49m\u001b[39m\n\u001b[31m+ \u001b[43m        \u001b[49m\u001b[39m\n\u001b[31m+           days\u001b[39m\n\u001b[31m+ \u001b[43m        \u001b[49m\u001b[39m\n\u001b[31m+ \u001b[43m      \u001b[49m\u001b[39m\n\nCall log:\n\u001b[2m  - Expect \"toContainText\" locator('#estimation_result_duration_section').getByRole('paragraph').first() with timeout 30000ms\u001b[22m\n\u001b[2m  - waiting for locator('#estimation_result_duration_section').getByRole('paragraph').first()\u001b[22m\n\u001b[2m    64 × locator resolved to <p class=\"col-start-1 row-start-1 mb-[3%] flex flex-col items-center self-end leading-none\">…</p>\u001b[22m\n\u001b[2m       - unexpected value \"\u001b[22m\n\u001b[2m        \u001b[22m\n\u001b[2m          10\u001b[22m\n\u001b[2m        \u001b[22m\n\u001b[2m        \u001b[22m\n\u001b[2m          days\u001b[22m\n\u001b[2m        \u001b[22m\n\u001b[2m      \"\u001b[22m\n\n    at expectDuration (/home/runner/work/arm_test/arm_test/arm_test/automation_tests/tests_support/core/utils/estimation-result.ts:83:25)\n    at EstimationWizardPage.expectDuration (/home/runner/work/arm_test/arm_test/arm_test/automation_tests/tests_support/core/pages/estimation-wizard.page.ts:241:5)\n    at /home/runner/work/arm_test/arm_test/arm_test/automation_tests/tests/web/project_management/standalone-estimations.spec.ts:328:7",
+        "step": "   at ../tests_support/core/utils/estimation-result.ts:83\n\n\u001b[0m \u001b[90m 81 |\u001b[39m   \u001b[36mawait\u001b[39m expect(summary)\u001b[33m.\u001b[39mtoBeVisible()\u001b[33m;\u001b[39m\n \u001b[90m 82 |\u001b[39m   \u001b[36mawait\u001b[39m expect(summary)\u001b[33m.\u001b[39mtoContainText(\u001b[32m`${expected.duration} days`\u001b[39m)\u001b[33m;\u001b[39m\n\u001b[31m\u001b[1m>\u001b[22m\u001b[39m\u001b[90m 83 |\u001b[39m   \u001b[36mawait\u001b[39m expect(summary)\u001b[33m.\u001b[39mtoContainText(\u001b[32m`${expected.buffer} buffer`\u001b[39m)\u001b[33m;\u001b[39m\n \u001b[90m    |\u001b[39m                         \u001b[31m\u001b[1m^\u001b[22m\u001b[39m\n \u001b[90m 84 |\u001b[39m   \u001b[36mawait\u001b[39m expect(summary)\u001b[33m.\u001b[39mtoContainText(\u001b[32m`= ${expected.total} days`\u001b[39m)\u001b[33m;\u001b[39m\n \u001b[90m 85 |\u001b[39m }\n \u001b[90m 86 |\u001b[39m\u001b[0m"
+      },
+      "history30d": [
+        {
+          "date": "2026-10-15",
+          "runId": "38742263279",
+          "status": "failed",
+          "durationMs": 43436,
+          "error": "Error: \u001b[2mexpect(\u001b[22m\u001b[31mlocator\u001b[39m\u001b[2m).\u001b[22mtoContainText\u001b[2m(\u001b[22m\u001b[32mexpected\u001b[39m\u001b[2m)\u001b[22m failed\n\nLocator: locator('#estimation_result_duration_section').getByRole('paragraph').first()\nTimeout: 30000ms\n\u001b[32m- Expected substring  - 1\u001b[39m\n\u001b[31m+ Received string     + 8\u001b[39m\n\n\u001b[32m- 1 buffer\u001b[39m\n\u001b[31m+\u001b[39m\n\u001b[31m+ \u001b[43m        \u001b[49m\u001b[39m\n\u001b[31m+           10\u001b[39m\n\u001b[31m+ \u001b[43m        \u001b[49m\u001b[39m\n\u001b[31m+ \u001b[43m        \u001b[49m\u001b[39m\n\u001b[31m+           days\u001b[39m\n\u001b[31m+ \u001b[43m        \u001b[49m\u001b[39m\n\u001b[31m+ \u001b[43m      \u001b[49m\u001b[39m\n\nCall log:\n\u001b[2m  - Expect \"toContainText\" locator('#estimation_result_duration_section').getByRole('paragraph').first() with timeout 30000ms\u001b[22m\n\u001b[2m  - waiting for locator('#estimation_result_duration_section').getByRole('paragraph').first()\u001b[22m\n\u001b[2m    64 × locator resolved to <p class=\"col-start-1 row-start-1 mb-[3%] flex flex-col items-center self-end leading-none\">…</p>\u001b[22m\n\u001b[2m       - unexpected value \"\u001b[22m\n\u001b[2m        \u001b[22m\n\u001b[2m          10\u001b[22m\n\u001b[2m        \u001b[22m\n\u001b[2m        \u001b[22m\n\u001b[2m          days\u001b[22m\n\u001b[2m        \u001b[22m\n\u001b[2m      \"\u001b[22m\n"
+        }
+      ]
+    }
+  ],
+  "runsHistory": [
+    {
+      "date": "2026-10-15",
+      "total": 51,
+      "passed": 45,
+      "failed": 5,
+      "flaky": 1,
+      "skipped": 0,
+      "passRate": 88.2
+    }
+  ]
+}
