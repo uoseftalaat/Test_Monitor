@@ -3,14 +3,14 @@
   "projectName": "ARM",
   "layer": "api",
   "layerName": "API",
-  "lastUpdated": "2026-10-15T13:22:24.651Z",
+  "lastUpdated": null,
   "summary": {
-    "total": 865,
-    "passed": 859,
+    "total": 0,
+    "passed": 0,
     "failed": 0,
     "flaky": 0,
-    "skipped": 6,
-    "passRate": 99.3
+    "skipped": 0,
+    "passRate": 100
   },
   "tests": [],
   "runsHistory": []

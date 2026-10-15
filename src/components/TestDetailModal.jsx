@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
-import { AnsiText, stripAnsi } from '../utils/ansi.jsx';
+import AnsiText from './common/AnsiText';
+import { stripAnsi } from '../utils/ansi';
 import { 
   X, 
   CheckCircle2, 

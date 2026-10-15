@@ -1,13 +1,13 @@
 {
-  "lastUpdated": "2026-10-15T13:42:21.441Z",
+  "lastUpdated": null,
   "totalProjects": 4,
   "overallSummary": {
-    "totalTests": 916,
-    "totalPassed": 904,
-    "totalFailed": 5,
-    "totalFlaky": 1,
-    "totalSkipped": 6,
-    "passRate": 98.7
+    "totalTests": 0,
+    "totalPassed": 0,
+    "totalFailed": 0,
+    "totalFlaky": 0,
+    "totalSkipped": 0,
+    "passRate": 100
   },
   "projects": [
     {
@@ -15,18 +15,18 @@
       "name": "ARM",
       "description": "Asset & Resource Management Platform",
       "repoUrl": "https://github.com/Areeb-Innovative-Technologies/arm_test",
-      "lastUpdated": "2026-10-15T13:42:21.441Z",
+      "lastUpdated": null,
       "summary": {
-        "total": 916,
-        "passed": 904,
-        "failed": 5,
-        "flaky": 1,
-        "skipped": 6,
-        "passRate": 98.7
+        "total": 0,
+        "passed": 0,
+        "failed": 0,
+        "flaky": 0,
+        "skipped": 0,
+        "passRate": 100
       },
       "layers": {
-        "web": 88.2,
-        "api": 99.3,
+        "web": 100,
+        "api": 100,
         "mobile": 100
       }
     },
