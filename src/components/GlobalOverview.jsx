@@ -135,7 +135,8 @@ export default function GlobalOverview({ globalSummary, onSelectProject }) {
             return (
               <div 
                 key={proj.id}
-                className="bg-slate-900/90 border border-slate-800 hover:border-slate-700/80 rounded-xl p-6 transition duration-200 flex flex-col justify-between group shadow-sm hover:shadow-md hover:shadow-blue-500/5"
+                onClick={() => onSelectProject(proj.id)}
+                className="bg-slate-900/90 border border-slate-800 hover:border-blue-500/50 hover:bg-slate-900/95 rounded-xl p-6 transition duration-200 flex flex-col justify-between group shadow-sm hover:shadow-lg hover:shadow-blue-500/10 cursor-pointer"
               >
                 <div>
                   <div className="flex items-start justify-between gap-4">
@@ -149,8 +150,8 @@ export default function GlobalOverview({ globalSummary, onSelectProject }) {
                             href={proj.repoUrl} 
                             target="_blank" 
                             rel="noreferrer"
-                            className="text-slate-400 hover:text-slate-300"
-                            title="Open repository"
+                            className="text-slate-500 hover:text-slate-300 p-1 rounded hover:bg-slate-800 transition"
+                            title="Open repository on GitHub"
                             onClick={(e) => e.stopPropagation()}
                           >
                             <ExternalLink className="h-3.5 w-3.5" />

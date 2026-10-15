@@ -27,6 +27,7 @@ const args = parseArgs();
 const projectId = args.project || 'arm';
 const layer = args.layer || 'api'; // web, api, mobile
 const reportPath = args.report;
+const htmlReportPath = args['html-report'];
 const runId = args['run-id'] || `manual-${Date.now()}`;
 
 // ============================================================================
@@ -62,9 +63,7 @@ if (!fs.existsSync(projectSubDir)) {
 const layerFilePath = path.join(projectSubDir, `${layer}.json`);
 const manifestPath = path.join(projectSubDir, 'manifest.json');
 
-// ============================================================================
-// FAIL-SAFE 3: Load existing data with fallback and backup
-// ============================================================================
+// Load existing data with fallback
 let layerData = {
   projectId,
   projectName: projectId.toUpperCase(),
@@ -114,8 +113,15 @@ function traversePlaywrightSuites(suites, parentTitle = '') {
             };
           }
 
+          // Build a globally unique, stable ID for this test
+          const testId = spec.id 
+            ? `${projectId}-${layer}-${spec.id}` 
+            : `${projectId}-${layer}-${spec.file || 'spec'}:${spec.line || 0}:${test.projectName || ''}:${spec.title}`
+                .toLowerCase()
+                .replace(/[^a-z0-9:_\-\/\.]/g, '-');
+
           parsedTests.push({
-            id: `${projectId}-${layer}-${spec.id || spec.title.toLowerCase().replace(/[^a-z0-9]/g, '-')}`,
+            id: testId,
             suite: fullSuiteTitle || 'Default Suite',
             title: spec.title || 'Untitled Test',
             file: spec.file || '',
@@ -137,7 +143,7 @@ if (rawReport.suites) {
 } else if (Array.isArray(rawReport.tests)) {
   for (const t of rawReport.tests) {
     parsedTests.push({
-      id: t.id || `${projectId}-${layer}-${(t.title || 'test').toLowerCase().replace(/[^a-z0-9]/g, '-')}`,
+      id: t.id || `${projectId}-${layer}-${t.file || 'test'}:${t.title.toLowerCase().replace(/[^a-z0-9]/g, '-')}`,
       suite: t.suite || 'General',
       title: t.title || 'Untitled Test',
       file: t.file || '',
@@ -163,8 +169,18 @@ const todayStr = now.toISOString().split('T')[0];
 
 if (!Array.isArray(layerData.tests)) layerData.tests = [];
 
+// Filter out any legacy dummy/mock tests if present (e.g. arm-api-encryption-keys)
+layerData.tests = layerData.tests.filter(t => 
+  !t.id.startsWith('arm-api-encryption') && 
+  !t.id.startsWith('arm-api-project') && 
+  !t.id.startsWith('arm-api-estimation') && 
+  !t.id.startsWith('arm-api-filtered') && 
+  !t.id.startsWith('arm-api-assigned')
+);
+
+// Map incoming tests strictly by unique ID (do not de-duplicate solely by title)
 for (const incoming of parsedTests) {
-  let existing = layerData.tests.find(t => t.id === incoming.id || t.title === incoming.title);
+  let existing = layerData.tests.find(t => t.id === incoming.id);
 
   if (!existing) {
     existing = {
@@ -241,14 +257,67 @@ if (existingDayRun) {
 }
 
 // ============================================================================
-// FAIL-SAFE 4: Atomic Write (Write to .tmp then rename)
-// This ensures that even if the pipeline aborts mid-write, the target file is never left corrupt or empty.
+// Playwright Daily Failure Report Handling
+// If there are failures in today's run, retain the Playwright HTML report.
+// If there are no failures (or failures have been resolved), the section remains empty.
 // ============================================================================
+const reportsBaseDir = path.join(__dirname, '../public/reports', projectId, layer);
+
+if (lFailed > 0) {
+  let reportUrl = null;
+  if (htmlReportPath && fs.existsSync(htmlReportPath)) {
+    try {
+      fs.mkdirSync(reportsBaseDir, { recursive: true });
+      const stat = fs.statSync(htmlReportPath);
+      if (stat.isDirectory()) {
+        fs.cpSync(htmlReportPath, reportsBaseDir, { recursive: true });
+      } else {
+        fs.copyFileSync(htmlReportPath, path.join(reportsBaseDir, 'index.html'));
+      }
+      reportUrl = `reports/${projectId}/${layer}/index.html`;
+      console.log(`✅ Staged Playwright failure HTML report to: ${reportsBaseDir}`);
+    } catch (copyErr) {
+      console.warn(`⚠️ Warning copying HTML report: ${copyErr.message}`);
+    }
+  } else if (fs.existsSync(path.join(reportsBaseDir, 'index.html'))) {
+    reportUrl = `reports/${projectId}/${layer}/index.html`;
+  }
+
+  layerData.playwrightReport = {
+    hasFailures: true,
+    runId: runId || null,
+    date: todayStr,
+    timestamp: now.toISOString(),
+    failedCount: lFailed,
+    totalCount: lTotal,
+    reportUrl: reportUrl,
+    failedTests: layerData.tests
+      .filter(t => t.currentStatus === 'failed')
+      .slice(0, 10)
+      .map(t => ({
+        id: t.id,
+        title: t.title,
+        suite: t.suite,
+        file: t.file,
+        errorMessage: t.latestError?.message || 'Test failed'
+      }))
+  };
+} else {
+  // If there are no failures, clean up any previous failure report so the section remains empty
+  if (fs.existsSync(reportsBaseDir)) {
+    try {
+      fs.rmSync(reportsBaseDir, { recursive: true, force: true });
+    } catch (_) {}
+  }
+  layerData.playwrightReport = null;
+}
+
+// Atomic Write
 const tempLayerFile = `${layerFilePath}.tmp`;
 try {
   fs.writeFileSync(tempLayerFile, JSON.stringify(layerData, null, 2));
   fs.renameSync(tempLayerFile, layerFilePath);
-  console.log(`✅ FAIL-SAFE: Atomic write succeeded: ${layerFilePath}`);
+  console.log(`✅ Atomic write succeeded: ${layerFilePath}`);
 } catch (writeErr) {
   console.error(`❌ Atomic write error for ${layerFilePath}: ${writeErr.message}`);
   if (fs.existsSync(tempLayerFile)) fs.unlinkSync(tempLayerFile);
@@ -267,7 +336,8 @@ if (fs.existsSync(manifestPath)) {
       failed: lFailed,
       flaky: lFlaky,
       skipped: lSkipped,
-      passRate: lPassRate
+      passRate: lPassRate,
+      playwrightReport: layerData.playwrightReport
     };
 
     const layersList = Object.values(manifest.layers);
@@ -300,12 +370,20 @@ if (fs.existsSync(summaryFilePath)) {
       if (!globalSummary.projects[projIdx].layers) globalSummary.projects[projIdx].layers = {};
       globalSummary.projects[projIdx].layers[layer] = lPassRate;
       globalSummary.projects[projIdx].lastUpdated = now.toISOString();
+      globalSummary.projects[projIdx].summary = {
+        total: lTotal,
+        passed: lPassed,
+        failed: lFailed,
+        flaky: lFlaky,
+        skipped: lSkipped,
+        passRate: lPassRate
+      };
     }
 
     const tempSummary = `${summaryFilePath}.tmp`;
     fs.writeFileSync(tempSummary, JSON.stringify(globalSummary, null, 2));
     fs.renameSync(tempSummary, summaryFilePath);
-    console.log(`✅ FAIL-SAFE: Atomic update of global summary: ${summaryFilePath}`);
+    console.log(`✅ Atomic update of global summary: ${summaryFilePath}`);
   } catch (summaryErr) {
     console.warn(`⚠️ Warning updating summary: ${summaryErr.message}`);
   }

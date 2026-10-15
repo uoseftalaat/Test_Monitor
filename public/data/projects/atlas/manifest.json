@@ -3,11 +3,11 @@
   "projectName": "Atlas",
   "description": "Enterprise Geolocation & Fleet Tracking",
   "repoUrl": "https://github.com/Areeb-Innovative-Technologies/atlas_test",
-  "lastUpdated": "2026-10-15T12:17:18.093Z",
+  "lastUpdated": null,
   "retentionDays": 30,
   "summary": {
-    "total": 3,
-    "passed": 3,
+    "total": 0,
+    "passed": 0,
     "failed": 0,
     "flaky": 0,
     "skipped": 0,
@@ -16,8 +16,8 @@
   "layers": {
     "web": {
       "name": "Web",
-      "total": 1,
-      "passed": 1,
+      "total": 0,
+      "passed": 0,
       "failed": 0,
       "flaky": 0,
       "skipped": 0,
@@ -25,8 +25,8 @@
     },
     "api": {
       "name": "API",
-      "total": 1,
-      "passed": 1,
+      "total": 0,
+      "passed": 0,
       "failed": 0,
       "flaky": 0,
       "skipped": 0,
@@ -34,8 +34,8 @@
     },
     "mobile": {
       "name": "Mobile",
-      "total": 1,
-      "passed": 1,
+      "total": 0,
+      "passed": 0,
       "failed": 0,
       "flaky": 0,
       "skipped": 0,

@@ -67,9 +67,16 @@ export default function App() {
 
         layerKeys.forEach((key, idx) => {
           const result = layerResponses[idx];
+          const isNotConfigured = manifest?.layers?.[key]?.notConfigured;
+
           if (result.status === 'fulfilled' && result.value && typeof result.value === 'object') {
             const data = result.value;
-            loadedLayers[key] = data.summary || { total: 0, passed: 0, failed: 0, flaky: 0, skipped: 0, passRate: 100 };
+            loadedLayers[key] = {
+              ...(data.summary || { total: 0, passed: 0, failed: 0, flaky: 0, skipped: 0, passRate: 100 }),
+              runsHistory: data.runsHistory || [],
+              playwrightReport: data.playwrightReport || null,
+              notConfigured: !!isNotConfigured
+            };
             
             if (Array.isArray(data.tests) && data.tests.length > 0) {
               combinedTests = combinedTests.concat(data.tests);
@@ -89,7 +96,17 @@ export default function App() {
             });
           } else {
             // Layer file doesn't exist (e.g. project has no mobile app yet) -> Safe empty fallback
-            loadedLayers[key] = { total: 0, passed: 0, failed: 0, flaky: 0, skipped: 0, passRate: 100, notConfigured: true };
+            loadedLayers[key] = { 
+              total: 0, 
+              passed: 0, 
+              failed: 0, 
+              flaky: 0, 
+              skipped: 0, 
+              passRate: 100, 
+              notConfigured: true,
+              runsHistory: [],
+              playwrightReport: null
+            };
           }
         });
 

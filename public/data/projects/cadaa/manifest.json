@@ -3,21 +3,21 @@
   "projectName": "Cadaa",
   "description": "Compliance & Digital Auditing Automation",
   "repoUrl": "https://github.com/Areeb-Innovative-Technologies/cadaa_test",
-  "lastUpdated": "2026-10-15T12:17:18.092Z",
+  "lastUpdated": null,
   "retentionDays": 30,
   "summary": {
-    "total": 5,
-    "passed": 4,
+    "total": 0,
+    "passed": 0,
     "failed": 0,
-    "flaky": 1,
+    "flaky": 0,
     "skipped": 0,
-    "passRate": 80
+    "passRate": 100
   },
   "layers": {
     "web": {
       "name": "Web",
-      "total": 2,
-      "passed": 2,
+      "total": 0,
+      "passed": 0,
       "failed": 0,
       "flaky": 0,
       "skipped": 0,
@@ -25,17 +25,17 @@
     },
     "api": {
       "name": "API",
-      "total": 2,
-      "passed": 1,
+      "total": 0,
+      "passed": 0,
       "failed": 0,
-      "flaky": 1,
+      "flaky": 0,
       "skipped": 0,
-      "passRate": 50
+      "passRate": 100
     },
     "mobile": {
       "name": "Mobile",
-      "total": 1,
-      "passed": 1,
+      "total": 0,
+      "passed": 0,
       "failed": 0,
       "flaky": 0,
       "skipped": 0,
