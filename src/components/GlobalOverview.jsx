@@ -183,7 +183,7 @@ export default function GlobalOverview({ globalSummary, onSelectProject }) {
                     <span className="text-[11px] uppercase tracking-wider font-semibold text-slate-400 block mb-2">
                       Layer Health
                     </span>
-                    <div className="grid grid-cols-2 sm:grid-cols-4 gap-2">
+                    <div className="grid grid-cols-3 gap-2">
                       <div className="bg-slate-800/50 rounded-lg p-2 text-center border border-slate-800">
                         <div className="flex items-center justify-center gap-1 text-[11px] text-slate-400 mb-0.5">
                           <Globe className="h-3 w-3 text-blue-400" /> Web
@@ -198,15 +198,9 @@ export default function GlobalOverview({ globalSummary, onSelectProject }) {
                       </div>
                       <div className="bg-slate-800/50 rounded-lg p-2 text-center border border-slate-800">
                         <div className="flex items-center justify-center gap-1 text-[11px] text-slate-400 mb-0.5">
-                          <Smartphone className="h-3 w-3 text-emerald-400" /> Android
+                          <Smartphone className="h-3 w-3 text-emerald-400" /> Mobile
                         </div>
-                        <span className="text-xs font-bold text-slate-200">{proj.layers?.android ?? '-'}%</span>
-                      </div>
-                      <div className="bg-slate-800/50 rounded-lg p-2 text-center border border-slate-800">
-                        <div className="flex items-center justify-center gap-1 text-[11px] text-slate-400 mb-0.5">
-                          <Smartphone className="h-3 w-3 text-indigo-400" /> iOS
-                        </div>
-                        <span className="text-xs font-bold text-slate-200">{proj.layers?.ios ?? '-'}%</span>
+                        <span className="text-xs font-bold text-slate-200">{proj.layers?.mobile ?? '-'}%</span>
                       </div>
                     </div>
                   </div>

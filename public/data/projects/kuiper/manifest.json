@@ -1,0 +1,45 @@
+{
+  "projectId": "kuiper",
+  "projectName": "Kuiper",
+  "description": "High-Throughput Analytics & Telemetry Engine",
+  "repoUrl": "https://github.com/Areeb-Innovative-Technologies/kuiper_test",
+  "lastUpdated": "2026-10-15T12:17:18.092Z",
+  "retentionDays": 30,
+  "summary": {
+    "total": 3,
+    "passed": 2,
+    "failed": 1,
+    "flaky": 0,
+    "skipped": 0,
+    "passRate": 66.7
+  },
+  "layers": {
+    "web": {
+      "name": "Web",
+      "total": 1,
+      "passed": 1,
+      "failed": 0,
+      "flaky": 0,
+      "skipped": 0,
+      "passRate": 100
+    },
+    "api": {
+      "name": "API",
+      "total": 2,
+      "passed": 1,
+      "failed": 1,
+      "flaky": 0,
+      "skipped": 0,
+      "passRate": 50
+    },
+    "mobile": {
+      "name": "Mobile",
+      "total": 0,
+      "passed": 0,
+      "failed": 0,
+      "flaky": 0,
+      "skipped": 0,
+      "passRate": 100
+    }
+  }
+}

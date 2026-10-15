@@ -1,0 +1,875 @@
+{
+  "projectId": "arm",
+  "projectName": "ARM",
+  "layer": "android",
+  "layerName": "Mobile - Android",
+  "lastUpdated": "2026-10-15T12:15:51.641Z",
+  "summary": {
+    "total": 3,
+    "passed": 3,
+    "failed": 0,
+    "flaky": 0,
+    "skipped": 0,
+    "passRate": 100
+  },
+  "tests": [
+    {
+      "id": "arm-android-login-biometric",
+      "layer": "android",
+      "suite": "Authentication",
+      "title": "Biometric fingerprint login on Android 14 Emulators",
+      "file": "android/tests/auth/BiometricLoginTest.kt",
+      "currentStatus": "passed",
+      "lastRunAt": "2026-10-15T10:30:00Z",
+      "durationMs": 8200,
+      "latestError": null,
+      "history30d": [
+        {
+          "date": "2026-09-16",
+          "runId": "run-20260916-and",
+          "status": "passed",
+          "durationMs": 694
+        },
+        {
+          "date": "2026-09-17",
+          "runId": "run-20260917-and",
+          "status": "passed",
+          "durationMs": 2599
+        },
+        {
+          "date": "2026-09-18",
+          "runId": "run-20260918-and",
+          "status": "passed",
+          "durationMs": 824
+        },
+        {
+          "date": "2026-09-19",
+          "runId": "run-20260919-and",
+          "status": "passed",
+          "durationMs": 2545
+        },
+        {
+          "date": "2026-09-20",
+          "runId": "run-20260920-and",
+          "status": "passed",
+          "durationMs": 1293
+        },
+        {
+          "date": "2026-09-21",
+          "runId": "run-20260921-and",
+          "status": "passed",
+          "durationMs": 2687
+        },
+        {
+          "date": "2026-09-22",
+          "runId": "run-20260922-and",
+          "status": "passed",
+          "durationMs": 2740
+        },
+        {
+          "date": "2026-09-23",
+          "runId": "run-20260923-and",
+          "status": "passed",
+          "durationMs": 2100
+        },
+        {
+          "date": "2026-09-24",
+          "runId": "run-20260924-and",
+          "status": "passed",
+          "durationMs": 1445
+        },
+        {
+          "date": "2026-09-25",
+          "runId": "run-20260925-and",
+          "status": "passed",
+          "durationMs": 773
+        },
+        {
+          "date": "2026-09-26",
+          "runId": "run-20260926-and",
+          "status": "passed",
+          "durationMs": 550
+        },
+        {
+          "date": "2026-09-27",
+          "runId": "run-20260927-and",
+          "status": "passed",
+          "durationMs": 824
+        },
+        {
+          "date": "2026-09-28",
+          "runId": "run-20260928-and",
+          "status": "passed",
+          "durationMs": 942
+        },
+        {
+          "date": "2026-09-29",
+          "runId": "run-20260929-and",
+          "status": "passed",
+          "durationMs": 1858
+        },
+        {
+          "date": "2026-09-30",
+          "runId": "run-20260930-and",
+          "status": "passed",
+          "durationMs": 599
+        },
+        {
+          "date": "2026-10-01",
+          "runId": "run-20261001-and",
+          "status": "passed",
+          "durationMs": 2693
+        },
+        {
+          "date": "2026-10-02",
+          "runId": "run-20261002-and",
+          "status": "passed",
+          "durationMs": 2315
+        },
+        {
+          "date": "2026-10-03",
+          "runId": "run-20261003-and",
+          "status": "passed",
+          "durationMs": 1147
+        },
+        {
+          "date": "2026-10-04",
+          "runId": "run-20261004-and",
+          "status": "passed",
+          "durationMs": 1227
+        },
+        {
+          "date": "2026-10-05",
+          "runId": "run-20261005-and",
+          "status": "passed",
+          "durationMs": 799
+        },
+        {
+          "date": "2026-10-06",
+          "runId": "run-20261006-and",
+          "status": "passed",
+          "durationMs": 1816
+        },
+        {
+          "date": "2026-10-07",
+          "runId": "run-20261007-and",
+          "status": "passed",
+          "durationMs": 545
+        },
+        {
+          "date": "2026-10-08",
+          "runId": "run-20261008-and",
+          "status": "passed",
+          "durationMs": 1194
+        },
+        {
+          "date": "2026-10-09",
+          "runId": "run-20261009-and",
+          "status": "passed",
+          "durationMs": 2266
+        },
+        {
+          "date": "2026-10-10",
+          "runId": "run-20261010-and",
+          "status": "passed",
+          "durationMs": 325
+        },
+        {
+          "date": "2026-10-11",
+          "runId": "run-20261011-and",
+          "status": "passed",
+          "durationMs": 598
+        },
+        {
+          "date": "2026-10-12",
+          "runId": "run-20261012-and",
+          "status": "passed",
+          "durationMs": 747
+        },
+        {
+          "date": "2026-10-13",
+          "runId": "run-20261013-and",
+          "status": "passed",
+          "durationMs": 2014
+        },
+        {
+          "date": "2026-10-14",
+          "runId": "run-20261014-and",
+          "status": "passed",
+          "durationMs": 982
+        },
+        {
+          "date": "2026-10-15",
+          "runId": "run-20261015-and",
+          "status": "passed",
+          "durationMs": 2472
+        }
+      ]
+    },
+    {
+      "id": "arm-android-project-sync",
+      "layer": "android",
+      "suite": "Offline Data Sync",
+      "title": "Sync offline task updates with exponential backoff upon network restoration",
+      "file": "android/tests/sync/OfflineSyncTest.kt",
+      "currentStatus": "passed",
+      "lastRunAt": "2026-10-15T10:30:00Z",
+      "durationMs": 14200,
+      "latestError": {
+        "message": "RoomDbException: Migration missing from version 14 to 15 on SQLite database",
+        "stack": "RoomDbException: Migration failed\n    at com.areeb.arm.db.AppDatabase.migrate(AppDatabase.kt:56)\n    at android/tests/sync/OfflineSyncTest.kt:41",
+        "step": "database.syncWorker.doWork()"
+      },
+      "history30d": [
+        {
+          "date": "2026-09-16",
+          "runId": "run-20260916-and",
+          "status": "passed",
+          "durationMs": 2350
+        },
+        {
+          "date": "2026-09-17",
+          "runId": "run-20260917-and",
+          "status": "passed",
+          "durationMs": 524
+        },
+        {
+          "date": "2026-09-18",
+          "runId": "run-20260918-and",
+          "status": "passed",
+          "durationMs": 1813
+        },
+        {
+          "date": "2026-09-19",
+          "runId": "run-20260919-and",
+          "status": "passed",
+          "durationMs": 2088
+        },
+        {
+          "date": "2026-09-20",
+          "runId": "run-20260920-and",
+          "status": "passed",
+          "durationMs": 2743
+        },
+        {
+          "date": "2026-09-21",
+          "runId": "run-20260921-and",
+          "status": "passed",
+          "durationMs": 1540
+        },
+        {
+          "date": "2026-09-22",
+          "runId": "run-20260922-and",
+          "status": "passed",
+          "durationMs": 501
+        },
+        {
+          "date": "2026-09-23",
+          "runId": "run-20260923-and",
+          "status": "passed",
+          "durationMs": 1705
+        },
+        {
+          "date": "2026-09-24",
+          "runId": "run-20260924-and",
+          "status": "passed",
+          "durationMs": 717
+        },
+        {
+          "date": "2026-09-25",
+          "runId": "run-20260925-and",
+          "status": "passed",
+          "durationMs": 2006
+        },
+        {
+          "date": "2026-09-26",
+          "runId": "run-20260926-and",
+          "status": "failed",
+          "durationMs": 1586,
+          "error": "AssertionError: Received 502 Bad Gateway"
+        },
+        {
+          "date": "2026-09-27",
+          "runId": "run-20260927-and",
+          "status": "passed",
+          "durationMs": 1880
+        },
+        {
+          "date": "2026-09-28",
+          "runId": "run-20260928-and",
+          "status": "passed",
+          "durationMs": 1727
+        },
+        {
+          "date": "2026-09-29",
+          "runId": "run-20260929-and",
+          "status": "passed",
+          "durationMs": 2341
+        },
+        {
+          "date": "2026-09-30",
+          "runId": "run-20260930-and",
+          "status": "passed",
+          "durationMs": 2549
+        },
+        {
+          "date": "2026-10-01",
+          "runId": "run-20261001-and",
+          "status": "passed",
+          "durationMs": 899
+        },
+        {
+          "date": "2026-10-02",
+          "runId": "run-20261002-and",
+          "status": "passed",
+          "durationMs": 1675
+        },
+        {
+          "date": "2026-10-03",
+          "runId": "run-20261003-and",
+          "status": "passed",
+          "durationMs": 1211
+        },
+        {
+          "date": "2026-10-04",
+          "runId": "run-20261004-and",
+          "status": "failed",
+          "durationMs": 2177,
+          "error": "AssertionError: Received 502 Bad Gateway"
+        },
+        {
+          "date": "2026-10-05",
+          "runId": "run-20261005-and",
+          "status": "passed",
+          "durationMs": 1745
+        },
+        {
+          "date": "2026-10-06",
+          "runId": "run-20261006-and",
+          "status": "passed",
+          "durationMs": 979
+        },
+        {
+          "date": "2026-10-07",
+          "runId": "run-20261007-and",
+          "status": "passed",
+          "durationMs": 773
+        },
+        {
+          "date": "2026-10-08",
+          "runId": "run-20261008-and",
+          "status": "passed",
+          "durationMs": 1210
+        },
+        {
+          "date": "2026-10-09",
+          "runId": "run-20261009-and",
+          "status": "passed",
+          "durationMs": 2192
+        },
+        {
+          "date": "2026-10-10",
+          "runId": "run-20261010-and",
+          "status": "passed",
+          "durationMs": 360
+        },
+        {
+          "date": "2026-10-11",
+          "runId": "run-20261011-and",
+          "status": "passed",
+          "durationMs": 2237
+        },
+        {
+          "date": "2026-10-12",
+          "runId": "run-20261012-and",
+          "status": "passed",
+          "durationMs": 2243
+        },
+        {
+          "date": "2026-10-13",
+          "runId": "run-20261013-and",
+          "status": "passed",
+          "durationMs": 2420
+        },
+        {
+          "date": "2026-10-14",
+          "runId": "run-20261014-and",
+          "status": "failed",
+          "durationMs": 491,
+          "error": "AssertionError: Received 502 Bad Gateway"
+        },
+        {
+          "date": "2026-10-15",
+          "runId": "run-20261015-and",
+          "status": "passed",
+          "durationMs": 2036
+        }
+      ]
+    },
+    {
+      "id": "arm-android-receipt-upload",
+      "layer": "android",
+      "suite": "Expenses",
+      "title": "Capture expense receipt image and attach to active invoice draft",
+      "file": "android/tests/expenses/ReceiptUploadTest.kt",
+      "currentStatus": "passed",
+      "lastRunAt": "2026-10-15T10:30:00Z",
+      "durationMs": 9400,
+      "latestError": null,
+      "history30d": [
+        {
+          "date": "2026-09-16",
+          "runId": "run-20260916-and",
+          "status": "passed",
+          "durationMs": 1031
+        },
+        {
+          "date": "2026-09-17",
+          "runId": "run-20260917-and",
+          "status": "passed",
+          "durationMs": 1814
+        },
+        {
+          "date": "2026-09-18",
+          "runId": "run-20260918-and",
+          "status": "passed",
+          "durationMs": 1543
+        },
+        {
+          "date": "2026-09-19",
+          "runId": "run-20260919-and",
+          "status": "passed",
+          "durationMs": 1900
+        },
+        {
+          "date": "2026-09-20",
+          "runId": "run-20260920-and",
+          "status": "passed",
+          "durationMs": 1987
+        },
+        {
+          "date": "2026-09-21",
+          "runId": "run-20260921-and",
+          "status": "passed",
+          "durationMs": 1593
+        },
+        {
+          "date": "2026-09-22",
+          "runId": "run-20260922-and",
+          "status": "passed",
+          "durationMs": 2527
+        },
+        {
+          "date": "2026-09-23",
+          "runId": "run-20260923-and",
+          "status": "passed",
+          "durationMs": 1913
+        },
+        {
+          "date": "2026-09-24",
+          "runId": "run-20260924-and",
+          "status": "passed",
+          "durationMs": 1688
+        },
+        {
+          "date": "2026-09-25",
+          "runId": "run-20260925-and",
+          "status": "passed",
+          "durationMs": 2770
+        },
+        {
+          "date": "2026-09-26",
+          "runId": "run-20260926-and",
+          "status": "passed",
+          "durationMs": 798
+        },
+        {
+          "date": "2026-09-27",
+          "runId": "run-20260927-and",
+          "status": "passed",
+          "durationMs": 2562
+        },
+        {
+          "date": "2026-09-28",
+          "runId": "run-20260928-and",
+          "status": "passed",
+          "durationMs": 1774
+        },
+        {
+          "date": "2026-09-29",
+          "runId": "run-20260929-and",
+          "status": "passed",
+          "durationMs": 2479
+        },
+        {
+          "date": "2026-09-30",
+          "runId": "run-20260930-and",
+          "status": "passed",
+          "durationMs": 1272
+        },
+        {
+          "date": "2026-10-01",
+          "runId": "run-20261001-and",
+          "status": "passed",
+          "durationMs": 2773
+        },
+        {
+          "date": "2026-10-02",
+          "runId": "run-20261002-and",
+          "status": "passed",
+          "durationMs": 2731
+        },
+        {
+          "date": "2026-10-03",
+          "runId": "run-20261003-and",
+          "status": "passed",
+          "durationMs": 1886
+        },
+        {
+          "date": "2026-10-04",
+          "runId": "run-20261004-and",
+          "status": "passed",
+          "durationMs": 1695
+        },
+        {
+          "date": "2026-10-05",
+          "runId": "run-20261005-and",
+          "status": "passed",
+          "durationMs": 2080
+        },
+        {
+          "date": "2026-10-06",
+          "runId": "run-20261006-and",
+          "status": "passed",
+          "durationMs": 2304
+        },
+        {
+          "date": "2026-10-07",
+          "runId": "run-20261007-and",
+          "status": "passed",
+          "durationMs": 1626
+        },
+        {
+          "date": "2026-10-08",
+          "runId": "run-20261008-and",
+          "status": "passed",
+          "durationMs": 2690
+        },
+        {
+          "date": "2026-10-09",
+          "runId": "run-20261009-and",
+          "status": "passed",
+          "durationMs": 2548
+        },
+        {
+          "date": "2026-10-10",
+          "runId": "run-20261010-and",
+          "status": "passed",
+          "durationMs": 705
+        },
+        {
+          "date": "2026-10-11",
+          "runId": "run-20261011-and",
+          "status": "passed",
+          "durationMs": 1799
+        },
+        {
+          "date": "2026-10-12",
+          "runId": "run-20261012-and",
+          "status": "passed",
+          "durationMs": 619
+        },
+        {
+          "date": "2026-10-13",
+          "runId": "run-20261013-and",
+          "status": "passed",
+          "durationMs": 2474
+        },
+        {
+          "date": "2026-10-14",
+          "runId": "run-20261014-and",
+          "status": "passed",
+          "durationMs": 1651
+        },
+        {
+          "date": "2026-10-15",
+          "runId": "run-20261015-and",
+          "status": "passed",
+          "durationMs": 1215
+        }
+      ]
+    }
+  ],
+  "runsHistory": [
+    {
+      "date": "2026-09-16",
+      "total": 3,
+      "passed": 3,
+      "failed": 0,
+      "flaky": 0,
+      "skipped": 0,
+      "passRate": 100
+    },
+    {
+      "date": "2026-09-17",
+      "total": 3,
+      "passed": 3,
+      "failed": 0,
+      "flaky": 0,
+      "skipped": 0,
+      "passRate": 100
+    },
+    {
+      "date": "2026-09-18",
+      "total": 3,
+      "passed": 3,
+      "failed": 0,
+      "flaky": 0,
+      "skipped": 0,
+      "passRate": 100
+    },
+    {
+      "date": "2026-09-19",
+      "total": 3,
+      "passed": 3,
+      "failed": 0,
+      "flaky": 0,
+      "skipped": 0,
+      "passRate": 100
+    },
+    {
+      "date": "2026-09-20",
+      "total": 3,
+      "passed": 3,
+      "failed": 0,
+      "flaky": 0,
+      "skipped": 0,
+      "passRate": 100
+    },
+    {
+      "date": "2026-09-21",
+      "total": 3,
+      "passed": 3,
+      "failed": 0,
+      "flaky": 0,
+      "skipped": 0,
+      "passRate": 100
+    },
+    {
+      "date": "2026-09-22",
+      "total": 3,
+      "passed": 3,
+      "failed": 0,
+      "flaky": 0,
+      "skipped": 0,
+      "passRate": 100
+    },
+    {
+      "date": "2026-09-23",
+      "total": 3,
+      "passed": 3,
+      "failed": 0,
+      "flaky": 0,
+      "skipped": 0,
+      "passRate": 100
+    },
+    {
+      "date": "2026-09-24",
+      "total": 3,
+      "passed": 3,
+      "failed": 0,
+      "flaky": 0,
+      "skipped": 0,
+      "passRate": 100
+    },
+    {
+      "date": "2026-09-25",
+      "total": 3,
+      "passed": 3,
+      "failed": 0,
+      "flaky": 0,
+      "skipped": 0,
+      "passRate": 100
+    },
+    {
+      "date": "2026-09-26",
+      "total": 3,
+      "passed": 2,
+      "failed": 1,
+      "flaky": 0,
+      "skipped": 0,
+      "passRate": 66.7
+    },
+    {
+      "date": "2026-09-27",
+      "total": 3,
+      "passed": 3,
+      "failed": 0,
+      "flaky": 0,
+      "skipped": 0,
+      "passRate": 100
+    },
+    {
+      "date": "2026-09-28",
+      "total": 3,
+      "passed": 3,
+      "failed": 0,
+      "flaky": 0,
+      "skipped": 0,
+      "passRate": 100
+    },
+    {
+      "date": "2026-09-29",
+      "total": 3,
+      "passed": 3,
+      "failed": 0,
+      "flaky": 0,
+      "skipped": 0,
+      "passRate": 100
+    },
+    {
+      "date": "2026-09-30",
+      "total": 3,
+      "passed": 3,
+      "failed": 0,
+      "flaky": 0,
+      "skipped": 0,
+      "passRate": 100
+    },
+    {
+      "date": "2026-10-01",
+      "total": 3,
+      "passed": 3,
+      "failed": 0,
+      "flaky": 0,
+      "skipped": 0,
+      "passRate": 100
+    },
+    {
+      "date": "2026-10-02",
+      "total": 3,
+      "passed": 3,
+      "failed": 0,
+      "flaky": 0,
+      "skipped": 0,
+      "passRate": 100
+    },
+    {
+      "date": "2026-10-03",
+      "total": 3,
+      "passed": 3,
+      "failed": 0,
+      "flaky": 0,
+      "skipped": 0,
+      "passRate": 100
+    },
+    {
+      "date": "2026-10-04",
+      "total": 3,
+      "passed": 2,
+      "failed": 1,
+      "flaky": 0,
+      "skipped": 0,
+      "passRate": 66.7
+    },
+    {
+      "date": "2026-10-05",
+      "total": 3,
+      "passed": 3,
+      "failed": 0,
+      "flaky": 0,
+      "skipped": 0,
+      "passRate": 100
+    },
+    {
+      "date": "2026-10-06",
+      "total": 3,
+      "passed": 3,
+      "failed": 0,
+      "flaky": 0,
+      "skipped": 0,
+      "passRate": 100
+    },
+    {
+      "date": "2026-10-07",
+      "total": 3,
+      "passed": 3,
+      "failed": 0,
+      "flaky": 0,
+      "skipped": 0,
+      "passRate": 100
+    },
+    {
+      "date": "2026-10-08",
+      "total": 3,
+      "passed": 3,
+      "failed": 0,
+      "flaky": 0,
+      "skipped": 0,
+      "passRate": 100
+    },
+    {
+      "date": "2026-10-09",
+      "total": 3,
+      "passed": 3,
+      "failed": 0,
+      "flaky": 0,
+      "skipped": 0,
+      "passRate": 100
+    },
+    {
+      "date": "2026-10-10",
+      "total": 3,
+      "passed": 3,
+      "failed": 0,
+      "flaky": 0,
+      "skipped": 0,
+      "passRate": 100
+    },
+    {
+      "date": "2026-10-11",
+      "total": 3,
+      "passed": 3,
+      "failed": 0,
+      "flaky": 0,
+      "skipped": 0,
+      "passRate": 100
+    },
+    {
+      "date": "2026-10-12",
+      "total": 3,
+      "passed": 3,
+      "failed": 0,
+      "flaky": 0,
+      "skipped": 0,
+      "passRate": 100
+    },
+    {
+      "date": "2026-10-13",
+      "total": 3,
+      "passed": 3,
+      "failed": 0,
+      "flaky": 0,
+      "skipped": 0,
+      "passRate": 100
+    },
+    {
+      "date": "2026-10-14",
+      "total": 3,
+      "passed": 2,
+      "failed": 1,
+      "flaky": 0,
+      "skipped": 0,
+      "passRate": 66.7
+    },
+    {
+      "date": "2026-10-15",
+      "total": 3,
+      "passed": 3,
+      "failed": 0,
+      "flaky": 0,
+      "skipped": 0,
+      "passRate": 100
+    }
+  ]
+}

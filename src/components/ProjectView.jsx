@@ -82,8 +82,7 @@ export default function ProjectView({ projectData, onSelectTest }) {
     { id: 'all', name: 'All Layers', icon: Layers, count: tests.length },
     { id: 'web', name: 'Web', icon: Globe, count: layers.web?.total || 0, passRate: layers.web?.passRate, failed: layers.web?.failed },
     { id: 'api', name: 'API', icon: Zap, count: layers.api?.total || 0, passRate: layers.api?.passRate, failed: layers.api?.failed },
-    { id: 'android', name: 'Mobile - Android', icon: Smartphone, count: layers.android?.total || 0, passRate: layers.android?.passRate, failed: layers.android?.failed },
-    { id: 'ios', name: 'Mobile - iOS', icon: Smartphone, count: layers.ios?.total || 0, passRate: layers.ios?.passRate, failed: layers.ios?.failed },
+    { id: 'mobile', name: 'Mobile', icon: Smartphone, count: layers.mobile?.total || 0, passRate: layers.mobile?.passRate, failed: layers.mobile?.failed },
   ];
 
   const totalFailedInLayer = useMemo(() => {

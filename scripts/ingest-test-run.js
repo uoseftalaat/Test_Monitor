@@ -37,15 +37,34 @@ if (!reportPath || !fs.existsSync(reportPath)) {
 
 const rawReport = JSON.parse(fs.readFileSync(reportPath, 'utf8'));
 
-const projectFilePath = path.join(PROJECTS_DIR, `${projectId}.json`);
-if (!fs.existsSync(projectFilePath)) {
-  console.error(`Project data file does not exist: ${projectFilePath}`);
-  process.exit(1);
+const projectSubDir = path.join(PROJECTS_DIR, projectId);
+if (!fs.existsSync(projectSubDir)) {
+  fs.mkdirSync(projectSubDir, { recursive: true });
 }
 
-const projectData = JSON.parse(fs.readFileSync(projectFilePath, 'utf8'));
+const layerFilePath = path.join(projectSubDir, `${layer}.json`);
+const manifestPath = path.join(projectSubDir, 'manifest.json');
 
-// Extract tests from report (Supports standard Playwright JSON report or simplified format)
+let layerData = {
+  projectId,
+  projectName: projectId.toUpperCase(),
+  layer,
+  layerName: layer === 'web' ? 'Web' : layer === 'api' ? 'API' : layer === 'android' ? 'Mobile - Android' : 'Mobile - iOS',
+  lastUpdated: new Date().toISOString(),
+  summary: { total: 0, passed: 0, failed: 0, flaky: 0, skipped: 0, passRate: 100 },
+  tests: [],
+  runsHistory: []
+};
+
+if (fs.existsSync(layerFilePath)) {
+  try {
+    layerData = JSON.parse(fs.readFileSync(layerFilePath, 'utf8'));
+  } catch (e) {
+    console.warn(`Could not parse existing ${layerFilePath}, creating fresh structure`);
+  }
+}
+
+// Extract tests from report (Supports standard Playwright JSON report or simplified custom format)
 const parsedTests = [];
 
 function traversePlaywrightSuites(suites, parentTitle = '') {
@@ -89,10 +108,8 @@ function traversePlaywrightSuites(suites, parentTitle = '') {
 }
 
 if (rawReport.suites) {
-  // It's a standard Playwright JSON report
   traversePlaywrightSuites(rawReport.suites);
 } else if (Array.isArray(rawReport.tests)) {
-  // It's a simplified custom format
   for (const t of rawReport.tests) {
     parsedTests.push({
       id: t.id || `${projectId}-${layer}-${t.title.toLowerCase().replace(/[^a-z0-9]/g, '-')}`,
@@ -106,7 +123,7 @@ if (rawReport.suites) {
   }
 }
 
-console.log(`Parsed ${parsedTests.length} tests for project ${projectId} (${layer})`);
+console.log(`Parsed ${parsedTests.length} tests for ${projectId} [${layer}]`);
 
 // 30-Day cutoff timestamp
 const now = new Date();
@@ -114,12 +131,11 @@ const cutoffDate = new Date();
 cutoffDate.setDate(cutoffDate.getDate() - 30);
 const todayStr = now.toISOString().split('T')[0];
 
-// Merge into projectData.tests
-if (!projectData.tests) projectData.tests = [];
+if (!layerData.tests) layerData.tests = [];
 
 for (const incoming of parsedTests) {
-  let existing = projectData.tests.find(t => t.id === incoming.id || (t.title === incoming.title && t.layer === layer));
-  
+  let existing = layerData.tests.find(t => t.id === incoming.id || t.title === incoming.title);
+
   if (!existing) {
     existing = {
       id: incoming.id,
@@ -133,7 +149,7 @@ for (const incoming of parsedTests) {
       latestError: incoming.error,
       history30d: []
     };
-    projectData.tests.push(existing);
+    layerData.tests.push(existing);
   } else {
     existing.currentStatus = incoming.status;
     existing.lastRunAt = now.toISOString();
@@ -154,17 +170,14 @@ for (const incoming of parsedTests) {
 }
 
 // Recompute layer summary
-if (!projectData.layers) projectData.layers = {};
-const layerTests = projectData.tests.filter(t => t.layer === layer);
-const lTotal = layerTests.length;
-const lPassed = layerTests.filter(t => t.currentStatus === 'passed').length;
-const lFailed = layerTests.filter(t => t.currentStatus === 'failed').length;
-const lFlaky = layerTests.filter(t => t.currentStatus === 'flaky').length;
-const lSkipped = layerTests.filter(t => t.currentStatus === 'skipped').length;
+const lTotal = layerData.tests.length;
+const lPassed = layerData.tests.filter(t => t.currentStatus === 'passed').length;
+const lFailed = layerData.tests.filter(t => t.currentStatus === 'failed').length;
+const lFlaky = layerData.tests.filter(t => t.currentStatus === 'flaky').length;
+const lSkipped = layerData.tests.filter(t => t.currentStatus === 'skipped').length;
 const lPassRate = lTotal > 0 ? Number(((lPassed / lTotal) * 100).toFixed(1)) : 100;
 
-projectData.layers[layer] = {
-  name: layer === 'web' ? 'Web' : layer === 'api' ? 'API' : layer === 'android' ? 'Mobile - Android' : 'Mobile - iOS',
+layerData.summary = {
   total: lTotal,
   passed: lPassed,
   failed: lFailed,
@@ -172,52 +185,75 @@ projectData.layers[layer] = {
   skipped: lSkipped,
   passRate: lPassRate
 };
+layerData.lastUpdated = now.toISOString();
 
-// Recompute total project summary
-const total = projectData.tests.length;
-const passed = projectData.tests.filter(t => t.currentStatus === 'passed').length;
-const failed = projectData.tests.filter(t => t.currentStatus === 'failed').length;
-const flaky = projectData.tests.filter(t => t.currentStatus === 'flaky').length;
-const skipped = projectData.tests.filter(t => t.currentStatus === 'skipped').length;
-const passRate = total > 0 ? Number(((passed / total) * 100).toFixed(1)) : 100;
+// Append to layer runsHistory
+if (!layerData.runsHistory) layerData.runsHistory = [];
+layerData.runsHistory = layerData.runsHistory.filter(r => new Date(r.date) >= cutoffDate);
+const existingDayRun = layerData.runsHistory.find(r => r.date === todayStr);
+if (existingDayRun) {
+  existingDayRun.total = lTotal;
+  existingDayRun.passed = lPassed;
+  existingDayRun.failed = lFailed;
+  existingDayRun.flaky = lFlaky;
+  existingDayRun.skipped = lSkipped;
+  existingDayRun.passRate = lPassRate;
+} else {
+  layerData.runsHistory.push({
+    date: todayStr,
+    total: lTotal,
+    passed: lPassed,
+    failed: lFailed,
+    flaky: lFlaky,
+    skipped: lSkipped,
+    passRate: lPassRate
+  });
+}
 
-projectData.summary = { total, passed, failed, flaky, skipped, passRate };
-projectData.lastUpdated = now.toISOString();
+// Write the layer file
+fs.writeFileSync(layerFilePath, JSON.stringify(layerData, null, 2));
+console.log(`✅ Saved layer file: ${layerFilePath}`);
 
-// Write updated project file
-fs.writeFileSync(projectFilePath, JSON.stringify(projectData, null, 2));
-console.log(`Updated ${projectFilePath}`);
+// Update manifest.json if exists
+if (fs.existsSync(manifestPath)) {
+  const manifest = JSON.parse(fs.readFileSync(manifestPath, 'utf8'));
+  if (!manifest.layers) manifest.layers = {};
+  manifest.layers[layer] = {
+    name: layerData.layerName,
+    total: lTotal,
+    passed: lPassed,
+    failed: lFailed,
+    flaky: lFlaky,
+    skipped: lSkipped,
+    passRate: lPassRate
+  };
+
+  const layersList = Object.values(manifest.layers);
+  const mTotal = layersList.reduce((acc, l) => acc + l.total, 0);
+  const mPassed = layersList.reduce((acc, l) => acc + l.passed, 0);
+  const mFailed = layersList.reduce((acc, l) => acc + l.failed, 0);
+  const mFlaky = layersList.reduce((acc, l) => acc + l.flaky, 0);
+  const mSkipped = layersList.reduce((acc, l) => acc + l.skipped, 0);
+  const mPassRate = mTotal > 0 ? Number(((mPassed / mTotal) * 100).toFixed(1)) : 100;
+
+  manifest.summary = { total: mTotal, passed: mPassed, failed: mFailed, flaky: mFlaky, skipped: mSkipped, passRate: mPassRate };
+  manifest.lastUpdated = now.toISOString();
+
+  fs.writeFileSync(manifestPath, JSON.stringify(manifest, null, 2));
+}
 
 // Update public/data/projects-summary.json
 const summaryFilePath = path.join(DATA_DIR, 'projects-summary.json');
 if (fs.existsSync(summaryFilePath)) {
   const globalSummary = JSON.parse(fs.readFileSync(summaryFilePath, 'utf8'));
   const projIdx = globalSummary.projects.findIndex(p => p.id === projectId);
-  const updatedEntry = {
-    id: projectId,
-    name: projectData.projectName,
-    description: projectData.description,
-    repoUrl: projectData.repoUrl,
-    lastUpdated: projectData.lastUpdated,
-    summary: projectData.summary,
-    layers: Object.fromEntries(Object.entries(projectData.layers).map(([k, v]) => [k, v.passRate]))
-  };
-
-  if (projIdx >= 0) globalSummary.projects[projIdx] = updatedEntry;
-  else globalSummary.projects.push(updatedEntry);
-
-  globalSummary.lastUpdated = now.toISOString();
-  globalSummary.overallSummary = {
-    totalTests: globalSummary.projects.reduce((acc, p) => acc + p.summary.total, 0),
-    totalPassed: globalSummary.projects.reduce((acc, p) => acc + p.summary.passed, 0),
-    totalFailed: globalSummary.projects.reduce((acc, p) => acc + p.summary.failed, 0),
-    totalFlaky: globalSummary.projects.reduce((acc, p) => acc + p.summary.flaky, 0),
-    totalSkipped: globalSummary.projects.reduce((acc, p) => acc + p.summary.skipped, 0),
-  };
-  globalSummary.overallSummary.passRate = Number(
-    ((globalSummary.overallSummary.totalPassed / globalSummary.overallSummary.totalTests) * 100).toFixed(1)
-  );
+  
+  if (projIdx >= 0) {
+    if (!globalSummary.projects[projIdx].layers) globalSummary.projects[projIdx].layers = {};
+    globalSummary.projects[projIdx].layers[layer] = lPassRate;
+    globalSummary.projects[projIdx].lastUpdated = now.toISOString();
+  }
 
   fs.writeFileSync(summaryFilePath, JSON.stringify(globalSummary, null, 2));
-  console.log(`Updated ${summaryFilePath}`);
+  console.log(`✅ Updated global summary: ${summaryFilePath}`);
 }

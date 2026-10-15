@@ -27,7 +27,6 @@ function getPast30Days() {
 const dates30d = getPast30Days();
 
 function generateTestHistory(testId, layer, baseStatus, failureProfile) {
-  // failureProfile: 'always-pass', 'flaky', 'recent-fail', 'intermittent'
   return dates30d.map((date, idx) => {
     let status = 'passed';
     let error = null;
@@ -174,66 +173,48 @@ const projects = [
           durationMs: 780
         }
       ],
-      android: [
+      mobile: [
         {
-          id: 'arm-android-login-biometric',
-          suite: 'Authentication',
-          title: 'Biometric fingerprint login on Android 14 Emulators',
-          file: 'android/tests/auth/BiometricLoginTest.kt',
+          id: 'arm-mobile-login-biometric',
+          suite: 'Mobile Authentication',
+          title: 'Biometric fingerprint & FaceID login validation',
+          file: 'mobile/tests/auth/BiometricLoginTest.ts',
           profile: 'always-pass',
           durationMs: 8200
         },
         {
-          id: 'arm-android-project-sync',
+          id: 'arm-mobile-project-sync',
           suite: 'Offline Data Sync',
           title: 'Sync offline task updates with exponential backoff upon network restoration',
-          file: 'android/tests/sync/OfflineSyncTest.kt',
+          file: 'mobile/tests/sync/OfflineSyncTest.ts',
           profile: 'intermittent',
           error: {
-            message: 'RoomDbException: Migration missing from version 14 to 15 on SQLite database',
-            stack: 'RoomDbException: Migration failed\n    at com.areeb.arm.db.AppDatabase.migrate(AppDatabase.kt:56)\n    at android/tests/sync/OfflineSyncTest.kt:41',
-            step: 'database.syncWorker.doWork()'
+            message: 'DatabaseException: Local storage schema mismatch on offline sync worker',
+            stack: 'DatabaseException: Sync failed\n    at MobileSyncEngine.doWork(SyncEngine.ts:62)\n    at mobile/tests/sync/OfflineSyncTest.ts:41',
+            step: 'await mobileApp.syncEngine.triggerSync()'
           },
           durationMs: 14200
         },
         {
-          id: 'arm-android-receipt-upload',
-          suite: 'Expenses',
-          title: 'Capture expense receipt image and attach to active invoice draft',
-          file: 'android/tests/expenses/ReceiptUploadTest.kt',
+          id: 'arm-mobile-receipt-upload',
+          suite: 'Expenses & Invoices',
+          title: 'Capture expense receipt camera photo and attach to active draft',
+          file: 'mobile/tests/expenses/ReceiptUploadTest.ts',
           profile: 'always-pass',
           durationMs: 9400
-        }
-      ],
-      ios: [
-        {
-          id: 'arm-ios-faceid-auth',
-          suite: 'Authentication',
-          title: 'FaceID authentication flow on iOS 18 Simulator',
-          file: 'ios/Tests/Auth/FaceIDAuthTests.swift',
-          profile: 'always-pass',
-          durationMs: 7100
         },
         {
-          id: 'arm-ios-push-notification',
-          suite: 'Notifications',
-          title: 'Receive APNS background notification and route to project details screen',
-          file: 'ios/Tests/Push/PushRoutingTests.swift',
+          id: 'arm-mobile-push-notification',
+          suite: 'Push Notifications',
+          title: 'Receive remote push notification and deep-link to project details screen',
+          file: 'mobile/tests/push/PushRoutingTest.ts',
           profile: 'recent-fail',
           error: {
-            message: 'XCTestCaseFailure: Expected viewController to be ProjectDetailViewController, found DashboardViewController',
-            stack: 'XCTestCaseFailure: Navigation hierarchy mismatched\n    at PushRoutingTests.swift:78\n    at XCTestRunner.run()',
-            step: 'XCTAssertTrue(currentVC is ProjectDetailViewController)'
+            message: 'NavigationError: Deep link target ProjectDetailScreen did not mount within 10000ms',
+            stack: 'NavigationError: Deep link timeout\n    at Router.navigateTo(router.ts:89)\n    at mobile/tests/push/PushRoutingTest.ts:54',
+            step: 'await mobileApp.simulatePushPayload(payload)'
           },
-          durationMs: 8900
-        },
-        {
-          id: 'arm-ios-invoice-review',
-          suite: 'Invoices',
-          title: 'Review invoice summary and export signed PDF copy to Files app',
-          file: 'ios/Tests/Invoices/InvoiceReviewTests.swift',
-          profile: 'always-pass',
-          durationMs: 6800
+          durationMs: 10800
         }
       ]
     }
@@ -285,24 +266,14 @@ const projects = [
           durationMs: 46000
         }
       ],
-      android: [
+      mobile: [
         {
-          id: 'cadaa-android-scanner',
+          id: 'cadaa-mobile-scanner',
           suite: 'Document Scanning',
-          title: 'QR Code physical asset tag scanner verification',
-          file: 'android/tests/scanner/QrScanTest.kt',
+          title: 'QR Code physical asset tag camera scanner verification',
+          file: 'mobile/tests/scanner/QrScanTest.ts',
           profile: 'always-pass',
           durationMs: 5800
-        }
-      ],
-      ios: [
-        {
-          id: 'cadaa-ios-scanner',
-          suite: 'Document Scanning',
-          title: 'VisionKit barcode and document perimeter auto-detection',
-          file: 'ios/Tests/Scanner/VisionKitScannerTests.swift',
-          profile: 'always-pass',
-          durationMs: 6100
         }
       ]
     }
@@ -346,8 +317,7 @@ const projects = [
           durationMs: 4200
         }
       ],
-      android: [],
-      ios: []
+      mobile: []
     }
   },
   {
@@ -376,40 +346,40 @@ const projects = [
           durationMs: 410
         }
       ],
-      android: [
+      mobile: [
         {
-          id: 'atlas-android-gps-service',
+          id: 'atlas-mobile-gps-service',
           suite: 'Background Location',
-          title: 'Foreground service GPS coordinate batching during battery saver mode',
-          file: 'android/tests/gps/BatterySaverGpsTest.kt',
+          title: 'Foreground location coordinate batching during battery saver mode',
+          file: 'mobile/tests/gps/LocationServiceTest.ts',
           profile: 'always-pass',
           durationMs: 11200
-        }
-      ],
-      ios: [
-        {
-          id: 'atlas-ios-significant-location',
-          suite: 'CoreLocation',
-          title: 'Significant location change wakeup and battery benchmark',
-          file: 'ios/Tests/Location/SignificantLocationTests.swift',
-          profile: 'always-pass',
-          durationMs: 10500
         }
       ]
     }
   }
 ];
 
-// Build individual project files and summary
 const projectSummaries = [];
 
 for (const p of projects) {
-  const allTests = [];
-  const layersSummary = {};
+  const projectSubDir = path.join(PROJECTS_DIR, p.id);
+  if (!fs.existsSync(projectSubDir)) {
+    fs.mkdirSync(projectSubDir, { recursive: true });
+  }
 
-  const layerKeys = ['web', 'api', 'android', 'ios'];
+  // 3 Layers: web, api, mobile
+  const layerKeys = ['web', 'api', 'mobile'];
+  const layersMeta = {};
+  let pTotal = 0;
+  let pPassed = 0;
+  let pFailed = 0;
+  let pFlaky = 0;
+  let pSkipped = 0;
+
   for (const layer of layerKeys) {
     const rawTests = p.layers[layer] || [];
+    const layerTests = [];
     let lPassed = 0;
     let lFailed = 0;
     let lFlaky = 0;
@@ -425,7 +395,7 @@ for (const p of projects) {
       else if (currentStatus === 'flaky') lFlaky++;
       else if (currentStatus === 'skipped') lSkipped++;
 
-      allTests.push({
+      layerTests.push({
         id: t.id,
         layer,
         suite: t.suite,
@@ -440,56 +410,81 @@ for (const p of projects) {
     }
 
     const lTotal = rawTests.length;
-    layersSummary[layer] = {
-      name: layer === 'web' ? 'Web' : layer === 'api' ? 'API' : layer === 'android' ? 'Mobile - Android' : 'Mobile - iOS',
+    const lPassRate = lTotal > 0 ? Number(((lPassed / lTotal) * 100).toFixed(1)) : 100;
+
+    // Per-layer runs history (30 days)
+    const layerRunsHistory = dates30d.map((date) => {
+      let dayPassed = 0;
+      let dayFailed = 0;
+      let dayFlaky = 0;
+      let daySkipped = 0;
+
+      layerTests.forEach(t => {
+        const dayRec = t.history30d.find(h => h.date === date);
+        if (dayRec) {
+          if (dayRec.status === 'passed') dayPassed++;
+          else if (dayRec.status === 'failed') dayFailed++;
+          else if (dayRec.status === 'flaky') dayFlaky++;
+          else if (dayRec.status === 'skipped') daySkipped++;
+        }
+      });
+
+      const dayTotal = dayPassed + dayFailed + dayFlaky + daySkipped;
+      const rate = dayTotal > 0 ? Number(((dayPassed / dayTotal) * 100).toFixed(1)) : 100;
+
+      return {
+        date,
+        total: dayTotal,
+        passed: dayPassed,
+        failed: dayFailed,
+        flaky: dayFlaky,
+        skipped: daySkipped,
+        passRate: rate
+      };
+    });
+
+    const layerPayload = {
+      projectId: p.id,
+      projectName: p.name,
+      layer,
+      layerName: layer === 'web' ? 'Web' : layer === 'api' ? 'API' : 'Mobile',
+      lastUpdated: new Date().toISOString(),
+      summary: {
+        total: lTotal,
+        passed: lPassed,
+        failed: lFailed,
+        flaky: lFlaky,
+        skipped: lSkipped,
+        passRate: lPassRate
+      },
+      tests: layerTests,
+      runsHistory: layerRunsHistory
+    };
+
+    // Save individual layer file: public/data/projects/{projectId}/{layer}.json
+    const layerFilePath = path.join(projectSubDir, `${layer}.json`);
+    fs.writeFileSync(layerFilePath, JSON.stringify(layerPayload, null, 2));
+
+    layersMeta[layer] = {
+      name: layerPayload.layerName,
       total: lTotal,
       passed: lPassed,
       failed: lFailed,
       flaky: lFlaky,
       skipped: lSkipped,
-      passRate: lTotal > 0 ? Number(((lPassed / lTotal) * 100).toFixed(1)) : 100
+      passRate: lPassRate
     };
+
+    pTotal += lTotal;
+    pPassed += lPassed;
+    pFailed += lFailed;
+    pFlaky += lFlaky;
+    pSkipped += lSkipped;
   }
 
-  const total = allTests.length;
-  const passed = allTests.filter(t => t.currentStatus === 'passed').length;
-  const failed = allTests.filter(t => t.currentStatus === 'failed').length;
-  const flaky = allTests.filter(t => t.currentStatus === 'flaky').length;
-  const skipped = allTests.filter(t => t.currentStatus === 'skipped').length;
-  const passRate = total > 0 ? Number(((passed / total) * 100).toFixed(1)) : 100;
+  const pPassRate = pTotal > 0 ? Number(((pPassed / pTotal) * 100).toFixed(1)) : 100;
 
-  // Build runs history for charts (30 days)
-  const runsHistory = dates30d.map((date) => {
-    let dayPassed = 0;
-    let dayFailed = 0;
-    let dayFlaky = 0;
-    let daySkipped = 0;
-
-    allTests.forEach(t => {
-      const dayRec = t.history30d.find(h => h.date === date);
-      if (dayRec) {
-        if (dayRec.status === 'passed') dayPassed++;
-        else if (dayRec.status === 'failed') dayFailed++;
-        else if (dayRec.status === 'flaky') dayFlaky++;
-        else if (dayRec.status === 'skipped') daySkipped++;
-      }
-    });
-
-    const dayTotal = dayPassed + dayFailed + dayFlaky + daySkipped;
-    const rate = dayTotal > 0 ? Number(((dayPassed / dayTotal) * 100).toFixed(1)) : 100;
-
-    return {
-      date,
-      total: dayTotal,
-      passed: dayPassed,
-      failed: dayFailed,
-      flaky: dayFlaky,
-      skipped: daySkipped,
-      passRate: rate
-    };
-  });
-
-  const projectPayload = {
+  const manifest = {
     projectId: p.id,
     projectName: p.name,
     description: p.description,
@@ -497,36 +492,34 @@ for (const p of projects) {
     lastUpdated: new Date().toISOString(),
     retentionDays: 30,
     summary: {
-      total,
-      passed,
-      failed,
-      flaky,
-      skipped,
-      passRate
+      total: pTotal,
+      passed: pPassed,
+      failed: pFailed,
+      flaky: pFlaky,
+      skipped: pSkipped,
+      passRate: pPassRate
     },
-    layers: layersSummary,
-    tests: allTests,
-    runsHistory
+    layers: layersMeta
   };
 
-  const projectFilePath = path.join(PROJECTS_DIR, `${p.id}.json`);
-  fs.writeFileSync(projectFilePath, JSON.stringify(projectPayload, null, 2));
-  console.log(`Saved ${p.name} data to ${projectFilePath}`);
+  const manifestPath = path.join(projectSubDir, 'manifest.json');
+  fs.writeFileSync(manifestPath, JSON.stringify(manifest, null, 2));
 
   projectSummaries.push({
     id: p.id,
     name: p.name,
     description: p.description,
     repoUrl: p.repoUrl,
-    lastUpdated: projectPayload.lastUpdated,
-    summary: projectPayload.summary,
+    lastUpdated: manifest.lastUpdated,
+    summary: manifest.summary,
     layers: {
-      web: layersSummary.web.passRate,
-      api: layersSummary.api.passRate,
-      android: layersSummary.android.passRate,
-      ios: layersSummary.ios.passRate
+      web: layersMeta.web.passRate,
+      api: layersMeta.api.passRate,
+      mobile: layersMeta.mobile.passRate
     }
   });
+
+  console.log(`Generated per-layer files for project ${p.name} (web, api, mobile) in ${projectSubDir}`);
 }
 
 // Write the global lightweight projects-summary.json

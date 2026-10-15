@@ -16,7 +16,7 @@ export default function App() {
   const [errorMessage, setErrorMessage] = useState(null);
   const [autoRefreshInterval, setAutoRefreshInterval] = useState(60); // seconds (default 60s)
 
-  // Fetch summary and project data with cache-busting timestamp
+  // Fetch summary and decoupled per-layer project files with cache-busting timestamp
   const loadData = useCallback(async (isManualRefresh = false) => {
     if (isManualRefresh) setIsRefreshing(true);
     setErrorMessage(null);
@@ -29,12 +29,82 @@ export default function App() {
       const summaryData = await summaryRes.json();
       setGlobalSummary(summaryData);
 
-      // If a specific project is selected, load its detailed data
+      // If a specific project is selected, load its decoupled manifest and 3 layer files (web, api, mobile)
       if (selectedProjectId !== 'all') {
-        const projRes = await fetch(`./data/projects/${selectedProjectId}.json?${cacheBuster}`);
-        if (!projRes.ok) throw new Error(`Failed to load project ${selectedProjectId} (HTTP ${projRes.status})`);
-        const projData = await projRes.json();
-        setCurrentProjectData(projData);
+        const manifestRes = await fetch(`./data/projects/${selectedProjectId}/manifest.json?${cacheBuster}`);
+        let manifest = null;
+        if (manifestRes.ok) {
+          manifest = await manifestRes.json();
+        }
+
+        // Fetch web, api, and mobile in parallel
+        const layerKeys = ['web', 'api', 'mobile'];
+        const layerResponses = await Promise.allSettled(
+          layerKeys.map(layer =>
+            fetch(`./data/projects/${selectedProjectId}/${layer}.json?${cacheBuster}`)
+              .then(res => res.ok ? res.json() : null)
+              .catch(() => null)
+          )
+        );
+
+        const loadedLayers = {};
+        let combinedTests = [];
+        let combinedRunsHistoryMap = {};
+
+        layerKeys.forEach((key, idx) => {
+          const result = layerResponses[idx];
+          if (result.status === 'fulfilled' && result.value) {
+            const data = result.value;
+            loadedLayers[key] = data.summary;
+            if (data.tests) combinedTests = combinedTests.concat(data.tests);
+
+            // Merge runs history
+            (data.runsHistory || []).forEach(r => {
+              if (!combinedRunsHistoryMap[r.date]) {
+                combinedRunsHistoryMap[r.date] = { date: r.date, total: 0, passed: 0, failed: 0, flaky: 0, skipped: 0 };
+              }
+              combinedRunsHistoryMap[r.date].total += r.total || 0;
+              combinedRunsHistoryMap[r.date].passed += r.passed || 0;
+              combinedRunsHistoryMap[r.date].failed += r.failed || 0;
+              combinedRunsHistoryMap[r.date].flaky += r.flaky || 0;
+              combinedRunsHistoryMap[r.date].skipped += r.skipped || 0;
+            });
+          } else {
+            loadedLayers[key] = { total: 0, passed: 0, failed: 0, flaky: 0, skipped: 0, passRate: 100 };
+          }
+        });
+
+        const combinedRunsHistory = Object.values(combinedRunsHistoryMap)
+          .sort((a, b) => a.date.localeCompare(b.date))
+          .map(r => ({
+            ...r,
+            passRate: r.total > 0 ? Number(((r.passed / r.total) * 100).toFixed(1)) : 100
+          }));
+
+        const totalTests = combinedTests.length;
+        const totalPassed = combinedTests.filter(t => t.currentStatus === 'passed').length;
+        const totalFailed = combinedTests.filter(t => t.currentStatus === 'failed').length;
+        const totalFlaky = combinedTests.filter(t => t.currentStatus === 'flaky').length;
+        const totalSkipped = combinedTests.filter(t => t.currentStatus === 'skipped').length;
+        const overallPassRate = totalTests > 0 ? Number(((totalPassed / totalTests) * 100).toFixed(1)) : 100;
+
+        setCurrentProjectData({
+          projectId: selectedProjectId,
+          projectName: manifest?.projectName || selectedProjectId.toUpperCase(),
+          description: manifest?.description || '',
+          repoUrl: manifest?.repoUrl || '',
+          summary: {
+            total: totalTests,
+            passed: totalPassed,
+            failed: totalFailed,
+            flaky: totalFlaky,
+            skipped: totalSkipped,
+            passRate: overallPassRate
+          },
+          layers: loadedLayers,
+          tests: combinedTests,
+          runsHistory: combinedRunsHistory
+        });
       }
 
       setLastUpdated(new Date().toISOString());
@@ -122,7 +192,7 @@ export default function App() {
       <footer className="border-t border-slate-900 bg-slate-950 py-6 text-center text-xs text-slate-600">
         <div className="max-w-7xl mx-auto px-4 flex flex-col sm:flex-row items-center justify-between gap-2">
           <span>TestMonitor — QA Intelligence & Regression Tracking</span>
-          <span>Automated by GitHub Actions • 30-Day Failure Retention</span>
+          <span>Web • API • Mobile • Automated by GitHub Actions • 30-Day Retention</span>
         </div>
       </footer>
 

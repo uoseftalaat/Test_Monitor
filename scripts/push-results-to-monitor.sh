@@ -1,12 +1,12 @@
 #!/usr/bin/env bash
 # =============================================================================
 # Push Test Results to Test_monitor Repository
-# Use this script in your project pipeline (e.g. arm_test, cadaa, etc.)
+# Concurrency-safe for Web, API, and Mobile independent pipelines.
 # =============================================================================
 set -euo pipefail
 
 PROJECT="${1:-arm}"
-LAYER="${2:-api}"
+LAYER="${2:-api}" # web | api | mobile
 REPORT_FILE="${3:-reports/report.json}"
 MONITOR_REPO="${4:-uoseftalaat/Test_monitor}"
 RUN_ID="${GITHUB_RUN_ID:-manual-$(date +%s)}"
@@ -40,15 +40,20 @@ node scripts/ingest-test-run.js \
   --report "$TEMP_DIR/report.json" \
   --run-id "$RUN_ID"
 
-# Commit and push
+# Stage only this layer's file and project manifest
 git config user.name "github-actions[bot]"
 git config user.email "github-actions[bot]@users.noreply.github.com"
-git add public/data/projects/"${PROJECT}".json public/data/projects-summary.json
+git add public/data/projects/"${PROJECT}"/"${LAYER}".json \
+        public/data/projects/"${PROJECT}"/manifest.json \
+        public/data/projects-summary.json 2>/dev/null || true
 
 if git diff --staged --quiet; then
   echo "ℹ️ No changes in test data. Skipping commit."
 else
   git commit -m "chore(qa): update ${PROJECT} [${LAYER}] test results [run: ${RUN_ID}]"
+  
+  # Concurrency protection: Pull latest commits before pushing so concurrent pipelines never fail
+  git pull --rebase origin main || git rebase --abort
   git push origin main
-  echo "✅ Successfully pushed test results to ${MONITOR_REPO}!"
+  echo "✅ Successfully pushed ${PROJECT} [${LAYER}] test results to ${MONITOR_REPO}!"
 fi

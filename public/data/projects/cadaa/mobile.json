@@ -1,0 +1,482 @@
+{
+  "projectId": "cadaa",
+  "projectName": "Cadaa",
+  "layer": "mobile",
+  "layerName": "Mobile",
+  "lastUpdated": "2026-10-15T12:17:18.092Z",
+  "summary": {
+    "total": 1,
+    "passed": 1,
+    "failed": 0,
+    "flaky": 0,
+    "skipped": 0,
+    "passRate": 100
+  },
+  "tests": [
+    {
+      "id": "cadaa-mobile-scanner",
+      "layer": "mobile",
+      "suite": "Document Scanning",
+      "title": "QR Code physical asset tag camera scanner verification",
+      "file": "mobile/tests/scanner/QrScanTest.ts",
+      "currentStatus": "passed",
+      "lastRunAt": "2026-10-15T10:30:00Z",
+      "durationMs": 5800,
+      "latestError": null,
+      "history30d": [
+        {
+          "date": "2026-09-16",
+          "runId": "run-20260916-mob",
+          "status": "passed",
+          "durationMs": 1585
+        },
+        {
+          "date": "2026-09-17",
+          "runId": "run-20260917-mob",
+          "status": "passed",
+          "durationMs": 1896
+        },
+        {
+          "date": "2026-09-18",
+          "runId": "run-20260918-mob",
+          "status": "passed",
+          "durationMs": 411
+        },
+        {
+          "date": "2026-09-19",
+          "runId": "run-20260919-mob",
+          "status": "passed",
+          "durationMs": 2402
+        },
+        {
+          "date": "2026-09-20",
+          "runId": "run-20260920-mob",
+          "status": "passed",
+          "durationMs": 1798
+        },
+        {
+          "date": "2026-09-21",
+          "runId": "run-20260921-mob",
+          "status": "passed",
+          "durationMs": 867
+        },
+        {
+          "date": "2026-09-22",
+          "runId": "run-20260922-mob",
+          "status": "passed",
+          "durationMs": 457
+        },
+        {
+          "date": "2026-09-23",
+          "runId": "run-20260923-mob",
+          "status": "passed",
+          "durationMs": 1668
+        },
+        {
+          "date": "2026-09-24",
+          "runId": "run-20260924-mob",
+          "status": "passed",
+          "durationMs": 646
+        },
+        {
+          "date": "2026-09-25",
+          "runId": "run-20260925-mob",
+          "status": "passed",
+          "durationMs": 1177
+        },
+        {
+          "date": "2026-09-26",
+          "runId": "run-20260926-mob",
+          "status": "passed",
+          "durationMs": 2177
+        },
+        {
+          "date": "2026-09-27",
+          "runId": "run-20260927-mob",
+          "status": "passed",
+          "durationMs": 1907
+        },
+        {
+          "date": "2026-09-28",
+          "runId": "run-20260928-mob",
+          "status": "passed",
+          "durationMs": 319
+        },
+        {
+          "date": "2026-09-29",
+          "runId": "run-20260929-mob",
+          "status": "passed",
+          "durationMs": 1416
+        },
+        {
+          "date": "2026-09-30",
+          "runId": "run-20260930-mob",
+          "status": "passed",
+          "durationMs": 2103
+        },
+        {
+          "date": "2026-10-01",
+          "runId": "run-20261001-mob",
+          "status": "passed",
+          "durationMs": 2793
+        },
+        {
+          "date": "2026-10-02",
+          "runId": "run-20261002-mob",
+          "status": "passed",
+          "durationMs": 2551
+        },
+        {
+          "date": "2026-10-03",
+          "runId": "run-20261003-mob",
+          "status": "passed",
+          "durationMs": 1724
+        },
+        {
+          "date": "2026-10-04",
+          "runId": "run-20261004-mob",
+          "status": "passed",
+          "durationMs": 385
+        },
+        {
+          "date": "2026-10-05",
+          "runId": "run-20261005-mob",
+          "status": "passed",
+          "durationMs": 1771
+        },
+        {
+          "date": "2026-10-06",
+          "runId": "run-20261006-mob",
+          "status": "passed",
+          "durationMs": 1879
+        },
+        {
+          "date": "2026-10-07",
+          "runId": "run-20261007-mob",
+          "status": "passed",
+          "durationMs": 865
+        },
+        {
+          "date": "2026-10-08",
+          "runId": "run-20261008-mob",
+          "status": "passed",
+          "durationMs": 2536
+        },
+        {
+          "date": "2026-10-09",
+          "runId": "run-20261009-mob",
+          "status": "passed",
+          "durationMs": 2131
+        },
+        {
+          "date": "2026-10-10",
+          "runId": "run-20261010-mob",
+          "status": "passed",
+          "durationMs": 2482
+        },
+        {
+          "date": "2026-10-11",
+          "runId": "run-20261011-mob",
+          "status": "passed",
+          "durationMs": 681
+        },
+        {
+          "date": "2026-10-12",
+          "runId": "run-20261012-mob",
+          "status": "passed",
+          "durationMs": 1435
+        },
+        {
+          "date": "2026-10-13",
+          "runId": "run-20261013-mob",
+          "status": "passed",
+          "durationMs": 1041
+        },
+        {
+          "date": "2026-10-14",
+          "runId": "run-20261014-mob",
+          "status": "passed",
+          "durationMs": 2667
+        },
+        {
+          "date": "2026-10-15",
+          "runId": "run-20261015-mob",
+          "status": "passed",
+          "durationMs": 2378
+        }
+      ]
+    }
+  ],
+  "runsHistory": [
+    {
+      "date": "2026-09-16",
+      "total": 1,
+      "passed": 1,
+      "failed": 0,
+      "flaky": 0,
+      "skipped": 0,
+      "passRate": 100
+    },
+    {
+      "date": "2026-09-17",
+      "total": 1,
+      "passed": 1,
+      "failed": 0,
+      "flaky": 0,
+      "skipped": 0,
+      "passRate": 100
+    },
+    {
+      "date": "2026-09-18",
+      "total": 1,
+      "passed": 1,
+      "failed": 0,
+      "flaky": 0,
+      "skipped": 0,
+      "passRate": 100
+    },
+    {
+      "date": "2026-09-19",
+      "total": 1,
+      "passed": 1,
+      "failed": 0,
+      "flaky": 0,
+      "skipped": 0,
+      "passRate": 100
+    },
+    {
+      "date": "2026-09-20",
+      "total": 1,
+      "passed": 1,
+      "failed": 0,
+      "flaky": 0,
+      "skipped": 0,
+      "passRate": 100
+    },
+    {
+      "date": "2026-09-21",
+      "total": 1,
+      "passed": 1,
+      "failed": 0,
+      "flaky": 0,
+      "skipped": 0,
+      "passRate": 100
+    },
+    {
+      "date": "2026-09-22",
+      "total": 1,
+      "passed": 1,
+      "failed": 0,
+      "flaky": 0,
+      "skipped": 0,
+      "passRate": 100
+    },
+    {
+      "date": "2026-09-23",
+      "total": 1,
+      "passed": 1,
+      "failed": 0,
+      "flaky": 0,
+      "skipped": 0,
+      "passRate": 100
+    },
+    {
+      "date": "2026-09-24",
+      "total": 1,
+      "passed": 1,
+      "failed": 0,
+      "flaky": 0,
+      "skipped": 0,
+      "passRate": 100
+    },
+    {
+      "date": "2026-09-25",
+      "total": 1,
+      "passed": 1,
+      "failed": 0,
+      "flaky": 0,
+      "skipped": 0,
+      "passRate": 100
+    },
+    {
+      "date": "2026-09-26",
+      "total": 1,
+      "passed": 1,
+      "failed": 0,
+      "flaky": 0,
+      "skipped": 0,
+      "passRate": 100
+    },
+    {
+      "date": "2026-09-27",
+      "total": 1,
+      "passed": 1,
+      "failed": 0,
+      "flaky": 0,
+      "skipped": 0,
+      "passRate": 100
+    },
+    {
+      "date": "2026-09-28",
+      "total": 1,
+      "passed": 1,
+      "failed": 0,
+      "flaky": 0,
+      "skipped": 0,
+      "passRate": 100
+    },
+    {
+      "date": "2026-09-29",
+      "total": 1,
+      "passed": 1,
+      "failed": 0,
+      "flaky": 0,
+      "skipped": 0,
+      "passRate": 100
+    },
+    {
+      "date": "2026-09-30",
+      "total": 1,
+      "passed": 1,
+      "failed": 0,
+      "flaky": 0,
+      "skipped": 0,
+      "passRate": 100
+    },
+    {
+      "date": "2026-10-01",
+      "total": 1,
+      "passed": 1,
+      "failed": 0,
+      "flaky": 0,
+      "skipped": 0,
+      "passRate": 100
+    },
+    {
+      "date": "2026-10-02",
+      "total": 1,
+      "passed": 1,
+      "failed": 0,
+      "flaky": 0,
+      "skipped": 0,
+      "passRate": 100
+    },
+    {
+      "date": "2026-10-03",
+      "total": 1,
+      "passed": 1,
+      "failed": 0,
+      "flaky": 0,
+      "skipped": 0,
+      "passRate": 100
+    },
+    {
+      "date": "2026-10-04",
+      "total": 1,
+      "passed": 1,
+      "failed": 0,
+      "flaky": 0,
+      "skipped": 0,
+      "passRate": 100
+    },
+    {
+      "date": "2026-10-05",
+      "total": 1,
+      "passed": 1,
+      "failed": 0,
+      "flaky": 0,
+      "skipped": 0,
+      "passRate": 100
+    },
+    {
+      "date": "2026-10-06",
+      "total": 1,
+      "passed": 1,
+      "failed": 0,
+      "flaky": 0,
+      "skipped": 0,
+      "passRate": 100
+    },
+    {
+      "date": "2026-10-07",
+      "total": 1,
+      "passed": 1,
+      "failed": 0,
+      "flaky": 0,
+      "skipped": 0,
+      "passRate": 100
+    },
+    {
+      "date": "2026-10-08",
+      "total": 1,
+      "passed": 1,
+      "failed": 0,
+      "flaky": 0,
+      "skipped": 0,
+      "passRate": 100
+    },
+    {
+      "date": "2026-10-09",
+      "total": 1,
+      "passed": 1,
+      "failed": 0,
+      "flaky": 0,
+      "skipped": 0,
+      "passRate": 100
+    },
+    {
+      "date": "2026-10-10",
+      "total": 1,
+      "passed": 1,
+      "failed": 0,
+      "flaky": 0,
+      "skipped": 0,
+      "passRate": 100
+    },
+    {
+      "date": "2026-10-11",
+      "total": 1,
+      "passed": 1,
+      "failed": 0,
+      "flaky": 0,
+      "skipped": 0,
+      "passRate": 100
+    },
+    {
+      "date": "2026-10-12",
+      "total": 1,
+      "passed": 1,
+      "failed": 0,
+      "flaky": 0,
+      "skipped": 0,
+      "passRate": 100
+    },
+    {
+      "date": "2026-10-13",
+      "total": 1,
+      "passed": 1,
+      "failed": 0,
+      "flaky": 0,
+      "skipped": 0,
+      "passRate": 100
+    },
+    {
+      "date": "2026-10-14",
+      "total": 1,
+      "passed": 1,
+      "failed": 0,
+      "flaky": 0,
+      "skipped": 0,
+      "passRate": 100
+    },
+    {
+      "date": "2026-10-15",
+      "total": 1,
+      "passed": 1,
+      "failed": 0,
+      "flaky": 0,
+      "skipped": 0,
+      "passRate": 100
+    }
+  ]
+}
