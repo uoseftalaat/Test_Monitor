@@ -39,7 +39,8 @@
       "failed": 0,
       "flaky": 0,
       "skipped": 0,
-      "passRate": 100
+      "passRate": 100,
+      "notConfigured": false
     }
   }
 }

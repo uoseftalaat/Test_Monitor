@@ -1,0 +1,11 @@
+rules_version = '2';
+service cloud.firestore {
+  match /databases/{database}/documents {
+    // Only authenticated users can read dashboard summaries and test reports
+    match /{document=**} {
+      allow read: if request.auth != null;
+      // Writes are strictly restricted to CI / Firebase Admin Service Account
+      allow write: if false;
+    }
+  }
+}

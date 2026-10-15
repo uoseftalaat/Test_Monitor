@@ -40,7 +40,7 @@
       "flaky": 0,
       "skipped": 0,
       "passRate": 100,
-      "notConfigured": true
+      "notConfigured": false
     }
   }
 }

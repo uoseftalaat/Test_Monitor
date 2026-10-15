@@ -24,11 +24,12 @@ A fast, serverless, automated QA test monitoring website hosted on **GitHub Page
   - Day-by-day pass/fail status bars for each test case over the past month.
   - Detailed audit table: Date, Run ID, Status, Duration, and Error Reason for every failure in the last 30 days.
   - Auto-pruning keeps JSON files fast and lightweight.
-- **GitOps Architecture (Zero Server Costs)**:
-  - Frontend hosted on **GitHub Pages**.
-  - Data stored directly in `public/data/projects/{projectId}.json`.
-  - **Decoupled Data Files**: Each project has its own JSON file—pipelines for ARM, Cadaa, etc. update independently with **zero Git merge conflicts**.
-  - GitHub Actions automatically commits and redeploys the site in ~30 seconds.
+- **Cloud-Native Realtime Architecture**:
+  - Live real-time dashboard updates via **Firebase Firestore** `onSnapshot`.
+  - Offline Playwright `.zip` archives hosted securely on **Firebase Storage**.
+  - Frontend hosted serverlessly on **GitHub Pages**.
+  - Direct pipeline push via `scripts/push-to-firebase.js` in ~300ms with **zero Git merge conflicts**.
+  - Local fallback preview mode supported when offline or without Firebase credentials.
 
 ---
 
@@ -38,27 +39,37 @@ A fast, serverless, automated QA test monitoring website hosted on **GitHub Page
 Test_monitor/
 ├── .github/
 │   └── workflows/
-│       └── deploy.yml              # Automatic GitHub Pages build & deploy on push
+│       └── deploy.yml                  # Automatic GitHub Pages build & deploy
 ├── public/
 │   ├── data/
-│   │   ├── projects-summary.json   # Executive high-level summary of all projects
-│   │   └── projects/
-│   │       ├── arm.json            # ARM test results & 30-day history
-│   │       ├── cadaa.json          # Cadaa test results & 30-day history
-│   │       ├── kuiper.json         # Kuiper test results & 30-day history
-│   │       └── atlas.json          # Atlas test results & 30-day history
+│   │   ├── projects-summary.json       # Offline fallback summary
+│   │   └── projects/                   # Offline fallback project data (zeros)
 │   └── favicon.svg
 ├── scripts/
-│   ├── generate-data.js            # Seeds realistic sample 30-day test data
-│   ├── ingest-test-run.js          # Ingests Playwright / Mobile test JSON reports
-│   └── push-results-to-monitor.sh  # Script run by CI to auto-commit test runs
+│   ├── push-to-firebase.js             # CI test results & zip report push to Firestore/Storage
+│   ├── reset-all-data.js               # Administrative script to reset all data to clean zeros
+│   └── migrate-local-data-to-firebase.js # Seeds Firestore from local fallback templates
 ├── src/
+│   ├── constants/                      # Centralized constants & configs
+│   │   ├── layers.js                   # Web, API, Mobile layers metadata & icons
+│   │   ├── status.js                   # Status priorities, styles, and configs
+│   │   └── projects.js                 # Default project registry
+│   ├── hooks/                          # Custom React hooks
+│   │   ├── useAuth.js                  # Authentication lifecycle hook
+│   │   └── useProjectData.js           # Realtime Firestore sync & fallback hook
+│   ├── utils/                          # Pure utilities
+│   │   ├── cn.js                       # clsx + twMerge utility
+│   │   ├── ansi.js                     # ANSI escape stripper & tokenizer
+│   │   └── formatters.js               # Byte, time, and duration formatters
 │   ├── components/
-│   │   ├── GlobalOverview.jsx      # All-projects executive dashboard
-│   │   ├── Navbar.jsx              # Project tabs, health badges, auto-refresh
-│   │   ├── ProjectView.jsx         # Layer tabs, 30-day trend chart, test table
-│   │   └── TestDetailModal.jsx     # Failure analysis & stack trace inspector
-│   ├── App.jsx
+│   │   ├── common/                     # Reusable UI primitives (AnsiText, MetricCard, StatusBadge)
+│   │   ├── layout/                     # Navbar, Footer
+│   │   ├── auth/                       # AuthModal
+│   │   ├── overview/                   # GlobalOverview, ProjectCard
+│   │   ├── project/                    # ProjectView, Header, Kpis, Tabs, ZipBanner, Failures, Filters, Table
+│   │   └── TestDetailModal.jsx         # Diagnostic stack trace & history inspector
+│   ├── firebase/                       # Firebase configuration & services
+│   ├── App.jsx                         # Main container
 │   ├── index.css
 │   └── main.jsx
 ├── package.json
@@ -67,50 +78,72 @@ Test_monitor/
 
 ---
 
-## Connecting Your Test Pipeline (e.g. `arm_test`)
+## Firebase Setup & Authentication
 
-### Step 1: Create a Personal Access Token (PAT)
-1. In your GitHub account, go to **Settings > Developer Settings > Personal Access Tokens > Fine-grained tokens** (or Tokens Classic).
-2. Generate a token with **Contents: Read and write** permissions on the `Test_monitor` repository.
-3. In `arm_test` (or your org repo), go to **Settings > Secrets and variables > Actions**.
-4. Add a secret named `TEST_MONITOR_PAT` and paste your token value.
+TestMonitor is connected to Firebase project **[`test-monitor-46836`](https://console.firebase.google.com/u/1/project/test-monitor-46836/overview)**.
 
-### Step 2: Add Reporting Step to `arm_test/.github/workflows/test-stages.yml`
+### 1. Enable Firebase Services in Console
+1. **Authentication**:
+   - Go to **Build > Authentication > Sign-in method**.
+   - Enable **Email/Password** (Email link and Google SSO can remain disabled).
+   - In **Users**, click **Add user** to manually provision authorized QA and engineering accounts. (Self-registration is disabled for maximum security).
+2. **Firestore Database**:
+   - Go to **Build > Firestore Database > Create database**.
+   - Paste the rules from [`firestore.rules`](file:///home/uoseftalaat/Projects/Test_monitor/firestore.rules).
+3. **Storage (Optional for Playwright Zip Uploads)**:
+   - Go to **Build > Storage > Get Started** (Free Spark tier bucket).
+4. **Register Web App**:
+   - Go to **Project Settings > General > Your apps > Web app** (`</>`).
+   - Copy the configuration keys into your local `.env.local` file (see `.env.example`).
 
-In `arm_test/.github/workflows/test-stages.yml`, ensure Playwright runs with the JSON reporter alongside list and HTML:
-
-```yaml
-      - name: Run ${{ inputs.testLayer }} tests (${{ inputs.apps }})
-        working-directory: ${{ inputs.qaRepoDir }}/${{ inputs.automationDir }}
-        run: |
-          ...
-          npx playwright test $PROJECT_ARG "${SELECT_ARGS[@]}" \
-            --reporter=list,html,json \
-            PLAYWRIGHT_JSON_OUTPUT_NAME=reports/results.json
+### 2. Reset or Seed Test Data
+To reset all projects and layers to clean zero metrics:
+```bash
+# Provide service account key via env var or service-account.json
+node scripts/reset-all-data.js
 ```
 
-Then right after tests run, add the step to automatically update `Test_monitor`:
+---
+
+## Connecting Your CI Test Pipeline (Direct Firebase Push)
+
+Instead of slow Git commits, pipelines push test results directly to Firestore in **~300ms** with zero merge conflicts, and automatically link interactive Playwright zip reports for offline analysis.
+
+### Step 1: Create a Service Account Key
+1. In Firebase Console, go to **Project Settings > Service accounts**.
+2. Click **Generate new private key** and download the JSON.
+3. In your QA repository (e.g. `arm_test`), go to **Settings > Secrets > Actions**.
+4. Add a secret named `FIREBASE_SERVICE_ACCOUNT` and paste the entire JSON content.
+
+### Step 2: Add Push Step in GitHub Actions Workflow
+In your test workflow (e.g., `test-stages.yml`), after Playwright or Mobile tests finish:
 
 ```yaml
-      - name: Push Results to Test Monitor
+      - name: Push Results & Playwright Reports to Firebase
         if: ${{ !cancelled() }}
         env:
-          TEST_MONITOR_PAT: ${{ secrets.TEST_MONITOR_PAT }}
+          FIREBASE_SERVICE_ACCOUNT: ${{ secrets.FIREBASE_SERVICE_ACCOUNT }}
         run: |
           REPORT_FILE="${{ inputs.qaRepoDir }}/${{ inputs.automationDir }}/reports/results.json"
+          ZIP_FILE="${{ inputs.qaRepoDir }}/${{ inputs.automationDir }}/playwright-report.zip"
           
-          # Clone push script and execute
-          curl -sSL https://raw.githubusercontent.com/uoseftalaat/Test_monitor/main/scripts/push-results-to-monitor.sh -o push-monitor.sh
-          chmod +x push-monitor.sh
+          # Compress Playwright HTML report into a zip archive
+          cd "${{ inputs.qaRepoDir }}/${{ inputs.automationDir }}"
+          zip -r playwright-report.zip playwright-report/ || true
+          cd -
           
-          ./push-monitor.sh \
-            "${{ inputs.apps }}" \
-            "${{ inputs.testLayer }}" \
-            "$REPORT_FILE" \
-            "uoseftalaat/Test_monitor"
+          # Download and execute Firebase push script
+          curl -sSL https://raw.githubusercontent.com/uoseftalaat/Test_monitor/main/scripts/push-to-firebase.js -o push-to-firebase.js
+          
+          node push-to-firebase.js \
+            --project "${{ inputs.apps }}" \
+            --layer "${{ inputs.testLayer }}" \
+            --report "$REPORT_FILE" \
+            --zip-report "$ZIP_FILE" \
+            --run-id "${{ github.run_id }}"
 ```
 
-**Result**: Every pipeline run commits directly to `Test_monitor`'s `main` branch. No PR or manual approval is needed, and GitHub Pages refreshes with the latest metrics within 30 seconds!
+> **Note for Old School Testers**: Uploading the `.zip` report allows QA testers to download the complete standalone Playwright HTML report package directly from the dashboard under each project's Web, API, or Mobile status page. Testers can extract the zip file and inspect network calls, video recordings, and step-by-step traces completely offline without needing CI access.
 
 ---
 
@@ -123,8 +156,11 @@ npm install
 # Start local preview
 npm run dev
 
-# Regenerate sample 30-day data
-node scripts/generate-data.js
+# Reset all metrics and test data to clean zeros (Local & Firestore)
+npm run reset:data
+
+# Push test results to Firebase Firestore & Storage
+npm run push:firebase -- --help
 
 # Build production bundle for GitHub Pages
 npm run build

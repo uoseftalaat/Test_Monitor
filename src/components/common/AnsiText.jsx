@@ -1,5 +1,6 @@
 import React from 'react';
-import { parseAnsi, stripAnsi } from './ansi.js';
+import { parseAnsi, stripAnsi } from '../../utils/ansi';
+import { cn } from '../../utils/cn';
 
 export { parseAnsi, stripAnsi };
 
@@ -14,13 +15,13 @@ export function AnsiText({ text, className = '' }) {
   return (
     <span className={className}>
       {tokens.map((token, index) => {
-        const classNames = [
-          token.color || '',
-          token.bg || '',
-          token.bold ? 'font-bold' : '',
-          token.dim ? 'opacity-70' : '',
-          token.underline ? 'underline' : ''
-        ].filter(Boolean).join(' ');
+        const classNames = cn(
+          token.color,
+          token.bg,
+          token.bold && 'font-bold',
+          token.dim && 'opacity-70',
+          token.underline && 'underline'
+        );
 
         return classNames ? (
           <span key={index} className={classNames}>
