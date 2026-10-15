@@ -3,7 +3,7 @@ import Navbar from './components/Navbar';
 import GlobalOverview from './components/GlobalOverview';
 import ProjectView from './components/ProjectView';
 import TestDetailModal from './components/TestDetailModal';
-import { Loader2, AlertCircle } from 'lucide-react';
+import { Loader2, AlertCircle, Info } from 'lucide-react';
 
 export default function App() {
   const [selectedProjectId, setSelectedProjectId] = useState('arm'); // Default to ARM
@@ -14,35 +14,48 @@ export default function App() {
   const [isRefreshing, setIsRefreshing] = useState(false);
   const [lastUpdated, setLastUpdated] = useState(null);
   const [errorMessage, setErrorMessage] = useState(null);
+  const [isUsingCache, setIsUsingCache] = useState(false);
   const [autoRefreshInterval, setAutoRefreshInterval] = useState(60); // seconds (default 60s)
 
-  // Fetch summary and decoupled per-layer project files with cache-busting timestamp
+  // Fetch summary and decoupled per-layer project files with cache-busting timestamp & offline fallback
   const loadData = useCallback(async (isManualRefresh = false) => {
     if (isManualRefresh) setIsRefreshing(true);
     setErrorMessage(null);
 
+    const cacheKey = `test_monitor_cache_${selectedProjectId}`;
+
     try {
       const cacheBuster = `t=${Date.now()}`;
-      // Load global summary
-      const summaryRes = await fetch(`./data/projects-summary.json?${cacheBuster}`);
-      if (!summaryRes.ok) throw new Error(`Failed to load summary (HTTP ${summaryRes.status})`);
-      const summaryData = await summaryRes.json();
-      setGlobalSummary(summaryData);
-
-      // If a specific project is selected, load its decoupled manifest and 3 layer files (web, api, mobile)
-      if (selectedProjectId !== 'all') {
-        const manifestRes = await fetch(`./data/projects/${selectedProjectId}/manifest.json?${cacheBuster}`);
-        let manifest = null;
-        if (manifestRes.ok) {
-          manifest = await manifestRes.json();
+      
+      // 1. Load global summary (fail-safe with fallback)
+      let summaryData = null;
+      try {
+        const summaryRes = await fetch(`./data/projects-summary.json?${cacheBuster}`);
+        if (summaryRes.ok) {
+          summaryData = await summaryRes.json();
+          setGlobalSummary(summaryData);
         }
+      } catch (sumErr) {
+        console.warn('Could not fetch global summary, using local cache if available', sumErr);
+      }
 
-        // Fetch web, api, and mobile in parallel
+      // 2. Load selected project layers (web, api, mobile)
+      if (selectedProjectId !== 'all') {
+        let manifest = null;
+        try {
+          const manifestRes = await fetch(`./data/projects/${selectedProjectId}/manifest.json?${cacheBuster}`);
+          if (manifestRes.ok) manifest = await manifestRes.json();
+        } catch (_) {}
+
+        // Fetch web, api, and mobile in parallel with individual fail-safes
         const layerKeys = ['web', 'api', 'mobile'];
         const layerResponses = await Promise.allSettled(
           layerKeys.map(layer =>
             fetch(`./data/projects/${selectedProjectId}/${layer}.json?${cacheBuster}`)
-              .then(res => res.ok ? res.json() : null)
+              .then(res => {
+                if (!res.ok) return null; // 404 or missing file is handled gracefully
+                return res.json().catch(() => null); // Catch corrupted JSON
+              })
               .catch(() => null)
           )
         );
@@ -50,13 +63,18 @@ export default function App() {
         const loadedLayers = {};
         let combinedTests = [];
         let combinedRunsHistoryMap = {};
+        let foundAnyLayer = false;
 
         layerKeys.forEach((key, idx) => {
           const result = layerResponses[idx];
-          if (result.status === 'fulfilled' && result.value) {
+          if (result.status === 'fulfilled' && result.value && typeof result.value === 'object') {
             const data = result.value;
-            loadedLayers[key] = data.summary;
-            if (data.tests) combinedTests = combinedTests.concat(data.tests);
+            loadedLayers[key] = data.summary || { total: 0, passed: 0, failed: 0, flaky: 0, skipped: 0, passRate: 100 };
+            
+            if (Array.isArray(data.tests) && data.tests.length > 0) {
+              combinedTests = combinedTests.concat(data.tests);
+              foundAnyLayer = true;
+            }
 
             // Merge runs history
             (data.runsHistory || []).forEach(r => {
@@ -70,9 +88,25 @@ export default function App() {
               combinedRunsHistoryMap[r.date].skipped += r.skipped || 0;
             });
           } else {
-            loadedLayers[key] = { total: 0, passed: 0, failed: 0, flaky: 0, skipped: 0, passRate: 100 };
+            // Layer file doesn't exist (e.g. project has no mobile app yet) -> Safe empty fallback
+            loadedLayers[key] = { total: 0, passed: 0, failed: 0, flaky: 0, skipped: 0, passRate: 100, notConfigured: true };
           }
         });
+
+        // Fail-safe check: If all layer files were missing or 404, check local cache
+        if (!foundAnyLayer) {
+          const cached = localStorage.getItem(cacheKey);
+          if (cached) {
+            try {
+              const cachedData = JSON.parse(cached);
+              setCurrentProjectData(cachedData);
+              setIsUsingCache(true);
+              setIsLoading(false);
+              setIsRefreshing(false);
+              return;
+            } catch (_) {}
+          }
+        }
 
         const combinedRunsHistory = Object.values(combinedRunsHistoryMap)
           .sort((a, b) => a.date.localeCompare(b.date))
@@ -88,7 +122,7 @@ export default function App() {
         const totalSkipped = combinedTests.filter(t => t.currentStatus === 'skipped').length;
         const overallPassRate = totalTests > 0 ? Number(((totalPassed / totalTests) * 100).toFixed(1)) : 100;
 
-        setCurrentProjectData({
+        const projectPayload = {
           projectId: selectedProjectId,
           projectName: manifest?.projectName || selectedProjectId.toUpperCase(),
           description: manifest?.description || '',
@@ -104,13 +138,33 @@ export default function App() {
           layers: loadedLayers,
           tests: combinedTests,
           runsHistory: combinedRunsHistory
-        });
+        };
+
+        setCurrentProjectData(projectPayload);
+        setIsUsingCache(false);
+
+        // Save successfully loaded project data to cache
+        try {
+          localStorage.setItem(cacheKey, JSON.stringify(projectPayload));
+        } catch (_) {}
       }
 
       setLastUpdated(new Date().toISOString());
     } catch (err) {
       console.error('Error fetching test monitoring data:', err);
-      setErrorMessage(err.message || 'Failed to fetch test monitoring data');
+      
+      // Fallback to local cache if fetch fails completely
+      const cached = localStorage.getItem(cacheKey);
+      if (cached) {
+        try {
+          setCurrentProjectData(JSON.parse(cached));
+          setIsUsingCache(true);
+        } catch (_) {
+          setErrorMessage(err.message || 'Failed to fetch test monitoring data');
+        }
+      } else {
+        setErrorMessage(err.message || 'Failed to fetch test monitoring data');
+      }
     } finally {
       setIsLoading(false);
       setIsRefreshing(false);
@@ -155,10 +209,17 @@ export default function App() {
 
       {/* Main Container */}
       <main className="flex-1 max-w-7xl w-full mx-auto px-4 sm:px-6 lg:px-8 py-8">
+        {isUsingCache && (
+          <div className="mb-4 p-3 rounded-xl bg-blue-950/40 border border-blue-500/30 flex items-center gap-2 text-blue-300 text-xs">
+            <Info className="h-4 w-4 text-blue-400 shrink-0" />
+            <span>Displaying cached test records. Waiting for pipeline updates.</span>
+          </div>
+        )}
+
         {errorMessage && (
           <div className="mb-6 p-4 rounded-xl bg-red-950/40 border border-red-500/30 flex items-center justify-between text-red-300 text-xs">
             <div className="flex items-center gap-2">
-              <AlertCircle className="h-4 w-4 text-red-400" />
+              <AlertCircle className="h-4 w-4 text-red-400 shrink-0" />
               <span>{errorMessage}</span>
             </div>
             <button

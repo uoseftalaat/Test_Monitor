@@ -25,17 +25,34 @@ function parseArgs() {
 
 const args = parseArgs();
 const projectId = args.project || 'arm';
-const layer = args.layer || 'api'; // web, api, android, ios
+const layer = args.layer || 'api'; // web, api, mobile
 const reportPath = args.report;
 const runId = args['run-id'] || `manual-${Date.now()}`;
 
+// ============================================================================
+// FAIL-SAFE 1: Verify report file existence and non-zero size
+// ============================================================================
 if (!reportPath || !fs.existsSync(reportPath)) {
-  console.error(`Error: Report file not found at: ${reportPath}`);
-  console.log(`Usage: node scripts/ingest-test-run.js --project <arm|cadaa|...> --layer <web|api|android|ios> --report <path-to-json> [--run-id <id>]`);
-  process.exit(1);
+  console.warn(`⚠️ FAIL-SAFE: Report file not found at: ${reportPath}. Aborting without modifying existing data.`);
+  process.exit(0);
 }
 
-const rawReport = JSON.parse(fs.readFileSync(reportPath, 'utf8'));
+const stats = fs.statSync(reportPath);
+if (stats.size === 0) {
+  console.warn(`⚠️ FAIL-SAFE: Report file is completely empty (0 bytes). Preserving existing data.`);
+  process.exit(0);
+}
+
+// ============================================================================
+// FAIL-SAFE 2: Verify valid JSON formatting in incoming report
+// ============================================================================
+let rawReport;
+try {
+  rawReport = JSON.parse(fs.readFileSync(reportPath, 'utf8'));
+} catch (err) {
+  console.error(`❌ FAIL-SAFE: Incoming report is corrupted or invalid JSON: ${err.message}. Aborting to protect existing data.`);
+  process.exit(0);
+}
 
 const projectSubDir = path.join(PROJECTS_DIR, projectId);
 if (!fs.existsSync(projectSubDir)) {
@@ -45,11 +62,14 @@ if (!fs.existsSync(projectSubDir)) {
 const layerFilePath = path.join(projectSubDir, `${layer}.json`);
 const manifestPath = path.join(projectSubDir, 'manifest.json');
 
+// ============================================================================
+// FAIL-SAFE 3: Load existing data with fallback and backup
+// ============================================================================
 let layerData = {
   projectId,
   projectName: projectId.toUpperCase(),
   layer,
-  layerName: layer === 'web' ? 'Web' : layer === 'api' ? 'API' : layer === 'android' ? 'Mobile - Android' : 'Mobile - iOS',
+  layerName: layer === 'web' ? 'Web' : layer === 'api' ? 'API' : 'Mobile',
   lastUpdated: new Date().toISOString(),
   summary: { total: 0, passed: 0, failed: 0, flaky: 0, skipped: 0, passRate: 100 },
   tests: [],
@@ -58,20 +78,25 @@ let layerData = {
 
 if (fs.existsSync(layerFilePath)) {
   try {
-    layerData = JSON.parse(fs.readFileSync(layerFilePath, 'utf8'));
+    const existingContent = fs.readFileSync(layerFilePath, 'utf8');
+    if (existingContent.trim().length > 0) {
+      layerData = JSON.parse(existingContent);
+    }
   } catch (e) {
-    console.warn(`Could not parse existing ${layerFilePath}, creating fresh structure`);
+    console.warn(`⚠️ Existing ${layerFilePath} had parsing issues. Initializing fresh structure.`);
   }
 }
 
-// Extract tests from report (Supports standard Playwright JSON report or simplified custom format)
+// Extract tests from report
 const parsedTests = [];
 
 function traversePlaywrightSuites(suites, parentTitle = '') {
+  if (!Array.isArray(suites)) return;
   for (const suite of suites) {
     const fullSuiteTitle = parentTitle ? `${parentTitle} > ${suite.title}` : suite.title;
-    if (suite.specs) {
+    if (suite.specs && Array.isArray(suite.specs)) {
       for (const spec of suite.specs) {
+        if (!spec.tests) continue;
         for (const test of spec.tests) {
           const latestResult = test.results?.[test.results.length - 1] || {};
           let status = 'passed';
@@ -92,8 +117,8 @@ function traversePlaywrightSuites(suites, parentTitle = '') {
           parsedTests.push({
             id: `${projectId}-${layer}-${spec.id || spec.title.toLowerCase().replace(/[^a-z0-9]/g, '-')}`,
             suite: fullSuiteTitle || 'Default Suite',
-            title: spec.title,
-            file: spec.file,
+            title: spec.title || 'Untitled Test',
+            file: spec.file || '',
             status,
             durationMs: latestResult.duration || 0,
             error
@@ -112,15 +137,20 @@ if (rawReport.suites) {
 } else if (Array.isArray(rawReport.tests)) {
   for (const t of rawReport.tests) {
     parsedTests.push({
-      id: t.id || `${projectId}-${layer}-${t.title.toLowerCase().replace(/[^a-z0-9]/g, '-')}`,
+      id: t.id || `${projectId}-${layer}-${(t.title || 'test').toLowerCase().replace(/[^a-z0-9]/g, '-')}`,
       suite: t.suite || 'General',
-      title: t.title,
+      title: t.title || 'Untitled Test',
       file: t.file || '',
       status: t.status || 'passed',
       durationMs: t.durationMs || 0,
       error: t.error || null
     });
   }
+}
+
+if (parsedTests.length === 0) {
+  console.warn(`⚠️ FAIL-SAFE: 0 tests were found in the incoming report. Preserving existing test records.`);
+  process.exit(0);
 }
 
 console.log(`Parsed ${parsedTests.length} tests for ${projectId} [${layer}]`);
@@ -131,7 +161,7 @@ const cutoffDate = new Date();
 cutoffDate.setDate(cutoffDate.getDate() - 30);
 const todayStr = now.toISOString().split('T')[0];
 
-if (!layerData.tests) layerData.tests = [];
+if (!Array.isArray(layerData.tests)) layerData.tests = [];
 
 for (const incoming of parsedTests) {
   let existing = layerData.tests.find(t => t.id === incoming.id || t.title === incoming.title);
@@ -188,7 +218,7 @@ layerData.summary = {
 layerData.lastUpdated = now.toISOString();
 
 // Append to layer runsHistory
-if (!layerData.runsHistory) layerData.runsHistory = [];
+if (!Array.isArray(layerData.runsHistory)) layerData.runsHistory = [];
 layerData.runsHistory = layerData.runsHistory.filter(r => new Date(r.date) >= cutoffDate);
 const existingDayRun = layerData.runsHistory.find(r => r.date === todayStr);
 if (existingDayRun) {
@@ -210,50 +240,73 @@ if (existingDayRun) {
   });
 }
 
-// Write the layer file
-fs.writeFileSync(layerFilePath, JSON.stringify(layerData, null, 2));
-console.log(`✅ Saved layer file: ${layerFilePath}`);
-
-// Update manifest.json if exists
-if (fs.existsSync(manifestPath)) {
-  const manifest = JSON.parse(fs.readFileSync(manifestPath, 'utf8'));
-  if (!manifest.layers) manifest.layers = {};
-  manifest.layers[layer] = {
-    name: layerData.layerName,
-    total: lTotal,
-    passed: lPassed,
-    failed: lFailed,
-    flaky: lFlaky,
-    skipped: lSkipped,
-    passRate: lPassRate
-  };
-
-  const layersList = Object.values(manifest.layers);
-  const mTotal = layersList.reduce((acc, l) => acc + l.total, 0);
-  const mPassed = layersList.reduce((acc, l) => acc + l.passed, 0);
-  const mFailed = layersList.reduce((acc, l) => acc + l.failed, 0);
-  const mFlaky = layersList.reduce((acc, l) => acc + l.flaky, 0);
-  const mSkipped = layersList.reduce((acc, l) => acc + l.skipped, 0);
-  const mPassRate = mTotal > 0 ? Number(((mPassed / mTotal) * 100).toFixed(1)) : 100;
-
-  manifest.summary = { total: mTotal, passed: mPassed, failed: mFailed, flaky: mFlaky, skipped: mSkipped, passRate: mPassRate };
-  manifest.lastUpdated = now.toISOString();
-
-  fs.writeFileSync(manifestPath, JSON.stringify(manifest, null, 2));
+// ============================================================================
+// FAIL-SAFE 4: Atomic Write (Write to .tmp then rename)
+// This ensures that even if the pipeline aborts mid-write, the target file is never left corrupt or empty.
+// ============================================================================
+const tempLayerFile = `${layerFilePath}.tmp`;
+try {
+  fs.writeFileSync(tempLayerFile, JSON.stringify(layerData, null, 2));
+  fs.renameSync(tempLayerFile, layerFilePath);
+  console.log(`✅ FAIL-SAFE: Atomic write succeeded: ${layerFilePath}`);
+} catch (writeErr) {
+  console.error(`❌ Atomic write error for ${layerFilePath}: ${writeErr.message}`);
+  if (fs.existsSync(tempLayerFile)) fs.unlinkSync(tempLayerFile);
+  process.exit(1);
 }
 
-// Update public/data/projects-summary.json
+// Update manifest.json atomically
+if (fs.existsSync(manifestPath)) {
+  try {
+    const manifest = JSON.parse(fs.readFileSync(manifestPath, 'utf8'));
+    if (!manifest.layers) manifest.layers = {};
+    manifest.layers[layer] = {
+      name: layerData.layerName,
+      total: lTotal,
+      passed: lPassed,
+      failed: lFailed,
+      flaky: lFlaky,
+      skipped: lSkipped,
+      passRate: lPassRate
+    };
+
+    const layersList = Object.values(manifest.layers);
+    const mTotal = layersList.reduce((acc, l) => acc + (l.total || 0), 0);
+    const mPassed = layersList.reduce((acc, l) => acc + (l.passed || 0), 0);
+    const mFailed = layersList.reduce((acc, l) => acc + (l.failed || 0), 0);
+    const mFlaky = layersList.reduce((acc, l) => acc + (l.flaky || 0), 0);
+    const mSkipped = layersList.reduce((acc, l) => acc + (l.skipped || 0), 0);
+    const mPassRate = mTotal > 0 ? Number(((mPassed / mTotal) * 100).toFixed(1)) : 100;
+
+    manifest.summary = { total: mTotal, passed: mPassed, failed: mFailed, flaky: mFlaky, skipped: mSkipped, passRate: mPassRate };
+    manifest.lastUpdated = now.toISOString();
+
+    const tempManifest = `${manifestPath}.tmp`;
+    fs.writeFileSync(tempManifest, JSON.stringify(manifest, null, 2));
+    fs.renameSync(tempManifest, manifestPath);
+  } catch (manifestErr) {
+    console.warn(`⚠️ Warning updating manifest: ${manifestErr.message}`);
+  }
+}
+
+// Update public/data/projects-summary.json atomically
 const summaryFilePath = path.join(DATA_DIR, 'projects-summary.json');
 if (fs.existsSync(summaryFilePath)) {
-  const globalSummary = JSON.parse(fs.readFileSync(summaryFilePath, 'utf8'));
-  const projIdx = globalSummary.projects.findIndex(p => p.id === projectId);
-  
-  if (projIdx >= 0) {
-    if (!globalSummary.projects[projIdx].layers) globalSummary.projects[projIdx].layers = {};
-    globalSummary.projects[projIdx].layers[layer] = lPassRate;
-    globalSummary.projects[projIdx].lastUpdated = now.toISOString();
-  }
+  try {
+    const globalSummary = JSON.parse(fs.readFileSync(summaryFilePath, 'utf8'));
+    const projIdx = globalSummary.projects.findIndex(p => p.id === projectId);
+    
+    if (projIdx >= 0) {
+      if (!globalSummary.projects[projIdx].layers) globalSummary.projects[projIdx].layers = {};
+      globalSummary.projects[projIdx].layers[layer] = lPassRate;
+      globalSummary.projects[projIdx].lastUpdated = now.toISOString();
+    }
 
-  fs.writeFileSync(summaryFilePath, JSON.stringify(globalSummary, null, 2));
-  console.log(`✅ Updated global summary: ${summaryFilePath}`);
+    const tempSummary = `${summaryFilePath}.tmp`;
+    fs.writeFileSync(tempSummary, JSON.stringify(globalSummary, null, 2));
+    fs.renameSync(tempSummary, summaryFilePath);
+    console.log(`✅ FAIL-SAFE: Atomic update of global summary: ${summaryFilePath}`);
+  } catch (summaryErr) {
+    console.warn(`⚠️ Warning updating summary: ${summaryErr.message}`);
+  }
 }

@@ -326,9 +326,23 @@ export default function ProjectView({ projectData, onSelectTest }) {
 
         {filteredTests.length === 0 ? (
           <div className="p-12 text-center text-slate-400">
-            <CheckCircle2 className="h-8 w-8 text-emerald-400 mx-auto mb-2" />
-            <p className="text-sm font-medium text-slate-300">No matching test cases found</p>
-            <p className="text-xs text-slate-500 mt-1">Try resetting the status filter or search term</p>
+            {currentSummary?.total === 0 && selectedLayer !== 'all' ? (
+              <>
+                <Layers className="h-8 w-8 text-slate-500 mx-auto mb-2" />
+                <p className="text-sm font-semibold text-slate-200">
+                  No {selectedLayer === 'web' ? 'Web' : selectedLayer === 'api' ? 'API' : 'Mobile'} tests configured for {projectName}
+                </p>
+                <p className="text-xs text-slate-400 mt-1 max-w-sm mx-auto">
+                  This project currently does not run automated {selectedLayer} suites. As soon as the {selectedLayer} pipeline runs, results will appear here automatically.
+                </p>
+              </>
+            ) : (
+              <>
+                <CheckCircle2 className="h-8 w-8 text-emerald-400 mx-auto mb-2" />
+                <p className="text-sm font-medium text-slate-300">No matching test cases found</p>
+                <p className="text-xs text-slate-400 mt-1">Try resetting the status filter or search term</p>
+              </>
+            )}
           </div>
         ) : (
           <div className="overflow-x-auto">
