@@ -1,4 +1,5 @@
 import React, { useState, useMemo } from 'react';
+import { stripAnsi } from '../utils/ansi.jsx';
 import { 
   CheckCircle2, 
   XCircle, 
@@ -12,75 +13,9 @@ import {
   Smartphone,
   Layers,
   ChevronRight,
-  TrendingUp,
   FileCode,
   Flame
 } from 'lucide-react';
-
-function TrendBarChart({ title, icon: Icon, runs = [], passRate = 100, notConfigured = false }) {
-  if (notConfigured) return null;
-
-  return (
-    <div className="bg-slate-900 border border-slate-800 rounded-xl p-4 shadow-sm flex flex-col justify-between">
-      <div className="flex items-center justify-between mb-3">
-        <div className="flex items-center gap-2">
-          {Icon && <Icon className="h-4 w-4 text-blue-400" />}
-          <h3 className="text-xs font-bold text-white uppercase tracking-wider">{title}</h3>
-        </div>
-        <span className={`text-xs font-bold px-2 py-0.5 rounded-full ${
-          runs.length === 0
-            ? 'bg-slate-800 text-slate-400'
-            : passRate >= 95
-            ? 'bg-emerald-500/10 text-emerald-400 border border-emerald-500/20'
-            : 'bg-amber-500/10 text-amber-400 border border-amber-500/20'
-        }`}>
-          {runs.length > 0 ? `${passRate}%` : 'No Runs'}
-        </span>
-      </div>
-
-      {runs && runs.length > 0 ? (
-        <div>
-          <div className="h-20 flex items-end gap-1.5 pt-2">
-            {runs.map((run, i) => {
-              const heightPct = Math.max(15, run.passRate);
-              const hasFails = run.failed > 0;
-              return (
-                <div 
-                  key={i} 
-                  className="flex-1 flex flex-col items-center group relative h-full justify-end"
-                >
-                  <div className="absolute -top-12 z-20 hidden group-hover:flex flex-col items-center bg-slate-950 text-white text-[10px] p-1.5 rounded border border-slate-700 whitespace-nowrap shadow-xl pointer-events-none">
-                    <span className="font-semibold">{run.date}</span>
-                    <span className={hasFails ? 'text-red-400' : 'text-emerald-400'}>
-                      {run.passRate}% ({run.passed}P / {run.failed}F)
-                    </span>
-                  </div>
-
-                  <div 
-                    className={`w-full rounded-t transition-all ${
-                      hasFails ? 'bg-red-500/70 group-hover:bg-red-400' : 'bg-emerald-500/70 group-hover:bg-emerald-400'
-                    }`}
-                    style={{ height: `${heightPct}%` }}
-                  />
-                </div>
-              );
-            })}
-          </div>
-
-          <div className="flex items-center justify-between text-[10px] text-slate-400 mt-2 border-t border-slate-800 pt-1.5 font-mono">
-            <span>{runs[0]?.date}</span>
-            <span>{runs[runs.length - 1]?.date}</span>
-          </div>
-        </div>
-      ) : (
-        <div className="h-20 flex flex-col items-center justify-center text-center p-2 text-slate-500 text-xs">
-          <span>No 30-day runs recorded yet</span>
-          <span className="text-[10px] text-slate-600 mt-0.5">Results will show automatically after CI run</span>
-        </div>
-      )}
-    </div>
-  );
-}
 
 export default function ProjectView({ projectData, onSelectTest }) {
   const [selectedLayer, setSelectedLayer] = useState('all'); // 'all' | 'web' | 'api' | 'android' | 'ios'
@@ -100,9 +35,17 @@ export default function ProjectView({ projectData, onSelectTest }) {
     runsHistory = []
   } = projectData;
 
-  // Filter tests by layer, status, suite, and search query
+  // Status priority for listing order: failed (0) -> flaky (1) -> passed (2) -> skipped (3)
+  const STATUS_PRIORITY = {
+    failed: 0,
+    flaky: 1,
+    passed: 2,
+    skipped: 3
+  };
+
+  // Filter tests by layer, status, suite, and search query, then sort failures on top
   const filteredTests = useMemo(() => {
-    return tests.filter(test => {
+    const list = tests.filter(test => {
       // Layer filter
       if (selectedLayer !== 'all' && test.layer !== selectedLayer) return false;
 
@@ -121,11 +64,23 @@ export default function ProjectView({ projectData, onSelectTest }) {
         const matchesTitle = test.title?.toLowerCase().includes(q);
         const matchesSuite = test.suite?.toLowerCase().includes(q);
         const matchesFile = test.file?.toLowerCase().includes(q);
-        const matchesError = test.latestError?.message?.toLowerCase().includes(q);
+        const cleanError = stripAnsi(test.latestError?.message).toLowerCase();
+        const matchesError = cleanError.includes(q);
         if (!matchesTitle && !matchesSuite && !matchesFile && !matchesError) return false;
       }
 
       return true;
+    });
+
+    // Sort: Fails first (0), then Flaky (1), then Passed (2), then Skipped (3)
+    return list.sort((a, b) => {
+      const pA = STATUS_PRIORITY[a.currentStatus] ?? 99;
+      const pB = STATUS_PRIORITY[b.currentStatus] ?? 99;
+      if (pA !== pB) return pA - pB;
+      // Secondary sort: Keep consistent alphabetical order by suite and title
+      const suiteCmp = (a.suite || '').localeCompare(b.suite || '');
+      if (suiteCmp !== 0) return suiteCmp;
+      return (a.title || '').localeCompare(b.title || '');
     });
   }, [tests, selectedLayer, statusFilter, selectedSuite, searchQuery]);
 
@@ -275,53 +230,6 @@ export default function ProjectView({ projectData, onSelectTest }) {
         </div>
       </div>
 
-      {/* 30-Day Pass Rate Trend Separated by Layer */}
-      <div className="space-y-3">
-        <div className="flex items-center justify-between">
-          <div className="flex items-center gap-2">
-            <TrendingUp className="h-4 w-4 text-blue-400" />
-            <h3 className="text-sm font-bold text-white">
-              {selectedLayer === 'all' ? '30-Day Pass Rate Trend by Layer' : `${selectedLayer.toUpperCase()} — 30-Day Pass Rate Trend`}
-            </h3>
-          </div>
-          <span className="text-xs text-slate-400 font-mono">Last 30 Calendar Days</span>
-        </div>
-
-        {selectedLayer === 'all' ? (
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
-            <TrendBarChart
-              title="Web — 30-Day Trend"
-              icon={Globe}
-              runs={layers.web?.runsHistory || []}
-              passRate={layers.web?.passRate ?? 100}
-              notConfigured={layers.web?.notConfigured}
-            />
-            <TrendBarChart
-              title="API — 30-Day Trend"
-              icon={Zap}
-              runs={layers.api?.runsHistory || []}
-              passRate={layers.api?.passRate ?? 100}
-              notConfigured={layers.api?.notConfigured}
-            />
-            <TrendBarChart
-              title="Mobile — 30-Day Trend"
-              icon={Smartphone}
-              runs={layers.mobile?.runsHistory || []}
-              passRate={layers.mobile?.passRate ?? 100}
-              notConfigured={layers.mobile?.notConfigured}
-            />
-          </div>
-        ) : (
-          <TrendBarChart
-            title={`${selectedLayer === 'web' ? 'Web' : selectedLayer === 'api' ? 'API' : 'Mobile'} Pass Rate`}
-            icon={selectedLayer === 'web' ? Globe : selectedLayer === 'api' ? Zap : Smartphone}
-            runs={layers[selectedLayer]?.runsHistory || []}
-            passRate={layers[selectedLayer]?.passRate ?? 100}
-            notConfigured={layers[selectedLayer]?.notConfigured}
-          />
-        )}
-      </div>
-
       {/* Daily Playwright Report Section */}
       <div className="space-y-3">
         {activePlaywrightReports.length > 0 ? (
@@ -384,7 +292,7 @@ export default function ProjectView({ projectData, onSelectTest }) {
                             </div>
                             {ft.errorMessage && (
                               <p className="text-[11px] text-red-300/80 font-mono mt-1 line-clamp-1">
-                                {ft.errorMessage}
+                                {stripAnsi(ft.errorMessage)}
                               </p>
                             )}
                           </div>
@@ -495,9 +403,15 @@ export default function ProjectView({ projectData, onSelectTest }) {
       {/* Test Cases Table */}
       <div className="bg-slate-900 border border-slate-800 rounded-xl overflow-hidden shadow-sm">
         <div className="p-4 border-b border-slate-800 flex items-center justify-between">
-          <div className="flex items-center gap-2">
+          <div className="flex flex-wrap items-center gap-2">
             <h2 className="text-sm font-bold text-white tracking-tight">Test Cases</h2>
             <span className="text-xs text-slate-400">({filteredTests.length} matches)</span>
+            {totalFailedInLayer > 0 && statusFilter === 'all' && (
+              <span className="text-[11px] font-semibold text-red-400 bg-red-500/10 border border-red-500/30 px-2 py-0.5 rounded-full flex items-center gap-1">
+                <XCircle className="h-3 w-3" />
+                {totalFailedInLayer} failure{totalFailedInLayer > 1 ? 's' : ''} on top
+              </span>
+            )}
           </div>
           {statusFilter === 'failed' && (
             <span className="text-xs font-semibold text-red-400 flex items-center gap-1">
@@ -538,7 +452,7 @@ export default function ProjectView({ projectData, onSelectTest }) {
                   <th className="py-3 px-4">Test Case / Suite</th>
                   <th className="py-3 px-4">Layer</th>
                   <th className="py-3 px-4">Status</th>
-                  <th className="py-3 px-4">30-Day Health Bar</th>
+                  <th className="py-3 px-4">Health Bar</th>
                   <th className="py-3 px-4">Duration</th>
                   <th className="py-3 px-4 text-right">Actions</th>
                 </tr>
@@ -574,7 +488,7 @@ export default function ProjectView({ projectData, onSelectTest }) {
                         {/* If failed: show failure snippet right in the table row */}
                         {isFailed && test.latestError?.message && (
                           <div className="mt-2 text-[11px] font-mono text-red-300 bg-red-950/30 px-2 py-1 rounded border border-red-900/40 truncate max-w-lg">
-                            {test.latestError.message}
+                            {stripAnsi(test.latestError.message)}
                           </div>
                         )}
                       </td>

@@ -17,6 +17,16 @@ export default function GlobalOverview({ globalSummary, onSelectProject }) {
 
   const { overallSummary, projects = [] } = globalSummary;
 
+  // Prioritize projects with active failures first so testers see issues immediately
+  const sortedProjects = [...projects].sort((a, b) => {
+    const aFailed = a.summary?.failed || 0;
+    const bFailed = b.summary?.failed || 0;
+    if (aFailed > 0 && bFailed === 0) return -1;
+    if (bFailed > 0 && aFailed === 0) return 1;
+    if (aFailed !== bFailed) return bFailed - aFailed;
+    return (a.name || '').localeCompare(b.name || '');
+  });
+
   return (
     <div className="space-y-8 animate-fadeIn">
       {/* Page Title & Intro */}
@@ -39,7 +49,7 @@ export default function GlobalOverview({ globalSummary, onSelectProject }) {
           </div>
           <div className="mt-3 flex items-baseline gap-2">
             <span className="text-3xl font-extrabold text-white">{overallSummary?.passRate || 0}%</span>
-            <span className="text-xs text-emerald-400 font-medium">30-day health</span>
+            <span className="text-xs text-emerald-400 font-medium">overall health</span>
           </div>
           <div className="w-full bg-slate-800 h-1.5 rounded-full mt-3 overflow-hidden">
             <div 
@@ -96,7 +106,7 @@ export default function GlobalOverview({ globalSummary, onSelectProject }) {
             <span className="text-3xl font-extrabold text-amber-400">{overallSummary?.totalFlaky || 0}</span>
             <span className="text-xs text-amber-400/80 font-medium">unstable runs</span>
           </div>
-          <p className="text-xs text-slate-400 mt-3">Intermittent pass/fail across last 30d</p>
+          <p className="text-xs text-slate-400 mt-3">Intermittent pass/fail across executions</p>
         </div>
       </div>
 
@@ -108,7 +118,7 @@ export default function GlobalOverview({ globalSummary, onSelectProject }) {
         </div>
 
         <div className="grid grid-cols-1 md:grid-cols-2 gap-5">
-          {projects.map((proj) => {
+          {sortedProjects.map((proj) => {
             const hasFailures = proj.summary?.failed > 0;
             const passRate = proj.summary?.passRate || 0;
 
