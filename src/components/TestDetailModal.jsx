@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from 'react';
+import { AnsiText, stripAnsi } from '../utils/ansi.jsx';
 import { 
   X, 
   CheckCircle2, 
@@ -32,7 +33,7 @@ export default function TestDetailModal({ test, onClose }) {
 
   const handleCopyStack = () => {
     if (test.latestError?.stack) {
-      navigator.clipboard.writeText(test.latestError.stack);
+      navigator.clipboard.writeText(stripAnsi(test.latestError.stack));
       setCopied(true);
       setTimeout(() => setCopied(false), 2000);
     }
@@ -52,9 +53,19 @@ export default function TestDetailModal({ test, onClose }) {
 
   // Determine error category
   const getErrorType = (msg = '') => {
-    const lower = msg.toLowerCase();
-    if (lower.includes('timeouterror') || lower.includes('timeout')) return 'Timeout / Latency';
-    if (lower.includes('assertionerror') || lower.includes('expected')) return 'Assertion Failure';
+    const cleanMsg = stripAnsi(msg);
+    const lower = cleanMsg.toLowerCase();
+    if (
+      lower.includes('assertionerror') ||
+      lower.includes('expect(') ||
+      (lower.includes('expected') && lower.includes('received')) ||
+      (lower.includes('expected') && lower.includes('failed'))
+    ) {
+      return 'Assertion Failure';
+    }
+    if (lower.includes('timeouterror') || lower.includes('timed out') || lower.includes('timeout')) {
+      return 'Timeout / Latency';
+    }
     if (lower.includes('500') || lower.includes('internal server error') || lower.includes('deadlock')) return 'Backend 500 / Deadlock';
     if (lower.includes('targetclosed') || lower.includes('crash')) return 'Browser / Session Crash';
     if (lower.includes('migration') || lower.includes('sql') || lower.includes('database')) return 'Database Migration';
@@ -145,7 +156,7 @@ export default function TestDetailModal({ test, onClose }) {
             }`}
           >
             <History className="h-4 w-4" />
-            <span>30-Day Execution History ({totalHistoryRuns})</span>
+            <span>Execution History ({totalHistoryRuns})</span>
             {historyFailures > 0 && (
               <span className="bg-red-500/20 text-red-400 text-[10px] px-1.5 py-0.2 rounded-full">
                 {historyFailures} fails
@@ -172,8 +183,8 @@ export default function TestDetailModal({ test, onClose }) {
                         Pipeline Diagnostic
                       </span>
                     </div>
-                    <p className="text-sm font-mono text-red-200 bg-red-900/30 p-3 rounded-lg border border-red-800/40 break-words whitespace-pre-wrap">
-                      {test.latestError.message}
+                    <p className="text-sm font-mono text-red-200 bg-red-900/30 p-3 rounded-lg border border-red-800/40 break-words whitespace-pre-wrap leading-relaxed">
+                      <AnsiText text={test.latestError.message} />
                     </p>
                   </div>
 
@@ -183,8 +194,8 @@ export default function TestDetailModal({ test, onClose }) {
                       <span className="text-xs font-semibold text-slate-400 uppercase tracking-wider block mb-2">
                         Failing Step / Action
                       </span>
-                      <pre className="font-mono text-xs text-amber-300 bg-slate-900 p-3 rounded-lg border border-slate-800 overflow-x-auto">
-                        {test.latestError.step}
+                      <pre className="font-mono text-xs text-amber-300 bg-slate-900 p-3.5 rounded-lg border border-slate-800 overflow-x-auto leading-relaxed">
+                        <AnsiText text={test.latestError.step} />
                       </pre>
                     </div>
                   )}
@@ -206,7 +217,7 @@ export default function TestDetailModal({ test, onClose }) {
                         </button>
                       </div>
                       <pre className="font-mono text-xs text-slate-300 bg-slate-900/90 p-4 rounded-lg overflow-x-auto max-h-72 leading-relaxed border border-slate-800/60 selection:bg-blue-600">
-                        {test.latestError.stack}
+                        <AnsiText text={test.latestError.stack} />
                       </pre>
                     </div>
                   )}
@@ -221,11 +232,11 @@ export default function TestDetailModal({ test, onClose }) {
                 </div>
               )}
 
-              {/* 30-Day Mini Timeline Bar */}
+              {/* Execution Health Timeline Bar */}
               <div className="bg-slate-950/60 border border-slate-800 rounded-xl p-4">
                 <div className="flex items-center justify-between mb-3">
                   <span className="text-xs font-semibold text-slate-400 uppercase tracking-wider">
-                    Recent 30-Day Health Bar
+                    Recent Health Bar
                   </span>
                   <span className="text-xs text-slate-400 font-medium">
                     {historySuccessRate}% reliability
@@ -236,7 +247,7 @@ export default function TestDetailModal({ test, onClose }) {
                   {history.map((h, i) => (
                     <div 
                       key={i}
-                      title={`${h.date}: ${h.status.toUpperCase()} (${h.durationMs}ms)${h.error ? ` - ${h.error}` : ''}`}
+                      title={`${h.date}: ${h.status.toUpperCase()} (${h.durationMs}ms)${h.error ? ` - ${stripAnsi(h.error)}` : ''}`}
                       className={`h-7 flex-1 min-w-[8px] rounded-sm transition cursor-pointer hover:opacity-80 ${
                         h.status === 'passed' ? 'bg-emerald-500' : h.status === 'failed' ? 'bg-red-500' : h.status === 'flaky' ? 'bg-amber-500' : 'bg-slate-700'
                       }`}
@@ -244,18 +255,18 @@ export default function TestDetailModal({ test, onClose }) {
                   ))}
                 </div>
 
-                <div className="flex items-center justify-between text-[11px] text-slate-400 mt-2">
-                  <span>30 days ago</span>
-                  <span>Today</span>
+                <div className="flex items-center justify-between text-[11px] text-slate-400 mt-2 font-mono">
+                  <span>{history[0]?.date || 'First Run'}</span>
+                  <span>{history[history.length - 1]?.date || 'Latest'}</span>
                 </div>
               </div>
             </>
           ) : (
-            /* Tab: 30-Day Execution History */
+            /* Tab: Execution History */
             <div className="space-y-4">
               <div className="grid grid-cols-3 gap-3">
                 <div className="bg-slate-950/60 border border-slate-800 rounded-lg p-3 text-center">
-                  <span className="text-[11px] text-slate-400 uppercase">30-Day Runs</span>
+                  <span className="text-[11px] text-slate-400 uppercase">Recorded Runs</span>
                   <p className="text-xl font-bold text-white mt-1">{totalHistoryRuns}</p>
                 </div>
                 <div className="bg-slate-950/60 border border-slate-800 rounded-lg p-3 text-center">
@@ -301,9 +312,9 @@ export default function TestDetailModal({ test, onClose }) {
                         <td className="py-2.5 px-4 text-slate-400 font-mono">
                           {run.durationMs ? `${(run.durationMs / 1000).toFixed(2)}s` : '-'}
                         </td>
-                        <td className="py-2.5 px-4 text-slate-300 max-w-xs truncate" title={run.error || 'Passed without error'}>
+                        <td className="py-2.5 px-4 text-slate-300 max-w-xs truncate" title={stripAnsi(run.error) || 'Passed without error'}>
                           {run.error ? (
-                            <span className="text-red-400 font-mono text-[11px]">{run.error}</span>
+                            <span className="text-red-400 font-mono text-[11px]">{stripAnsi(run.error)}</span>
                           ) : (
                             <span className="text-slate-400">Clean execution</span>
                           )}

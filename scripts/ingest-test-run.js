@@ -215,6 +215,17 @@ for (const incoming of parsedTests) {
   });
 }
 
+// Sort tests with failures prioritized on top: failed (0) -> flaky (1) -> passed (2) -> skipped (3)
+const STATUS_PRIORITY = { failed: 0, flaky: 1, passed: 2, skipped: 3 };
+layerData.tests.sort((a, b) => {
+  const pA = STATUS_PRIORITY[a.currentStatus] ?? 99;
+  const pB = STATUS_PRIORITY[b.currentStatus] ?? 99;
+  if (pA !== pB) return pA - pB;
+  const suiteCmp = (a.suite || '').localeCompare(b.suite || '');
+  if (suiteCmp !== 0) return suiteCmp;
+  return (a.title || '').localeCompare(b.title || '');
+});
+
 // Recompute layer summary
 const lTotal = layerData.tests.length;
 const lPassed = layerData.tests.filter(t => t.currentStatus === 'passed').length;

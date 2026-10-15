@@ -139,6 +139,15 @@ export default function App() {
         const totalSkipped = combinedTests.filter(t => t.currentStatus === 'skipped').length;
         const overallPassRate = totalTests > 0 ? Number(((totalPassed / totalTests) * 100).toFixed(1)) : 100;
 
+        // Sort tests so failures are prioritized on top across all layers
+        const STATUS_PRIORITY = { failed: 0, flaky: 1, passed: 2, skipped: 3 };
+        combinedTests.sort((a, b) => {
+          const pA = STATUS_PRIORITY[a.currentStatus] ?? 99;
+          const pB = STATUS_PRIORITY[b.currentStatus] ?? 99;
+          if (pA !== pB) return pA - pB;
+          return (a.title || '').localeCompare(b.title || '');
+        });
+
         const projectPayload = {
           projectId: selectedProjectId,
           projectName: manifest?.projectName || selectedProjectId.toUpperCase(),
@@ -270,7 +279,7 @@ export default function App() {
       <footer className="border-t border-slate-900 bg-slate-950 py-6 text-center text-xs text-slate-600">
         <div className="max-w-7xl mx-auto px-4 flex flex-col sm:flex-row items-center justify-between gap-2">
           <span>TestMonitor — QA Intelligence & Regression Tracking</span>
-          <span>Web • API • Mobile • Automated by GitHub Actions • 30-Day Retention</span>
+          <span>Web • API • Mobile • Automated by GitHub Actions • Continuous Monitoring</span>
         </div>
       </footer>
 
