@@ -1,0 +1,1499 @@
+{
+  "projectId": "cadaa",
+  "projectName": "Cadaa",
+  "description": "Compliance & Digital Auditing Automation",
+  "repoUrl": "https://github.com/Areeb-Innovative-Technologies/cadaa_test",
+  "lastUpdated": "2026-10-15T12:04:20.910Z",
+  "retentionDays": 30,
+  "summary": {
+    "total": 6,
+    "passed": 5,
+    "failed": 0,
+    "flaky": 1,
+    "skipped": 0,
+    "passRate": 83.3
+  },
+  "layers": {
+    "web": {
+      "name": "Web",
+      "total": 2,
+      "passed": 2,
+      "failed": 0,
+      "flaky": 0,
+      "skipped": 0,
+      "passRate": 100
+    },
+    "api": {
+      "name": "API",
+      "total": 2,
+      "passed": 1,
+      "failed": 0,
+      "flaky": 1,
+      "skipped": 0,
+      "passRate": 50
+    },
+    "android": {
+      "name": "Mobile - Android",
+      "total": 1,
+      "passed": 1,
+      "failed": 0,
+      "flaky": 0,
+      "skipped": 0,
+      "passRate": 100
+    },
+    "ios": {
+      "name": "Mobile - iOS",
+      "total": 1,
+      "passed": 1,
+      "failed": 0,
+      "flaky": 0,
+      "skipped": 0,
+      "passRate": 100
+    }
+  },
+  "tests": [
+    {
+      "id": "cadaa-web-audit-run",
+      "layer": "web",
+      "suite": "Auditing Engine",
+      "title": "Trigger multi-entity SOC2 compliance scan",
+      "file": "tests/web/audit/soc2-scan.spec.ts",
+      "currentStatus": "passed",
+      "lastRunAt": "2026-10-15T10:30:00Z",
+      "durationMs": 7400,
+      "latestError": null,
+      "history30d": [
+        {
+          "date": "2026-09-16",
+          "runId": "run-20260916-web",
+          "status": "passed",
+          "durationMs": 2371
+        },
+        {
+          "date": "2026-09-17",
+          "runId": "run-20260917-web",
+          "status": "passed",
+          "durationMs": 1022
+        },
+        {
+          "date": "2026-09-18",
+          "runId": "run-20260918-web",
+          "status": "passed",
+          "durationMs": 2173
+        },
+        {
+          "date": "2026-09-19",
+          "runId": "run-20260919-web",
+          "status": "passed",
+          "durationMs": 2231
+        },
+        {
+          "date": "2026-09-20",
+          "runId": "run-20260920-web",
+          "status": "passed",
+          "durationMs": 828
+        },
+        {
+          "date": "2026-09-21",
+          "runId": "run-20260921-web",
+          "status": "passed",
+          "durationMs": 406
+        },
+        {
+          "date": "2026-09-22",
+          "runId": "run-20260922-web",
+          "status": "passed",
+          "durationMs": 1837
+        },
+        {
+          "date": "2026-09-23",
+          "runId": "run-20260923-web",
+          "status": "passed",
+          "durationMs": 2593
+        },
+        {
+          "date": "2026-09-24",
+          "runId": "run-20260924-web",
+          "status": "passed",
+          "durationMs": 1848
+        },
+        {
+          "date": "2026-09-25",
+          "runId": "run-20260925-web",
+          "status": "passed",
+          "durationMs": 1988
+        },
+        {
+          "date": "2026-09-26",
+          "runId": "run-20260926-web",
+          "status": "passed",
+          "durationMs": 1625
+        },
+        {
+          "date": "2026-09-27",
+          "runId": "run-20260927-web",
+          "status": "passed",
+          "durationMs": 1542
+        },
+        {
+          "date": "2026-09-28",
+          "runId": "run-20260928-web",
+          "status": "passed",
+          "durationMs": 531
+        },
+        {
+          "date": "2026-09-29",
+          "runId": "run-20260929-web",
+          "status": "passed",
+          "durationMs": 1804
+        },
+        {
+          "date": "2026-09-30",
+          "runId": "run-20260930-web",
+          "status": "passed",
+          "durationMs": 1720
+        },
+        {
+          "date": "2026-10-01",
+          "runId": "run-20261001-web",
+          "status": "passed",
+          "durationMs": 1627
+        },
+        {
+          "date": "2026-10-02",
+          "runId": "run-20261002-web",
+          "status": "passed",
+          "durationMs": 2528
+        },
+        {
+          "date": "2026-10-03",
+          "runId": "run-20261003-web",
+          "status": "passed",
+          "durationMs": 1222
+        },
+        {
+          "date": "2026-10-04",
+          "runId": "run-20261004-web",
+          "status": "passed",
+          "durationMs": 1864
+        },
+        {
+          "date": "2026-10-05",
+          "runId": "run-20261005-web",
+          "status": "passed",
+          "durationMs": 2204
+        },
+        {
+          "date": "2026-10-06",
+          "runId": "run-20261006-web",
+          "status": "passed",
+          "durationMs": 804
+        },
+        {
+          "date": "2026-10-07",
+          "runId": "run-20261007-web",
+          "status": "passed",
+          "durationMs": 1793
+        },
+        {
+          "date": "2026-10-08",
+          "runId": "run-20261008-web",
+          "status": "passed",
+          "durationMs": 2761
+        },
+        {
+          "date": "2026-10-09",
+          "runId": "run-20261009-web",
+          "status": "passed",
+          "durationMs": 735
+        },
+        {
+          "date": "2026-10-10",
+          "runId": "run-20261010-web",
+          "status": "passed",
+          "durationMs": 1740
+        },
+        {
+          "date": "2026-10-11",
+          "runId": "run-20261011-web",
+          "status": "passed",
+          "durationMs": 1974
+        },
+        {
+          "date": "2026-10-12",
+          "runId": "run-20261012-web",
+          "status": "passed",
+          "durationMs": 1286
+        },
+        {
+          "date": "2026-10-13",
+          "runId": "run-20261013-web",
+          "status": "passed",
+          "durationMs": 1506
+        },
+        {
+          "date": "2026-10-14",
+          "runId": "run-20261014-web",
+          "status": "passed",
+          "durationMs": 1960
+        },
+        {
+          "date": "2026-10-15",
+          "runId": "run-20261015-web",
+          "status": "passed",
+          "durationMs": 2351
+        }
+      ]
+    },
+    {
+      "id": "cadaa-web-evidence-upload",
+      "layer": "web",
+      "suite": "Evidence Vault",
+      "title": "Upload encrypted compliance evidence with cryptographic signature",
+      "file": "tests/web/evidence/upload.spec.ts",
+      "currentStatus": "passed",
+      "lastRunAt": "2026-10-15T10:30:00Z",
+      "durationMs": 5100,
+      "latestError": null,
+      "history30d": [
+        {
+          "date": "2026-09-16",
+          "runId": "run-20260916-web",
+          "status": "passed",
+          "durationMs": 2181
+        },
+        {
+          "date": "2026-09-17",
+          "runId": "run-20260917-web",
+          "status": "passed",
+          "durationMs": 486
+        },
+        {
+          "date": "2026-09-18",
+          "runId": "run-20260918-web",
+          "status": "passed",
+          "durationMs": 1730
+        },
+        {
+          "date": "2026-09-19",
+          "runId": "run-20260919-web",
+          "status": "passed",
+          "durationMs": 2414
+        },
+        {
+          "date": "2026-09-20",
+          "runId": "run-20260920-web",
+          "status": "passed",
+          "durationMs": 1951
+        },
+        {
+          "date": "2026-09-21",
+          "runId": "run-20260921-web",
+          "status": "passed",
+          "durationMs": 1570
+        },
+        {
+          "date": "2026-09-22",
+          "runId": "run-20260922-web",
+          "status": "passed",
+          "durationMs": 1749
+        },
+        {
+          "date": "2026-09-23",
+          "runId": "run-20260923-web",
+          "status": "passed",
+          "durationMs": 1155
+        },
+        {
+          "date": "2026-09-24",
+          "runId": "run-20260924-web",
+          "status": "passed",
+          "durationMs": 484
+        },
+        {
+          "date": "2026-09-25",
+          "runId": "run-20260925-web",
+          "status": "passed",
+          "durationMs": 1616
+        },
+        {
+          "date": "2026-09-26",
+          "runId": "run-20260926-web",
+          "status": "passed",
+          "durationMs": 2781
+        },
+        {
+          "date": "2026-09-27",
+          "runId": "run-20260927-web",
+          "status": "passed",
+          "durationMs": 1160
+        },
+        {
+          "date": "2026-09-28",
+          "runId": "run-20260928-web",
+          "status": "passed",
+          "durationMs": 1817
+        },
+        {
+          "date": "2026-09-29",
+          "runId": "run-20260929-web",
+          "status": "passed",
+          "durationMs": 693
+        },
+        {
+          "date": "2026-09-30",
+          "runId": "run-20260930-web",
+          "status": "passed",
+          "durationMs": 1048
+        },
+        {
+          "date": "2026-10-01",
+          "runId": "run-20261001-web",
+          "status": "passed",
+          "durationMs": 1599
+        },
+        {
+          "date": "2026-10-02",
+          "runId": "run-20261002-web",
+          "status": "passed",
+          "durationMs": 2623
+        },
+        {
+          "date": "2026-10-03",
+          "runId": "run-20261003-web",
+          "status": "passed",
+          "durationMs": 2413
+        },
+        {
+          "date": "2026-10-04",
+          "runId": "run-20261004-web",
+          "status": "passed",
+          "durationMs": 1127
+        },
+        {
+          "date": "2026-10-05",
+          "runId": "run-20261005-web",
+          "status": "passed",
+          "durationMs": 1114
+        },
+        {
+          "date": "2026-10-06",
+          "runId": "run-20261006-web",
+          "status": "passed",
+          "durationMs": 991
+        },
+        {
+          "date": "2026-10-07",
+          "runId": "run-20261007-web",
+          "status": "passed",
+          "durationMs": 2099
+        },
+        {
+          "date": "2026-10-08",
+          "runId": "run-20261008-web",
+          "status": "passed",
+          "durationMs": 1297
+        },
+        {
+          "date": "2026-10-09",
+          "runId": "run-20261009-web",
+          "status": "passed",
+          "durationMs": 1293
+        },
+        {
+          "date": "2026-10-10",
+          "runId": "run-20261010-web",
+          "status": "passed",
+          "durationMs": 1676
+        },
+        {
+          "date": "2026-10-11",
+          "runId": "run-20261011-web",
+          "status": "passed",
+          "durationMs": 587
+        },
+        {
+          "date": "2026-10-12",
+          "runId": "run-20261012-web",
+          "status": "passed",
+          "durationMs": 1679
+        },
+        {
+          "date": "2026-10-13",
+          "runId": "run-20261013-web",
+          "status": "passed",
+          "durationMs": 2174
+        },
+        {
+          "date": "2026-10-14",
+          "runId": "run-20261014-web",
+          "status": "passed",
+          "durationMs": 467
+        },
+        {
+          "date": "2026-10-15",
+          "runId": "run-20261015-web",
+          "status": "passed",
+          "durationMs": 2748
+        }
+      ]
+    },
+    {
+      "id": "cadaa-api-scan-status",
+      "layer": "api",
+      "suite": "Scan API",
+      "title": "GET /api/v1/scans/:id/progress - poll scan completion percentage",
+      "file": "tests/api/scans/scan-progress.spec.ts",
+      "currentStatus": "passed",
+      "lastRunAt": "2026-10-15T10:30:00Z",
+      "durationMs": 340,
+      "latestError": null,
+      "history30d": [
+        {
+          "date": "2026-09-16",
+          "runId": "run-20260916-api",
+          "status": "passed",
+          "durationMs": 2612
+        },
+        {
+          "date": "2026-09-17",
+          "runId": "run-20260917-api",
+          "status": "passed",
+          "durationMs": 520
+        },
+        {
+          "date": "2026-09-18",
+          "runId": "run-20260918-api",
+          "status": "passed",
+          "durationMs": 2346
+        },
+        {
+          "date": "2026-09-19",
+          "runId": "run-20260919-api",
+          "status": "passed",
+          "durationMs": 502
+        },
+        {
+          "date": "2026-09-20",
+          "runId": "run-20260920-api",
+          "status": "passed",
+          "durationMs": 2259
+        },
+        {
+          "date": "2026-09-21",
+          "runId": "run-20260921-api",
+          "status": "passed",
+          "durationMs": 1940
+        },
+        {
+          "date": "2026-09-22",
+          "runId": "run-20260922-api",
+          "status": "passed",
+          "durationMs": 330
+        },
+        {
+          "date": "2026-09-23",
+          "runId": "run-20260923-api",
+          "status": "passed",
+          "durationMs": 1217
+        },
+        {
+          "date": "2026-09-24",
+          "runId": "run-20260924-api",
+          "status": "passed",
+          "durationMs": 2409
+        },
+        {
+          "date": "2026-09-25",
+          "runId": "run-20260925-api",
+          "status": "passed",
+          "durationMs": 1535
+        },
+        {
+          "date": "2026-09-26",
+          "runId": "run-20260926-api",
+          "status": "passed",
+          "durationMs": 2418
+        },
+        {
+          "date": "2026-09-27",
+          "runId": "run-20260927-api",
+          "status": "passed",
+          "durationMs": 2186
+        },
+        {
+          "date": "2026-09-28",
+          "runId": "run-20260928-api",
+          "status": "passed",
+          "durationMs": 2391
+        },
+        {
+          "date": "2026-09-29",
+          "runId": "run-20260929-api",
+          "status": "passed",
+          "durationMs": 1868
+        },
+        {
+          "date": "2026-09-30",
+          "runId": "run-20260930-api",
+          "status": "passed",
+          "durationMs": 1120
+        },
+        {
+          "date": "2026-10-01",
+          "runId": "run-20261001-api",
+          "status": "passed",
+          "durationMs": 1533
+        },
+        {
+          "date": "2026-10-02",
+          "runId": "run-20261002-api",
+          "status": "passed",
+          "durationMs": 2431
+        },
+        {
+          "date": "2026-10-03",
+          "runId": "run-20261003-api",
+          "status": "passed",
+          "durationMs": 1302
+        },
+        {
+          "date": "2026-10-04",
+          "runId": "run-20261004-api",
+          "status": "passed",
+          "durationMs": 1454
+        },
+        {
+          "date": "2026-10-05",
+          "runId": "run-20261005-api",
+          "status": "passed",
+          "durationMs": 805
+        },
+        {
+          "date": "2026-10-06",
+          "runId": "run-20261006-api",
+          "status": "passed",
+          "durationMs": 1454
+        },
+        {
+          "date": "2026-10-07",
+          "runId": "run-20261007-api",
+          "status": "passed",
+          "durationMs": 1530
+        },
+        {
+          "date": "2026-10-08",
+          "runId": "run-20261008-api",
+          "status": "passed",
+          "durationMs": 2577
+        },
+        {
+          "date": "2026-10-09",
+          "runId": "run-20261009-api",
+          "status": "passed",
+          "durationMs": 2051
+        },
+        {
+          "date": "2026-10-10",
+          "runId": "run-20261010-api",
+          "status": "passed",
+          "durationMs": 941
+        },
+        {
+          "date": "2026-10-11",
+          "runId": "run-20261011-api",
+          "status": "passed",
+          "durationMs": 2535
+        },
+        {
+          "date": "2026-10-12",
+          "runId": "run-20261012-api",
+          "status": "passed",
+          "durationMs": 2265
+        },
+        {
+          "date": "2026-10-13",
+          "runId": "run-20261013-api",
+          "status": "passed",
+          "durationMs": 1866
+        },
+        {
+          "date": "2026-10-14",
+          "runId": "run-20261014-api",
+          "status": "passed",
+          "durationMs": 548
+        },
+        {
+          "date": "2026-10-15",
+          "runId": "run-20261015-api",
+          "status": "passed",
+          "durationMs": 870
+        }
+      ]
+    },
+    {
+      "id": "cadaa-api-export-pdf",
+      "layer": "api",
+      "suite": "Reports API",
+      "title": "POST /api/v1/reports/soc2/generate - PDF generator pipeline",
+      "file": "tests/api/reports/soc2-pdf.spec.ts",
+      "currentStatus": "flaky",
+      "lastRunAt": "2026-10-15T10:30:00Z",
+      "durationMs": 46000,
+      "latestError": {
+        "message": "TimeoutError: Puppeteer worker PDF render timed out at 45s",
+        "stack": "TimeoutError: Render timeout\n    at PdfService.render(pdf.service.ts:112)\n    at tests/api/reports/soc2-pdf.spec.ts:29",
+        "step": "await reportClient.generatePdf(scanId)"
+      },
+      "history30d": [
+        {
+          "date": "2026-09-16",
+          "runId": "run-20260916-api",
+          "status": "flaky",
+          "durationMs": 1876,
+          "error": "Transient timeout: locator.waitFor exceeded 30000ms"
+        },
+        {
+          "date": "2026-09-17",
+          "runId": "run-20260917-api",
+          "status": "passed",
+          "durationMs": 899
+        },
+        {
+          "date": "2026-09-18",
+          "runId": "run-20260918-api",
+          "status": "passed",
+          "durationMs": 1820
+        },
+        {
+          "date": "2026-09-19",
+          "runId": "run-20260919-api",
+          "status": "passed",
+          "durationMs": 447
+        },
+        {
+          "date": "2026-09-20",
+          "runId": "run-20260920-api",
+          "status": "flaky",
+          "durationMs": 777,
+          "error": "Transient timeout: locator.waitFor exceeded 30000ms"
+        },
+        {
+          "date": "2026-09-21",
+          "runId": "run-20260921-api",
+          "status": "passed",
+          "durationMs": 1572
+        },
+        {
+          "date": "2026-09-22",
+          "runId": "run-20260922-api",
+          "status": "passed",
+          "durationMs": 1724
+        },
+        {
+          "date": "2026-09-23",
+          "runId": "run-20260923-api",
+          "status": "passed",
+          "durationMs": 2417
+        },
+        {
+          "date": "2026-09-24",
+          "runId": "run-20260924-api",
+          "status": "flaky",
+          "durationMs": 1981,
+          "error": "Transient timeout: locator.waitFor exceeded 30000ms"
+        },
+        {
+          "date": "2026-09-25",
+          "runId": "run-20260925-api",
+          "status": "passed",
+          "durationMs": 2269
+        },
+        {
+          "date": "2026-09-26",
+          "runId": "run-20260926-api",
+          "status": "passed",
+          "durationMs": 2392
+        },
+        {
+          "date": "2026-09-27",
+          "runId": "run-20260927-api",
+          "status": "passed",
+          "durationMs": 456
+        },
+        {
+          "date": "2026-09-28",
+          "runId": "run-20260928-api",
+          "status": "flaky",
+          "durationMs": 2626,
+          "error": "Transient timeout: locator.waitFor exceeded 30000ms"
+        },
+        {
+          "date": "2026-09-29",
+          "runId": "run-20260929-api",
+          "status": "passed",
+          "durationMs": 2455
+        },
+        {
+          "date": "2026-09-30",
+          "runId": "run-20260930-api",
+          "status": "passed",
+          "durationMs": 363
+        },
+        {
+          "date": "2026-10-01",
+          "runId": "run-20261001-api",
+          "status": "passed",
+          "durationMs": 344
+        },
+        {
+          "date": "2026-10-02",
+          "runId": "run-20261002-api",
+          "status": "flaky",
+          "durationMs": 2105,
+          "error": "Transient timeout: locator.waitFor exceeded 30000ms"
+        },
+        {
+          "date": "2026-10-03",
+          "runId": "run-20261003-api",
+          "status": "passed",
+          "durationMs": 1858
+        },
+        {
+          "date": "2026-10-04",
+          "runId": "run-20261004-api",
+          "status": "passed",
+          "durationMs": 1461
+        },
+        {
+          "date": "2026-10-05",
+          "runId": "run-20261005-api",
+          "status": "passed",
+          "durationMs": 1424
+        },
+        {
+          "date": "2026-10-06",
+          "runId": "run-20261006-api",
+          "status": "flaky",
+          "durationMs": 2622,
+          "error": "Transient timeout: locator.waitFor exceeded 30000ms"
+        },
+        {
+          "date": "2026-10-07",
+          "runId": "run-20261007-api",
+          "status": "passed",
+          "durationMs": 2028
+        },
+        {
+          "date": "2026-10-08",
+          "runId": "run-20261008-api",
+          "status": "passed",
+          "durationMs": 2175
+        },
+        {
+          "date": "2026-10-09",
+          "runId": "run-20261009-api",
+          "status": "passed",
+          "durationMs": 1535
+        },
+        {
+          "date": "2026-10-10",
+          "runId": "run-20261010-api",
+          "status": "flaky",
+          "durationMs": 2224,
+          "error": "Transient timeout: locator.waitFor exceeded 30000ms"
+        },
+        {
+          "date": "2026-10-11",
+          "runId": "run-20261011-api",
+          "status": "passed",
+          "durationMs": 2341
+        },
+        {
+          "date": "2026-10-12",
+          "runId": "run-20261012-api",
+          "status": "passed",
+          "durationMs": 2357
+        },
+        {
+          "date": "2026-10-13",
+          "runId": "run-20261013-api",
+          "status": "passed",
+          "durationMs": 1026
+        },
+        {
+          "date": "2026-10-14",
+          "runId": "run-20261014-api",
+          "status": "flaky",
+          "durationMs": 1084,
+          "error": "Transient timeout: locator.waitFor exceeded 30000ms"
+        },
+        {
+          "date": "2026-10-15",
+          "runId": "run-20261015-api",
+          "status": "flaky",
+          "durationMs": 792,
+          "error": "Transient timeout: locator.waitFor exceeded 30000ms"
+        }
+      ]
+    },
+    {
+      "id": "cadaa-android-scanner",
+      "layer": "android",
+      "suite": "Document Scanning",
+      "title": "QR Code physical asset tag scanner verification",
+      "file": "android/tests/scanner/QrScanTest.kt",
+      "currentStatus": "passed",
+      "lastRunAt": "2026-10-15T10:30:00Z",
+      "durationMs": 5800,
+      "latestError": null,
+      "history30d": [
+        {
+          "date": "2026-09-16",
+          "runId": "run-20260916-and",
+          "status": "passed",
+          "durationMs": 804
+        },
+        {
+          "date": "2026-09-17",
+          "runId": "run-20260917-and",
+          "status": "passed",
+          "durationMs": 1761
+        },
+        {
+          "date": "2026-09-18",
+          "runId": "run-20260918-and",
+          "status": "passed",
+          "durationMs": 2503
+        },
+        {
+          "date": "2026-09-19",
+          "runId": "run-20260919-and",
+          "status": "passed",
+          "durationMs": 1979
+        },
+        {
+          "date": "2026-09-20",
+          "runId": "run-20260920-and",
+          "status": "passed",
+          "durationMs": 2264
+        },
+        {
+          "date": "2026-09-21",
+          "runId": "run-20260921-and",
+          "status": "passed",
+          "durationMs": 718
+        },
+        {
+          "date": "2026-09-22",
+          "runId": "run-20260922-and",
+          "status": "passed",
+          "durationMs": 1051
+        },
+        {
+          "date": "2026-09-23",
+          "runId": "run-20260923-and",
+          "status": "passed",
+          "durationMs": 1056
+        },
+        {
+          "date": "2026-09-24",
+          "runId": "run-20260924-and",
+          "status": "passed",
+          "durationMs": 2181
+        },
+        {
+          "date": "2026-09-25",
+          "runId": "run-20260925-and",
+          "status": "passed",
+          "durationMs": 2339
+        },
+        {
+          "date": "2026-09-26",
+          "runId": "run-20260926-and",
+          "status": "passed",
+          "durationMs": 2776
+        },
+        {
+          "date": "2026-09-27",
+          "runId": "run-20260927-and",
+          "status": "passed",
+          "durationMs": 1283
+        },
+        {
+          "date": "2026-09-28",
+          "runId": "run-20260928-and",
+          "status": "passed",
+          "durationMs": 2109
+        },
+        {
+          "date": "2026-09-29",
+          "runId": "run-20260929-and",
+          "status": "passed",
+          "durationMs": 659
+        },
+        {
+          "date": "2026-09-30",
+          "runId": "run-20260930-and",
+          "status": "passed",
+          "durationMs": 776
+        },
+        {
+          "date": "2026-10-01",
+          "runId": "run-20261001-and",
+          "status": "passed",
+          "durationMs": 1037
+        },
+        {
+          "date": "2026-10-02",
+          "runId": "run-20261002-and",
+          "status": "passed",
+          "durationMs": 1126
+        },
+        {
+          "date": "2026-10-03",
+          "runId": "run-20261003-and",
+          "status": "passed",
+          "durationMs": 2463
+        },
+        {
+          "date": "2026-10-04",
+          "runId": "run-20261004-and",
+          "status": "passed",
+          "durationMs": 892
+        },
+        {
+          "date": "2026-10-05",
+          "runId": "run-20261005-and",
+          "status": "passed",
+          "durationMs": 2196
+        },
+        {
+          "date": "2026-10-06",
+          "runId": "run-20261006-and",
+          "status": "passed",
+          "durationMs": 2052
+        },
+        {
+          "date": "2026-10-07",
+          "runId": "run-20261007-and",
+          "status": "passed",
+          "durationMs": 757
+        },
+        {
+          "date": "2026-10-08",
+          "runId": "run-20261008-and",
+          "status": "passed",
+          "durationMs": 1497
+        },
+        {
+          "date": "2026-10-09",
+          "runId": "run-20261009-and",
+          "status": "passed",
+          "durationMs": 553
+        },
+        {
+          "date": "2026-10-10",
+          "runId": "run-20261010-and",
+          "status": "passed",
+          "durationMs": 2585
+        },
+        {
+          "date": "2026-10-11",
+          "runId": "run-20261011-and",
+          "status": "passed",
+          "durationMs": 1759
+        },
+        {
+          "date": "2026-10-12",
+          "runId": "run-20261012-and",
+          "status": "passed",
+          "durationMs": 2043
+        },
+        {
+          "date": "2026-10-13",
+          "runId": "run-20261013-and",
+          "status": "passed",
+          "durationMs": 2454
+        },
+        {
+          "date": "2026-10-14",
+          "runId": "run-20261014-and",
+          "status": "passed",
+          "durationMs": 2036
+        },
+        {
+          "date": "2026-10-15",
+          "runId": "run-20261015-and",
+          "status": "passed",
+          "durationMs": 2089
+        }
+      ]
+    },
+    {
+      "id": "cadaa-ios-scanner",
+      "layer": "ios",
+      "suite": "Document Scanning",
+      "title": "VisionKit barcode and document perimeter auto-detection",
+      "file": "ios/Tests/Scanner/VisionKitScannerTests.swift",
+      "currentStatus": "passed",
+      "lastRunAt": "2026-10-15T10:30:00Z",
+      "durationMs": 6100,
+      "latestError": null,
+      "history30d": [
+        {
+          "date": "2026-09-16",
+          "runId": "run-20260916-ios",
+          "status": "passed",
+          "durationMs": 1355
+        },
+        {
+          "date": "2026-09-17",
+          "runId": "run-20260917-ios",
+          "status": "passed",
+          "durationMs": 2724
+        },
+        {
+          "date": "2026-09-18",
+          "runId": "run-20260918-ios",
+          "status": "passed",
+          "durationMs": 2603
+        },
+        {
+          "date": "2026-09-19",
+          "runId": "run-20260919-ios",
+          "status": "passed",
+          "durationMs": 2025
+        },
+        {
+          "date": "2026-09-20",
+          "runId": "run-20260920-ios",
+          "status": "passed",
+          "durationMs": 1363
+        },
+        {
+          "date": "2026-09-21",
+          "runId": "run-20260921-ios",
+          "status": "passed",
+          "durationMs": 825
+        },
+        {
+          "date": "2026-09-22",
+          "runId": "run-20260922-ios",
+          "status": "passed",
+          "durationMs": 1200
+        },
+        {
+          "date": "2026-09-23",
+          "runId": "run-20260923-ios",
+          "status": "passed",
+          "durationMs": 1147
+        },
+        {
+          "date": "2026-09-24",
+          "runId": "run-20260924-ios",
+          "status": "passed",
+          "durationMs": 819
+        },
+        {
+          "date": "2026-09-25",
+          "runId": "run-20260925-ios",
+          "status": "passed",
+          "durationMs": 2658
+        },
+        {
+          "date": "2026-09-26",
+          "runId": "run-20260926-ios",
+          "status": "passed",
+          "durationMs": 360
+        },
+        {
+          "date": "2026-09-27",
+          "runId": "run-20260927-ios",
+          "status": "passed",
+          "durationMs": 535
+        },
+        {
+          "date": "2026-09-28",
+          "runId": "run-20260928-ios",
+          "status": "passed",
+          "durationMs": 1980
+        },
+        {
+          "date": "2026-09-29",
+          "runId": "run-20260929-ios",
+          "status": "passed",
+          "durationMs": 1331
+        },
+        {
+          "date": "2026-09-30",
+          "runId": "run-20260930-ios",
+          "status": "passed",
+          "durationMs": 825
+        },
+        {
+          "date": "2026-10-01",
+          "runId": "run-20261001-ios",
+          "status": "passed",
+          "durationMs": 475
+        },
+        {
+          "date": "2026-10-02",
+          "runId": "run-20261002-ios",
+          "status": "passed",
+          "durationMs": 1043
+        },
+        {
+          "date": "2026-10-03",
+          "runId": "run-20261003-ios",
+          "status": "passed",
+          "durationMs": 1991
+        },
+        {
+          "date": "2026-10-04",
+          "runId": "run-20261004-ios",
+          "status": "passed",
+          "durationMs": 2243
+        },
+        {
+          "date": "2026-10-05",
+          "runId": "run-20261005-ios",
+          "status": "passed",
+          "durationMs": 2235
+        },
+        {
+          "date": "2026-10-06",
+          "runId": "run-20261006-ios",
+          "status": "passed",
+          "durationMs": 1251
+        },
+        {
+          "date": "2026-10-07",
+          "runId": "run-20261007-ios",
+          "status": "passed",
+          "durationMs": 2061
+        },
+        {
+          "date": "2026-10-08",
+          "runId": "run-20261008-ios",
+          "status": "passed",
+          "durationMs": 1244
+        },
+        {
+          "date": "2026-10-09",
+          "runId": "run-20261009-ios",
+          "status": "passed",
+          "durationMs": 2341
+        },
+        {
+          "date": "2026-10-10",
+          "runId": "run-20261010-ios",
+          "status": "passed",
+          "durationMs": 2109
+        },
+        {
+          "date": "2026-10-11",
+          "runId": "run-20261011-ios",
+          "status": "passed",
+          "durationMs": 720
+        },
+        {
+          "date": "2026-10-12",
+          "runId": "run-20261012-ios",
+          "status": "passed",
+          "durationMs": 2222
+        },
+        {
+          "date": "2026-10-13",
+          "runId": "run-20261013-ios",
+          "status": "passed",
+          "durationMs": 2431
+        },
+        {
+          "date": "2026-10-14",
+          "runId": "run-20261014-ios",
+          "status": "passed",
+          "durationMs": 1279
+        },
+        {
+          "date": "2026-10-15",
+          "runId": "run-20261015-ios",
+          "status": "passed",
+          "durationMs": 1401
+        }
+      ]
+    }
+  ],
+  "runsHistory": [
+    {
+      "date": "2026-09-16",
+      "total": 6,
+      "passed": 5,
+      "failed": 0,
+      "flaky": 1,
+      "skipped": 0,
+      "passRate": 83.3
+    },
+    {
+      "date": "2026-09-17",
+      "total": 6,
+      "passed": 6,
+      "failed": 0,
+      "flaky": 0,
+      "skipped": 0,
+      "passRate": 100
+    },
+    {
+      "date": "2026-09-18",
+      "total": 6,
+      "passed": 6,
+      "failed": 0,
+      "flaky": 0,
+      "skipped": 0,
+      "passRate": 100
+    },
+    {
+      "date": "2026-09-19",
+      "total": 6,
+      "passed": 6,
+      "failed": 0,
+      "flaky": 0,
+      "skipped": 0,
+      "passRate": 100
+    },
+    {
+      "date": "2026-09-20",
+      "total": 6,
+      "passed": 5,
+      "failed": 0,
+      "flaky": 1,
+      "skipped": 0,
+      "passRate": 83.3
+    },
+    {
+      "date": "2026-09-21",
+      "total": 6,
+      "passed": 6,
+      "failed": 0,
+      "flaky": 0,
+      "skipped": 0,
+      "passRate": 100
+    },
+    {
+      "date": "2026-09-22",
+      "total": 6,
+      "passed": 6,
+      "failed": 0,
+      "flaky": 0,
+      "skipped": 0,
+      "passRate": 100
+    },
+    {
+      "date": "2026-09-23",
+      "total": 6,
+      "passed": 6,
+      "failed": 0,
+      "flaky": 0,
+      "skipped": 0,
+      "passRate": 100
+    },
+    {
+      "date": "2026-09-24",
+      "total": 6,
+      "passed": 5,
+      "failed": 0,
+      "flaky": 1,
+      "skipped": 0,
+      "passRate": 83.3
+    },
+    {
+      "date": "2026-09-25",
+      "total": 6,
+      "passed": 6,
+      "failed": 0,
+      "flaky": 0,
+      "skipped": 0,
+      "passRate": 100
+    },
+    {
+      "date": "2026-09-26",
+      "total": 6,
+      "passed": 6,
+      "failed": 0,
+      "flaky": 0,
+      "skipped": 0,
+      "passRate": 100
+    },
+    {
+      "date": "2026-09-27",
+      "total": 6,
+      "passed": 6,
+      "failed": 0,
+      "flaky": 0,
+      "skipped": 0,
+      "passRate": 100
+    },
+    {
+      "date": "2026-09-28",
+      "total": 6,
+      "passed": 5,
+      "failed": 0,
+      "flaky": 1,
+      "skipped": 0,
+      "passRate": 83.3
+    },
+    {
+      "date": "2026-09-29",
+      "total": 6,
+      "passed": 6,
+      "failed": 0,
+      "flaky": 0,
+      "skipped": 0,
+      "passRate": 100
+    },
+    {
+      "date": "2026-09-30",
+      "total": 6,
+      "passed": 6,
+      "failed": 0,
+      "flaky": 0,
+      "skipped": 0,
+      "passRate": 100
+    },
+    {
+      "date": "2026-10-01",
+      "total": 6,
+      "passed": 6,
+      "failed": 0,
+      "flaky": 0,
+      "skipped": 0,
+      "passRate": 100
+    },
+    {
+      "date": "2026-10-02",
+      "total": 6,
+      "passed": 5,
+      "failed": 0,
+      "flaky": 1,
+      "skipped": 0,
+      "passRate": 83.3
+    },
+    {
+      "date": "2026-10-03",
+      "total": 6,
+      "passed": 6,
+      "failed": 0,
+      "flaky": 0,
+      "skipped": 0,
+      "passRate": 100
+    },
+    {
+      "date": "2026-10-04",
+      "total": 6,
+      "passed": 6,
+      "failed": 0,
+      "flaky": 0,
+      "skipped": 0,
+      "passRate": 100
+    },
+    {
+      "date": "2026-10-05",
+      "total": 6,
+      "passed": 6,
+      "failed": 0,
+      "flaky": 0,
+      "skipped": 0,
+      "passRate": 100
+    },
+    {
+      "date": "2026-10-06",
+      "total": 6,
+      "passed": 5,
+      "failed": 0,
+      "flaky": 1,
+      "skipped": 0,
+      "passRate": 83.3
+    },
+    {
+      "date": "2026-10-07",
+      "total": 6,
+      "passed": 6,
+      "failed": 0,
+      "flaky": 0,
+      "skipped": 0,
+      "passRate": 100
+    },
+    {
+      "date": "2026-10-08",
+      "total": 6,
+      "passed": 6,
+      "failed": 0,
+      "flaky": 0,
+      "skipped": 0,
+      "passRate": 100
+    },
+    {
+      "date": "2026-10-09",
+      "total": 6,
+      "passed": 6,
+      "failed": 0,
+      "flaky": 0,
+      "skipped": 0,
+      "passRate": 100
+    },
+    {
+      "date": "2026-10-10",
+      "total": 6,
+      "passed": 5,
+      "failed": 0,
+      "flaky": 1,
+      "skipped": 0,
+      "passRate": 83.3
+    },
+    {
+      "date": "2026-10-11",
+      "total": 6,
+      "passed": 6,
+      "failed": 0,
+      "flaky": 0,
+      "skipped": 0,
+      "passRate": 100
+    },
+    {
+      "date": "2026-10-12",
+      "total": 6,
+      "passed": 6,
+      "failed": 0,
+      "flaky": 0,
+      "skipped": 0,
+      "passRate": 100
+    },
+    {
+      "date": "2026-10-13",
+      "total": 6,
+      "passed": 6,
+      "failed": 0,
+      "flaky": 0,
+      "skipped": 0,
+      "passRate": 100
+    },
+    {
+      "date": "2026-10-14",
+      "total": 6,
+      "passed": 5,
+      "failed": 0,
+      "flaky": 1,
+      "skipped": 0,
+      "passRate": 83.3
+    },
+    {
+      "date": "2026-10-15",
+      "total": 6,
+      "passed": 5,
+      "failed": 0,
+      "flaky": 1,
+      "skipped": 0,
+      "passRate": 83.3
+    }
+  ]
+}

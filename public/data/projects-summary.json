@@ -1,0 +1,98 @@
+{
+  "lastUpdated": "2026-10-15T12:04:20.911Z",
+  "totalProjects": 4,
+  "overallSummary": {
+    "totalTests": 30,
+    "totalPassed": 23,
+    "totalFailed": 4,
+    "totalFlaky": 3,
+    "totalSkipped": 0,
+    "passRate": 76.7
+  },
+  "projects": [
+    {
+      "id": "arm",
+      "name": "ARM",
+      "description": "Asset & Resource Management Platform",
+      "repoUrl": "https://github.com/Areeb-Innovative-Technologies/arm_test",
+      "lastUpdated": "2026-10-15T12:04:20.906Z",
+      "summary": {
+        "total": 17,
+        "passed": 12,
+        "failed": 3,
+        "flaky": 2,
+        "skipped": 0,
+        "passRate": 70.6
+      },
+      "layers": {
+        "web": 66.7,
+        "api": 60,
+        "android": 100,
+        "ios": 66.7
+      }
+    },
+    {
+      "id": "cadaa",
+      "name": "Cadaa",
+      "description": "Compliance & Digital Auditing Automation",
+      "repoUrl": "https://github.com/Areeb-Innovative-Technologies/cadaa_test",
+      "lastUpdated": "2026-10-15T12:04:20.910Z",
+      "summary": {
+        "total": 6,
+        "passed": 5,
+        "failed": 0,
+        "flaky": 1,
+        "skipped": 0,
+        "passRate": 83.3
+      },
+      "layers": {
+        "web": 100,
+        "api": 50,
+        "android": 100,
+        "ios": 100
+      }
+    },
+    {
+      "id": "kuiper",
+      "name": "Kuiper",
+      "description": "High-Throughput Analytics & Telemetry Engine",
+      "repoUrl": "https://github.com/Areeb-Innovative-Technologies/kuiper_test",
+      "lastUpdated": "2026-10-15T12:04:20.911Z",
+      "summary": {
+        "total": 3,
+        "passed": 2,
+        "failed": 1,
+        "flaky": 0,
+        "skipped": 0,
+        "passRate": 66.7
+      },
+      "layers": {
+        "web": 100,
+        "api": 50,
+        "android": 100,
+        "ios": 100
+      }
+    },
+    {
+      "id": "atlas",
+      "name": "Atlas",
+      "description": "Enterprise Geolocation & Fleet Tracking",
+      "repoUrl": "https://github.com/Areeb-Innovative-Technologies/atlas_test",
+      "lastUpdated": "2026-10-15T12:04:20.911Z",
+      "summary": {
+        "total": 4,
+        "passed": 4,
+        "failed": 0,
+        "flaky": 0,
+        "skipped": 0,
+        "passRate": 100
+      },
+      "layers": {
+        "web": 100,
+        "api": 100,
+        "android": 100,
+        "ios": 100
+      }
+    }
+  ]
+}
