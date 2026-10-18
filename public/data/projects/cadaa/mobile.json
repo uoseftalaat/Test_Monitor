@@ -12,6 +12,8 @@
     "skipped": 0,
     "passRate": 100
   },
+  "playwrightZip": null,
+  "playwrightZipUrl": null,
   "tests": [],
   "runsHistory": []
 }
