@@ -20,7 +20,7 @@ export default function ProjectHeader({
                 href={repoUrl}
                 target="_blank"
                 rel="noreferrer"
-                className="inline-flex items-center gap-1 text-xs text-primary-600 hover:text-primary-700 bg-primary-50 px-2.5 py-1 rounded-full border border-primary-200"
+                className="inline-flex items-center gap-1 text-xs text-primary-600 hover:text-primary-700 bg-primary-50 px-3 py-1.5 rounded-full border border-primary-200"
               >
                 <span>Repository</span>
                 <ExternalLink className="h-3 w-3" />
@@ -31,16 +31,11 @@ export default function ProjectHeader({
         </div>
       </div>
 
-      <div className="flex items-center gap-4">
-        <div className="text-right">
-          <span className="text-xs text-gray-500 block">Layer Health</span>
-          <span className="text-2xl font-extrabold text-gray-900">{passRate}%</span>
-        </div>
-        <div className="w-16 h-16 rounded-full border-4 border-gray-100 flex items-center justify-center font-bold text-xs bg-white">
-          <span className={cn(passRate >= 95 ? 'text-success-600' : 'text-warning-600')}>
-            {passRate}%
-          </span>
-        </div>
+      <div className="text-right">
+        <span className="text-xs text-gray-500 block">Layer Health</span>
+        <span className={cn('text-2xl font-extrabold', passRate >= 95 ? 'text-success-600' : 'text-warning-600')}>
+          {passRate}%
+        </span>
       </div>
     </div>
   );

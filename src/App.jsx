@@ -89,7 +89,7 @@ export default function App() {
                 <div className="flex items-center gap-2">
                   <Database className="h-4 w-4 text-warning-500 shrink-0" />
                   <span>
-                    Running in <strong>Offline Local Preview</strong>. Connect Firebase credentials in <code className="bg-warning-100 px-1 py-0.5 rounded text-warning-700">.env.local</code> to enable cloud authentication and real-time Firestore sync.
+                    Running in <strong>offline preview</strong>. Sign in to enable live sync.
                   </span>
                 </div>
                 {firebaseReady && (
@@ -106,7 +106,7 @@ export default function App() {
             {isUsingCache && (
               <div className="mb-4 p-3 rounded-lg bg-primary-50 border border-primary-200 flex items-center gap-2 text-primary-700 text-xs">
                 <Info className="h-4 w-4 text-primary-500 shrink-0" />
-                <span>Displaying cached test records. Waiting for pipeline updates.</span>
+                <span>Showing cached results. Waiting for an update.</span>
               </div>
             )}
 
@@ -128,7 +128,7 @@ export default function App() {
             {isLoading || authLoading ? (
               <div className="h-96 flex flex-col items-center justify-center gap-3">
                 <Loader2 className="h-8 w-8 text-primary-500 animate-spin" />
-                <p className="text-xs text-gray-500 font-medium">Loading test metrics and pipeline logs...</p>
+                <p className="text-xs text-gray-500 font-medium">Loading test results...</p>
               </div>
             ) : selectedProjectId === 'all' ? (
               <GlobalOverview

@@ -175,14 +175,9 @@ export default function TestDetailModal({ test, onClose }) {
                 <div className="space-y-4">
                   {/* Error Alert Box */}
                   <div className="bg-destructive-50 border border-destructive-200 rounded-lg p-4">
-                    <div className="flex items-center justify-between mb-2">
-                      <div className="flex items-center gap-2 text-destructive-600 font-semibold text-xs uppercase tracking-wider">
-                        <AlertTriangle className="h-4 w-4" />
-                        <span>Failure Reason — {getErrorType(test.latestError.message)}</span>
-                      </div>
-                      <span className="text-[11px] text-destructive-400 font-mono">
-                        Pipeline Diagnostic
-                      </span>
+                    <div className="flex items-center gap-2 text-destructive-600 font-semibold text-xs uppercase tracking-wider mb-2">
+                      <AlertTriangle className="h-4 w-4" />
+                      <span>Failure Reason — {getErrorType(test.latestError.message)}</span>
                     </div>
                     <p className="text-sm font-mono text-gray-900 bg-white p-3 rounded-lg border border-destructive-100 break-words whitespace-pre-wrap leading-relaxed">
                       {stripAnsi(test.latestError.message)}

@@ -34,7 +34,7 @@ export default function TestFilters({
           <button
             onClick={() => onStatusFilterChange('all')}
             className={cn(
-              'px-3 py-1 rounded-md font-medium transition',
+              'px-3 py-1.5 rounded-md font-medium transition',
               statusFilter === 'all' ? 'bg-white text-gray-900 shadow-sm' : 'text-gray-500 hover:text-gray-800'
             )}
           >
@@ -43,7 +43,7 @@ export default function TestFilters({
           <button
             onClick={() => onStatusFilterChange('failed')}
             className={cn(
-              'px-3 py-1 rounded-md font-medium transition flex items-center gap-1.5',
+              'px-3 py-1.5 rounded-md font-medium transition flex items-center gap-1.5',
               statusFilter === 'failed' ? 'bg-destructive-500 text-white' : 'text-gray-500 hover:text-destructive-600'
             )}
           >
@@ -51,7 +51,7 @@ export default function TestFilters({
             {totalFailed > 0 && (
               <span
                 className={cn(
-                  'text-[10px] px-1.5 py-0.2 rounded-full',
+                  'text-[10px] px-1.5 py-0.5 rounded-full',
                   statusFilter === 'failed' ? 'bg-destructive-700' : 'bg-destructive-50 text-destructive-600'
                 )}
               >
@@ -62,7 +62,7 @@ export default function TestFilters({
           <button
             onClick={() => onStatusFilterChange('flaky')}
             className={cn(
-              'px-3 py-1 rounded-md font-medium transition flex items-center gap-1.5',
+              'px-3 py-1.5 rounded-md font-medium transition flex items-center gap-1.5',
               statusFilter === 'flaky' ? 'bg-warning-500 text-white' : 'text-gray-500 hover:text-warning-600'
             )}
           >
@@ -70,7 +70,7 @@ export default function TestFilters({
             {totalFlaky > 0 && (
               <span
                 className={cn(
-                  'text-[10px] px-1.5 py-0.2 rounded-full',
+                  'text-[10px] px-1.5 py-0.5 rounded-full',
                   statusFilter === 'flaky' ? 'bg-warning-700' : 'bg-warning-50 text-warning-600'
                 )}
               >
@@ -81,7 +81,7 @@ export default function TestFilters({
           <button
             onClick={() => onStatusFilterChange('passed')}
             className={cn(
-              'px-3 py-1 rounded-md font-medium transition',
+              'px-3 py-1.5 rounded-md font-medium transition',
               statusFilter === 'passed' ? 'bg-success-600 text-white' : 'text-gray-500 hover:text-success-600'
             )}
           >
