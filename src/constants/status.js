@@ -13,40 +13,40 @@ export const STATUS_CONFIG = {
     label: 'Failed',
     icon: XCircle,
     color: 'red',
-    badgeClass: 'bg-red-500/10 text-red-400 border-red-500/30',
-    dotClass: 'bg-red-500',
-    borderClass: 'border-red-500/30',
-    bgClass: 'bg-red-950/40'
+    badgeClass: 'bg-destructive-50 text-destructive-600 border-destructive-200',
+    dotClass: 'bg-destructive-500',
+    borderClass: 'border-destructive-200',
+    bgClass: 'bg-destructive-50'
   },
   flaky: {
     id: 'flaky',
     label: 'Flaky',
     icon: AlertTriangle,
     color: 'amber',
-    badgeClass: 'bg-amber-500/10 text-amber-400 border-amber-500/30',
-    dotClass: 'bg-amber-500',
-    borderClass: 'border-amber-500/30',
-    bgClass: 'bg-amber-950/40'
+    badgeClass: 'bg-warning-50 text-warning-600 border-warning-200',
+    dotClass: 'bg-warning-500',
+    borderClass: 'border-warning-200',
+    bgClass: 'bg-warning-50'
   },
   passed: {
     id: 'passed',
     label: 'Passed',
     icon: CheckCircle2,
     color: 'emerald',
-    badgeClass: 'bg-emerald-500/10 text-emerald-400 border-emerald-500/30',
-    dotClass: 'bg-emerald-500',
-    borderClass: 'border-emerald-500/30',
-    bgClass: 'bg-emerald-950/40'
+    badgeClass: 'bg-success-50 text-success-600 border-success-200',
+    dotClass: 'bg-success-500',
+    borderClass: 'border-success-200',
+    bgClass: 'bg-success-50'
   },
   skipped: {
     id: 'skipped',
     label: 'Skipped',
     icon: Clock,
-    color: 'slate',
-    badgeClass: 'bg-slate-800 text-slate-400 border-slate-700',
-    dotClass: 'bg-slate-500',
-    borderClass: 'border-slate-800',
-    bgClass: 'bg-slate-900/40'
+    color: 'gray',
+    badgeClass: 'bg-gray-100 text-gray-500 border-gray-200',
+    dotClass: 'bg-gray-400',
+    borderClass: 'border-gray-200',
+    bgClass: 'bg-gray-100'
   }
 };
 

@@ -13,21 +13,21 @@ export default function DailyFailures({
         activeReports.map((report, idx) => (
           <div
             key={idx}
-            className="bg-slate-900 border border-red-500/40 rounded-xl p-5 shadow-lg shadow-red-500/5 transition"
+            className="bg-white border border-destructive-200 rounded-lg p-5 shadow-sm transition"
           >
-            <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-3 pb-3 border-b border-slate-800">
+            <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-3 pb-3 border-b border-gray-100">
               <div className="flex items-center gap-3">
-                <div className="p-2 rounded-lg bg-red-500/10 text-red-400 border border-red-500/20">
+                <div className="p-2 rounded-lg bg-destructive-50 text-destructive-600 border border-destructive-200">
                   <FileCode className="h-5 w-5" />
                 </div>
                 <div>
                   <div className="flex items-center gap-2">
-                    <h3 className="text-sm font-bold text-white">Daily Playwright Report</h3>
-                    <span className="text-[11px] font-semibold px-2 py-0.5 rounded-full bg-red-500/20 text-red-300 border border-red-500/30">
+                    <h3 className="text-sm font-semibold text-gray-900">Daily Playwright Report</h3>
+                    <span className="text-[11px] font-semibold px-2 py-0.5 rounded-full bg-destructive-50 text-destructive-600 border border-destructive-200">
                       {report.layerName}: {report.failedCount} Failed Test{report.failedCount > 1 ? 's' : ''} Today
                     </span>
                   </div>
-                  <p className="text-xs text-slate-400 mt-0.5">
+                  <p className="text-xs text-gray-500 mt-0.5">
                     Recorded on {report.date} {report.runId ? `(CI Run #${report.runId})` : ''}
                   </p>
                 </div>
@@ -38,7 +38,7 @@ export default function DailyFailures({
                   href={report.reportUrl}
                   target="_blank"
                   rel="noreferrer"
-                  className="inline-flex items-center justify-center gap-2 px-4 py-2 rounded-lg bg-red-600 hover:bg-red-500 text-white font-semibold text-xs transition shadow-sm"
+                  className="inline-flex items-center justify-center gap-2 px-4 py-2 rounded-md bg-destructive-600 hover:bg-destructive-700 text-white font-semibold text-xs transition shadow-sm"
                 >
                   <span>Open Playwright HTML Report</span>
                   <ExternalLink className="h-3.5 w-3.5" />
@@ -49,7 +49,7 @@ export default function DailyFailures({
             {/* Highlights of failing tests */}
             {report.failedTests && report.failedTests.length > 0 && (
               <div className="mt-3 space-y-2">
-                <span className="text-[11px] font-semibold text-slate-400 uppercase tracking-wider block">
+                <span className="text-[11px] font-semibold text-gray-500 uppercase tracking-wider block">
                   Failed Tests in Today's Report
                 </span>
                 <div className="grid grid-cols-1 gap-2">
@@ -59,21 +59,21 @@ export default function DailyFailures({
                       <div
                         key={fIdx}
                         onClick={() => fullTest && onSelectTest(fullTest)}
-                        className="p-3 rounded-lg bg-slate-950/80 border border-red-500/20 hover:border-red-500/50 cursor-pointer transition flex items-start justify-between gap-3 text-xs"
+                        className="p-3 rounded-lg bg-destructive-50/40 border border-destructive-100 hover:border-destructive-300 cursor-pointer transition flex items-start justify-between gap-3 text-xs"
                       >
                         <div className="min-w-0">
                           <div className="flex items-center gap-2">
-                            <span className="text-red-400 font-mono text-[11px] font-semibold">{ft.suite}</span>
-                            <span className="text-slate-600">•</span>
-                            <span className="text-slate-200 font-semibold truncate">{ft.title}</span>
+                            <span className="text-destructive-600 font-mono text-[11px] font-semibold">{ft.suite}</span>
+                            <span className="text-gray-300">•</span>
+                            <span className="text-gray-800 font-semibold truncate">{ft.title}</span>
                           </div>
                           {ft.errorMessage && (
-                            <p className="text-[11px] text-red-300/80 font-mono mt-1 line-clamp-1">
+                            <p className="text-[11px] text-destructive-500 font-mono mt-1 line-clamp-1">
                               {stripAnsi(ft.errorMessage)}
                             </p>
                           )}
                         </div>
-                        <span className="shrink-0 text-[11px] text-blue-400 underline hover:text-blue-300">
+                        <span className="shrink-0 text-[11px] text-primary-600 underline hover:text-primary-700">
                           View Failure Logs →
                         </span>
                       </div>
@@ -85,14 +85,14 @@ export default function DailyFailures({
           </div>
         ))
       ) : (
-        <div className="bg-slate-900/60 border border-slate-800/80 rounded-xl p-4 flex items-center justify-between text-xs text-slate-400">
+        <div className="bg-white border border-gray-200 rounded-lg p-4 flex items-center justify-between text-xs text-gray-500">
           <div className="flex items-center gap-2.5">
-            <FileCode className="h-4 w-4 text-emerald-400" />
+            <FileCode className="h-4 w-4 text-success-500" />
             <span>
-              Daily Playwright Report: <strong className="text-slate-300 font-semibold">Clean Run</strong> — No failures reported today ({new Date().toISOString().split('T')[0]}).
+              Daily Playwright Report: <strong className="text-gray-700 font-semibold">Clean Run</strong> — No failures reported today ({new Date().toISOString().split('T')[0]}).
             </span>
           </div>
-          <span className="text-[11px] text-emerald-400 bg-emerald-500/10 border border-emerald-500/20 px-2.5 py-0.5 rounded-full font-medium">
+          <span className="text-[11px] text-success-700 bg-success-50 border border-success-200 px-2.5 py-0.5 rounded-full font-medium">
             Section Empty (All Passed)
           </span>
         </div>

@@ -27,11 +27,14 @@ export default function GlobalOverview({ globalSummary, onSelectProject }) {
   return (
     <div className="space-y-8 animate-fadeIn">
       {/* Page Title & Intro */}
-      <div>
-        <h1 className="text-2xl font-bold text-white tracking-tight">Executive QA Dashboard</h1>
-        <p className="text-sm text-slate-400 mt-1">
-          Unified test execution health across all platforms and automated test suites.
-        </p>
+      <div className="flex items-center gap-3 sm:gap-4">
+        <div className="w-1 h-8 bg-primary-500 rounded shrink-0" />
+        <div>
+          <h1 className="text-xl sm:text-2xl font-semibold text-gray-900 tracking-tight">Executive QA Dashboard</h1>
+          <p className="text-sm text-gray-500 mt-0.5">
+            Unified test execution health across all platforms and automated test suites.
+          </p>
+        </div>
       </div>
 
       {/* High-level KPI Cards */}
@@ -77,8 +80,8 @@ export default function GlobalOverview({ globalSummary, onSelectProject }) {
       {/* Projects Grid */}
       <div>
         <div className="flex items-center justify-between mb-4">
-          <h2 className="text-lg font-bold text-white tracking-tight">Active Projects</h2>
-          <span className="text-xs text-slate-400">{projects.length} integrated test suites</span>
+          <h2 className="text-lg font-semibold text-gray-900 tracking-tight">Active Projects</h2>
+          <span className="text-xs text-gray-500">{projects.length} integrated test suites</span>
         </div>
 
         <div className="grid grid-cols-1 md:grid-cols-2 gap-5">

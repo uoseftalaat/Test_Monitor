@@ -16,7 +16,7 @@ export default function LayerTabs({
   ];
 
   return (
-    <div className="flex items-center gap-2 overflow-x-auto mt-6 pt-5 border-t border-slate-800/80 scrollbar-none">
+    <div className="flex items-center gap-2 overflow-x-auto mt-6 pt-5 border-t border-gray-100 scrollbar-none">
       {layerTabs.map(tab => {
         const Icon = tab.icon;
         const isSelected = selectedLayer === tab.id;
@@ -25,10 +25,10 @@ export default function LayerTabs({
             key={tab.id}
             onClick={() => onSelectLayer(tab.id)}
             className={cn(
-              'flex items-center gap-2 px-4 py-2 rounded-xl text-xs font-semibold transition whitespace-nowrap',
+              'flex items-center gap-2 px-4 py-2 rounded-lg text-xs font-semibold transition whitespace-nowrap',
               isSelected
-                ? 'bg-blue-600 text-white shadow-md shadow-blue-600/20'
-                : 'bg-slate-800/50 hover:bg-slate-800 text-slate-400 hover:text-slate-200 border border-slate-800'
+                ? 'bg-primary-600 text-white shadow-sm'
+                : 'bg-gray-50 hover:bg-gray-100 text-gray-500 hover:text-gray-800 border border-gray-200'
             )}
           >
             <Icon className="h-4 w-4" />
@@ -36,13 +36,13 @@ export default function LayerTabs({
             <span
               className={cn(
                 'text-[10px] px-1.5 py-0.2 rounded-full',
-                isSelected ? 'bg-blue-700 text-white' : 'bg-slate-700 text-slate-300'
+                isSelected ? 'bg-white/20 text-white' : 'bg-gray-200 text-gray-600'
               )}
             >
               {tab.count}
             </span>
             {tab.failed > 0 && (
-              <span className="h-2 w-2 rounded-full bg-red-500" />
+              <span className="h-2 w-2 rounded-full bg-destructive-500" />
             )}
           </button>
         );
