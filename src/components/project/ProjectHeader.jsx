@@ -10,31 +10,34 @@ export default function ProjectHeader({
 }) {
   return (
     <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4">
-      <div>
-        <div className="flex items-center gap-3">
-          <h1 className="text-2xl font-bold text-white tracking-tight">{projectName}</h1>
-          {repoUrl && (
-            <a
-              href={repoUrl}
-              target="_blank"
-              rel="noreferrer"
-              className="inline-flex items-center gap-1 text-xs text-blue-400 hover:text-blue-300 bg-blue-500/10 px-2.5 py-1 rounded-full border border-blue-500/20"
-            >
-              <span>Repository</span>
-              <ExternalLink className="h-3 w-3" />
-            </a>
-          )}
+      <div className="flex items-center gap-3 sm:gap-4 min-w-0">
+        <div className="w-1 h-8 bg-primary-500 rounded shrink-0" />
+        <div className="min-w-0">
+          <div className="flex items-center gap-3">
+            <h1 className="text-xl sm:text-2xl font-semibold text-gray-900 tracking-tight">{projectName}</h1>
+            {repoUrl && (
+              <a
+                href={repoUrl}
+                target="_blank"
+                rel="noreferrer"
+                className="inline-flex items-center gap-1 text-xs text-primary-600 hover:text-primary-700 bg-primary-50 px-2.5 py-1 rounded-full border border-primary-200"
+              >
+                <span>Repository</span>
+                <ExternalLink className="h-3 w-3" />
+              </a>
+            )}
+          </div>
+          {description && <p className="text-sm text-gray-500 mt-1">{description}</p>}
         </div>
-        {description && <p className="text-sm text-slate-400 mt-1">{description}</p>}
       </div>
 
       <div className="flex items-center gap-4">
         <div className="text-right">
-          <span className="text-xs text-slate-400 block">Layer Health</span>
-          <span className="text-2xl font-extrabold text-white">{passRate}%</span>
+          <span className="text-xs text-gray-500 block">Layer Health</span>
+          <span className="text-2xl font-extrabold text-gray-900">{passRate}%</span>
         </div>
-        <div className="w-16 h-16 rounded-full border-4 border-slate-800 flex items-center justify-center font-bold text-xs bg-slate-950">
-          <span className={cn(passRate >= 95 ? 'text-emerald-400' : 'text-amber-400')}>
+        <div className="w-16 h-16 rounded-full border-4 border-gray-100 flex items-center justify-center font-bold text-xs bg-white">
+          <span className={cn(passRate >= 95 ? 'text-success-600' : 'text-warning-600')}>
             {passRate}%
           </span>
         </div>

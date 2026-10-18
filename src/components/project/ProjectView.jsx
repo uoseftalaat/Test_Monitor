@@ -118,7 +118,7 @@ export default function ProjectView({ projectData, onSelectTest }) {
   return (
     <div className="space-y-6 animate-fadeIn">
       {/* Project Banner Header */}
-      <div className="bg-slate-900 border border-slate-800 rounded-2xl p-6 shadow-sm">
+      <div className="bg-white border border-gray-200 rounded-lg p-6 shadow-sm">
         <ProjectHeader
           projectName={projectName}
           description={description}

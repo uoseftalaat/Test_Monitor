@@ -58,7 +58,7 @@ export default function App() {
   const projectsList = globalSummary?.projects || [];
 
   return (
-    <div className="min-h-screen flex flex-col bg-slate-950 text-slate-100 selection:bg-blue-600 selection:text-white">
+    <div className="min-h-screen flex flex-col bg-gray-50 text-gray-900 selection:bg-blue-600 selection:text-white">
       {/* Sticky Header / Navigation */}
       <Navbar
         projects={projectsList}
@@ -85,17 +85,17 @@ export default function App() {
           <>
             {/* Informational banners */}
             {bypassAuthForFallback && !currentUser && (
-              <div className="mb-4 p-3 rounded-xl bg-amber-950/40 border border-amber-500/30 flex items-center justify-between gap-2 text-amber-300 text-xs">
+              <div className="mb-4 p-3 rounded-lg bg-warning-50 border border-warning-200 flex items-center justify-between gap-2 text-warning-700 text-xs">
                 <div className="flex items-center gap-2">
-                  <Database className="h-4 w-4 text-amber-400 shrink-0" />
+                  <Database className="h-4 w-4 text-warning-500 shrink-0" />
                   <span>
-                    Running in <strong>Offline Local Preview</strong>. Connect Firebase credentials in <code className="bg-amber-900/50 px-1 py-0.5 rounded text-amber-200">.env.local</code> to enable cloud authentication and real-time Firestore sync.
+                    Running in <strong>Offline Local Preview</strong>. Connect Firebase credentials in <code className="bg-warning-100 px-1 py-0.5 rounded text-warning-700">.env.local</code> to enable cloud authentication and real-time Firestore sync.
                   </span>
                 </div>
                 {firebaseReady && (
                   <button
                     onClick={disableFallbackBypass}
-                    className="shrink-0 bg-amber-500/20 hover:bg-amber-500/30 text-amber-100 px-2.5 py-1 rounded-lg border border-amber-500/30 font-medium transition"
+                    className="shrink-0 bg-white hover:bg-warning-100 text-warning-700 px-2.5 py-1 rounded-lg border border-warning-300 font-medium transition"
                   >
                     Sign In
                   </button>
@@ -104,21 +104,21 @@ export default function App() {
             )}
 
             {isUsingCache && (
-              <div className="mb-4 p-3 rounded-xl bg-blue-950/40 border border-blue-500/30 flex items-center gap-2 text-blue-300 text-xs">
-                <Info className="h-4 w-4 text-blue-400 shrink-0" />
+              <div className="mb-4 p-3 rounded-lg bg-primary-50 border border-primary-200 flex items-center gap-2 text-primary-700 text-xs">
+                <Info className="h-4 w-4 text-primary-500 shrink-0" />
                 <span>Displaying cached test records. Waiting for pipeline updates.</span>
               </div>
             )}
 
             {errorMessage && (
-              <div className="mb-6 p-4 rounded-xl bg-red-950/40 border border-red-500/30 flex items-center justify-between text-red-300 text-xs">
+              <div className="mb-6 p-4 rounded-lg bg-destructive-50 border border-destructive-200 flex items-center justify-between text-destructive-700 text-xs">
                 <div className="flex items-center gap-2">
-                  <AlertCircle className="h-4 w-4 text-red-400 shrink-0" />
+                  <AlertCircle className="h-4 w-4 text-destructive-500 shrink-0" />
                   <span>{errorMessage}</span>
                 </div>
                 <button
                   onClick={refresh}
-                  className="text-white bg-red-800/60 hover:bg-red-800 px-3 py-1 rounded-lg font-medium transition"
+                  className="text-white bg-destructive-600 hover:bg-destructive-700 px-3 py-1 rounded-lg font-medium transition"
                 >
                   Retry
                 </button>
@@ -127,8 +127,8 @@ export default function App() {
 
             {isLoading || authLoading ? (
               <div className="h-96 flex flex-col items-center justify-center gap-3">
-                <Loader2 className="h-8 w-8 text-blue-500 animate-spin" />
-                <p className="text-xs text-slate-400 font-medium">Loading test metrics and pipeline logs...</p>
+                <Loader2 className="h-8 w-8 text-primary-500 animate-spin" />
+                <p className="text-xs text-gray-500 font-medium">Loading test metrics and pipeline logs...</p>
               </div>
             ) : selectedProjectId === 'all' ? (
               <GlobalOverview

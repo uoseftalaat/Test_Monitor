@@ -15,7 +15,7 @@ export default function StatusBadge({ status, showIcon = true, size = 'sm', clas
   return (
     <span
       className={cn(
-        'inline-flex items-center rounded-full font-bold uppercase tracking-wider border',
+        'inline-flex items-center rounded-full font-semibold uppercase tracking-wide border',
         config.badgeClass,
         sizeClasses,
         className

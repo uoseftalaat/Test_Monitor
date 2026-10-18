@@ -18,47 +18,47 @@ export default function Navbar({
   isFirebaseLive
 }) {
   return (
-    <header className="sticky top-0 z-40 bg-slate-900/90 backdrop-blur-md border-b border-slate-800">
+    <header className="sticky top-0 z-40 bg-white border-b border-gray-200">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         {/* Top bar with branding and actions */}
-        <div className="flex items-center justify-between h-16 border-b border-slate-800/60">
+        <div className="flex items-center justify-between h-16 border-b border-gray-100">
           <div className="flex items-center gap-3">
-            <div className="h-10 w-10 rounded-xl bg-gradient-to-tr from-blue-600 to-indigo-500 flex items-center justify-center shadow-lg shadow-blue-500/20">
+            <div className="h-10 w-10 rounded-lg bg-primary-600 flex items-center justify-center shadow-sm">
               <Activity className="h-5 w-5 text-white" />
             </div>
             <div>
               <div className="flex items-center gap-2">
-                <span className="font-bold text-lg text-white tracking-tight">TestMonitor</span>
-                <span className="text-[10px] uppercase font-semibold px-2 py-0.5 rounded-full bg-blue-500/10 text-blue-400 border border-blue-500/20">
+                <span className="font-bold text-lg text-gray-900 tracking-tight">TestMonitor</span>
+                <span className="text-[10px] uppercase font-semibold px-2 py-0.5 rounded-full bg-primary-50 text-primary-700 border border-primary-200">
                   QA Intelligence
                 </span>
                 {isFirebaseLive ? (
-                  <span className="hidden sm:inline-flex items-center gap-1 text-[10px] font-semibold px-2 py-0.5 rounded-full bg-emerald-500/10 text-emerald-400 border border-emerald-500/20">
-                    <Radio className="h-3 w-3 animate-pulse text-emerald-400" />
+                  <span className="hidden sm:inline-flex items-center gap-1 text-[10px] font-semibold px-2 py-0.5 rounded-full bg-success-50 text-success-700 border border-success-200">
+                    <Radio className="h-3 w-3 animate-pulse text-success-500" />
                     Firebase Live
                   </span>
                 ) : (
-                  <span className="hidden sm:inline-flex items-center gap-1 text-[10px] font-semibold px-2 py-0.5 rounded-full bg-slate-800 text-slate-400 border border-slate-700">
+                  <span className="hidden sm:inline-flex items-center gap-1 text-[10px] font-semibold px-2 py-0.5 rounded-full bg-gray-100 text-gray-500 border border-gray-200">
                     Local Data
                   </span>
                 )}
               </div>
-              <p className="text-xs text-slate-400">Automated Pipeline & Regression Monitoring</p>
+              <p className="text-xs text-gray-500">Automated Pipeline &amp; Regression Monitoring</p>
             </div>
           </div>
 
           {/* Right controls: Last updated, Auto-refresh, Manual refresh & User profile */}
           <div className="flex items-center gap-3">
-            <div className="hidden md:flex items-center gap-2 text-xs text-slate-400 bg-slate-800/60 px-3 py-1.5 rounded-lg border border-slate-700/50">
-              <span className={cn('flex h-2 w-2 rounded-full', isFirebaseLive ? 'bg-emerald-500 animate-pulse' : 'bg-slate-400')} />
-              <span>Updated: <span className="text-slate-200 font-mono">{formatTime(lastUpdated)}</span></span>
+            <div className="hidden md:flex items-center gap-2 text-xs text-gray-500 bg-gray-50 px-3 py-1.5 rounded-lg border border-gray-200">
+              <span className={cn('flex h-2 w-2 rounded-full', isFirebaseLive ? 'bg-success-500 animate-pulse' : 'bg-gray-400')} />
+              <span>Updated: <span className="text-gray-700 font-mono">{formatTime(lastUpdated)}</span></span>
             </div>
 
             <div className="flex items-center gap-2">
               <select
                 value={autoRefreshInterval}
                 onChange={(e) => onChangeAutoRefresh(Number(e.target.value))}
-                className="text-xs bg-slate-800 hover:bg-slate-700/80 text-slate-300 border border-slate-700 rounded-lg px-2.5 py-1.5 outline-none transition focus:border-blue-500"
+                className="text-xs bg-white hover:bg-gray-50 text-gray-600 border border-gray-300 rounded-lg px-2.5 py-1.5 outline-none transition focus:border-primary-500"
                 title="Auto-refresh frequency"
               >
                 <option value={0}>Auto: Off</option>
@@ -70,7 +70,7 @@ export default function Navbar({
               <button
                 onClick={onRefresh}
                 disabled={isRefreshing}
-                className="flex items-center gap-1.5 text-xs font-medium bg-blue-600 hover:bg-blue-500 disabled:opacity-50 text-white px-3 py-1.5 rounded-lg shadow-sm shadow-blue-600/30 transition active:scale-95"
+                className="flex items-center gap-1.5 text-xs font-medium bg-primary-600 hover:bg-primary-700 disabled:opacity-50 text-white px-3 py-1.5 rounded-lg shadow-sm transition active:scale-95"
                 title="Fetch latest test data"
               >
                 <RefreshCw className={cn('h-3.5 w-3.5', isRefreshing && 'animate-spin')} />
@@ -80,28 +80,28 @@ export default function Navbar({
 
             {/* Auth control */}
             {user ? (
-              <div className="flex items-center gap-2 pl-2 border-l border-slate-800">
+              <div className="flex items-center gap-2 pl-2 border-l border-gray-200">
                 <div className="hidden lg:flex flex-col text-right">
-                  <span className="text-xs font-medium text-slate-200 truncate max-w-[120px]">
+                  <span className="text-xs font-medium text-gray-700 truncate max-w-[120px]">
                     {user.displayName || user.email?.split('@')[0]}
                   </span>
-                  <span className="text-[10px] text-slate-500 truncate max-w-[120px]">{user.email}</span>
+                  <span className="text-[10px] text-gray-400 truncate max-w-[120px]">{user.email}</span>
                 </div>
                 {user.photoURL ? (
                   <img
                     src={user.photoURL}
                     alt={user.displayName || 'User'}
-                    className="h-8 w-8 rounded-full border border-slate-700 object-cover"
+                    className="h-8 w-8 rounded-full border border-gray-200 object-cover"
                   />
                 ) : (
-                  <div className="h-8 w-8 rounded-full bg-slate-800 border border-slate-700 flex items-center justify-center text-slate-300">
+                  <div className="h-8 w-8 rounded-full bg-gray-100 border border-gray-200 flex items-center justify-center text-gray-500">
                     <User className="h-4 w-4" />
                   </div>
                 )}
                 <button
                   onClick={onSignOut}
                   title="Sign out"
-                  className="p-1.5 rounded-lg text-slate-400 hover:text-red-400 hover:bg-red-500/10 transition"
+                  className="p-1.5 rounded-lg text-gray-400 hover:text-destructive-600 hover:bg-destructive-50 transition"
                 >
                   <LogOut className="h-4 w-4" />
                 </button>
@@ -109,7 +109,7 @@ export default function Navbar({
             ) : onSignInClick ? (
               <button
                 onClick={onSignInClick}
-                className="text-xs font-medium bg-slate-800 hover:bg-slate-700 text-slate-200 px-3 py-1.5 rounded-lg border border-slate-700 transition"
+                className="text-xs font-medium bg-white hover:bg-gray-50 text-gray-700 px-3 py-1.5 rounded-lg border border-gray-300 transition"
               >
                 Sign In
               </button>
@@ -124,8 +124,8 @@ export default function Navbar({
             className={cn(
               'flex items-center gap-2 px-3.5 py-1.5 rounded-lg text-xs font-medium transition whitespace-nowrap',
               selectedProject === 'all'
-                ? 'bg-blue-600 text-white shadow-sm shadow-blue-500/30'
-                : 'text-slate-400 hover:text-slate-200 hover:bg-slate-800/60'
+                ? 'bg-primary-600 text-white shadow-sm'
+                : 'text-gray-500 hover:text-gray-800 hover:bg-gray-100'
             )}
           >
             <Layers className="h-3.5 w-3.5" />
@@ -143,8 +143,8 @@ export default function Navbar({
                 className={cn(
                   'flex items-center gap-2 px-3.5 py-1.5 rounded-lg text-xs font-medium transition whitespace-nowrap relative',
                   isSelected
-                    ? 'bg-blue-600 text-white shadow-sm shadow-blue-500/30'
-                    : 'text-slate-400 hover:text-slate-200 hover:bg-slate-800/60'
+                    ? 'bg-primary-600 text-white shadow-sm'
+                    : 'text-gray-500 hover:text-gray-800 hover:bg-gray-100'
                 )}
               >
                 <span>{proj.name}</span>
@@ -152,7 +152,7 @@ export default function Navbar({
                   <span
                     className={cn(
                       'text-[10px] font-bold px-1.5 py-0.2 rounded-full',
-                      isSelected ? 'bg-red-500 text-white' : 'bg-red-500/20 text-red-400 border border-red-500/30'
+                      isSelected ? 'bg-white/20 text-white' : 'bg-destructive-50 text-destructive-600 border border-destructive-200'
                     )}
                   >
                     {proj.summary.failed}
@@ -161,7 +161,7 @@ export default function Navbar({
                   <span
                     className={cn(
                       'text-[10px] font-medium px-1.5 py-0.2 rounded-full',
-                      isSelected ? 'bg-blue-700 text-blue-100' : 'bg-emerald-500/10 text-emerald-400'
+                      isSelected ? 'bg-white/20 text-white' : 'bg-success-50 text-success-700'
                     )}
                   >
                     {proj.summary?.passRate}%

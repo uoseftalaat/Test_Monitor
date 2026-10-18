@@ -2,9 +2,9 @@ import React from 'react';
 
 export default function Footer() {
   return (
-    <footer className="border-t border-slate-900 bg-slate-950 py-6 text-center text-xs text-slate-600">
+    <footer className="border-t border-gray-200 bg-white py-6 text-center text-xs text-gray-400">
       <div className="max-w-7xl mx-auto px-4 flex flex-col sm:flex-row items-center justify-between gap-2">
-        <span>TestMonitor — QA Intelligence & Regression Tracking</span>
+        <span>TestMonitor — QA Intelligence &amp; Regression Tracking</span>
         <span>Web • API • Mobile • Powered by Firebase • Real-time Monitoring</span>
       </div>
     </footer>
