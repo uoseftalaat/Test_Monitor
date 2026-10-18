@@ -13,7 +13,7 @@ export default function TestTable({
   onSelectTest
 }) {
   return (
-    <div className="bg-white border border-gray-200 rounded-lg overflow-hidden shadow-sm">
+    <div className="bg-white border border-gray-200 rounded-lg overflow-hidden">
       <div className="p-4 border-b border-gray-200 flex items-center justify-between">
         <div className="flex flex-wrap items-center gap-2">
           <h2 className="text-sm font-semibold text-gray-900 tracking-tight">Test Cases</h2>
@@ -44,7 +44,7 @@ export default function TestTable({
               </p>
               <p className="text-xs text-gray-500 mt-1 max-w-sm mx-auto">
                 {selectedLayer === 'all'
-                  ? 'Test results will appear here automatically as soon as your GitHub Actions pipeline executes.'
+                  ? 'Test results will appear here automatically once your pipeline runs.'
                   : `As soon as the ${selectedLayer} pipeline runs, results will appear here automatically.`}
               </p>
             </>
@@ -108,7 +108,7 @@ export default function TestTable({
 
                     {/* Layer */}
                     <td className="py-3.5 px-4">
-                      <span className="text-[10px] font-semibold uppercase px-2 py-0.5 rounded bg-gray-100 text-gray-600 border border-gray-200">
+                      <span className="text-[10px] font-semibold uppercase px-2 py-0.5 rounded-full bg-gray-100 text-gray-600 border border-gray-200">
                         {test.layer}
                       </span>
                     </td>

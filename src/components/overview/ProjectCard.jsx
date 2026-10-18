@@ -43,7 +43,7 @@ export default function ProjectCard({ project, onSelectProject }) {
                   href={project.repoUrl}
                   target="_blank"
                   rel="noreferrer"
-                  className="text-gray-400 hover:text-gray-600 p-1 rounded hover:bg-gray-100 transition"
+                  className="text-gray-400 hover:text-gray-600 p-1.5 rounded-lg hover:bg-gray-100 transition"
                   title="Open repository on GitHub"
                   onClick={(e) => e.stopPropagation()}
                 >

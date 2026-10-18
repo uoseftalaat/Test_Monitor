@@ -29,28 +29,24 @@ export default function Navbar({
             <div>
               <div className="flex items-center gap-2">
                 <span className="font-bold text-lg text-gray-900 tracking-tight">TestMonitor</span>
-                <span className="text-[10px] uppercase font-semibold px-2 py-0.5 rounded-full bg-primary-50 text-primary-700 border border-primary-200">
-                  QA Intelligence
-                </span>
                 {isFirebaseLive ? (
                   <span className="hidden sm:inline-flex items-center gap-1 text-[10px] font-semibold px-2 py-0.5 rounded-full bg-success-50 text-success-700 border border-success-200">
                     <Radio className="h-3 w-3 animate-pulse text-success-500" />
-                    Firebase Live
+                    Live
                   </span>
                 ) : (
                   <span className="hidden sm:inline-flex items-center gap-1 text-[10px] font-semibold px-2 py-0.5 rounded-full bg-gray-100 text-gray-500 border border-gray-200">
-                    Local Data
+                    Offline
                   </span>
                 )}
               </div>
-              <p className="text-xs text-gray-500">Automated Pipeline &amp; Regression Monitoring</p>
+              <p className="text-xs text-gray-500">Pipeline &amp; Regression Monitoring</p>
             </div>
           </div>
 
           {/* Right controls: Last updated, Auto-refresh, Manual refresh & User profile */}
           <div className="flex items-center gap-3">
-            <div className="hidden md:flex items-center gap-2 text-xs text-gray-500 bg-gray-50 px-3 py-1.5 rounded-lg border border-gray-200">
-              <span className={cn('flex h-2 w-2 rounded-full', isFirebaseLive ? 'bg-success-500 animate-pulse' : 'bg-gray-400')} />
+            <div className="hidden md:flex items-center gap-1.5 text-xs text-gray-500 bg-gray-50 px-3 py-1.5 rounded-lg border border-gray-200">
               <span>Updated: <span className="text-gray-700 font-mono">{formatTime(lastUpdated)}</span></span>
             </div>
 

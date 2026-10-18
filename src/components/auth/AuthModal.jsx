@@ -31,9 +31,9 @@ export default function AuthModal({ onBypassFallback }) {
         err.code === 'auth/wrong-password' ||
         err.code === 'auth/user-not-found'
       ) {
-        msg = 'Invalid email or password. Access is restricted to provisioned QA accounts.';
+        msg = 'Invalid email or password.';
       } else if (err.code === 'auth/user-disabled') {
-        msg = 'This QA account has been disabled. Contact your administrator.';
+        msg = 'This account has been disabled. Contact your administrator.';
       } else if (err.code === 'auth/too-many-requests') {
         msg = 'Too many failed login attempts. Please try again later.';
       }
@@ -62,10 +62,10 @@ export default function AuthModal({ onBypassFallback }) {
             <div className="p-3.5 rounded-lg bg-warning-50 border border-warning-200 text-warning-700 text-xs space-y-2">
               <div className="flex items-center gap-2 font-semibold">
                 <AlertCircle className="h-4 w-4 text-warning-500 shrink-0" />
-                <span>Firebase Configuration Needed</span>
+                <span>Sign-in isn't set up yet</span>
               </div>
               <p className="text-warning-700/90 leading-relaxed">
-                Add your Firebase Web App credentials to <code className="bg-warning-100 px-1 py-0.5 rounded text-warning-700 font-mono">.env.local</code> to connect project <strong className="text-warning-800">test-monitor-46836</strong>.
+                Contact your administrator to connect an account, or continue with local data.
               </p>
               {onBypassFallback && (
                 <button
@@ -74,7 +74,7 @@ export default function AuthModal({ onBypassFallback }) {
                   className="w-full mt-2 py-1.5 px-3 rounded-lg bg-white hover:bg-warning-100 border border-warning-300 text-warning-700 font-medium text-xs transition flex items-center justify-center gap-1.5"
                 >
                   <Database className="h-3.5 w-3.5" />
-                  <span>Preview with Local Data (Offline Mode)</span>
+                  <span>Continue with Local Data</span>
                 </button>
               )}
             </div>
@@ -146,11 +146,8 @@ export default function AuthModal({ onBypassFallback }) {
             </button>
           </form>
 
-          {/* Notice: Accounts created via Console */}
           <div className="p-3 rounded-lg bg-gray-50 border border-gray-200 text-center text-xs text-gray-500">
-            <span>
-              Self-registration is disabled. New accounts are provisioned exclusively by the QA Administrator in Firebase Console.
-            </span>
+            <span>Self-registration is disabled. Contact your QA administrator for access.</span>
           </div>
         </div>
 
@@ -158,7 +155,7 @@ export default function AuthModal({ onBypassFallback }) {
         <div className="px-6 py-3 bg-gray-50 border-t border-gray-200 flex items-center justify-between text-[11px] text-gray-500">
           <div className="flex items-center gap-1.5">
             <ShieldCheck className="h-3.5 w-3.5 text-success-500" />
-            <span>Secured via Firebase Authentication</span>
+            <span>Secure sign-in</span>
           </div>
         </div>
       </div>

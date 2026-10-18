@@ -28,7 +28,7 @@ export default function DailyFailures({
                     </span>
                   </div>
                   <p className="text-xs text-gray-500 mt-0.5">
-                    Recorded on {report.date} {report.runId ? `(CI Run #${report.runId})` : ''}
+                    Recorded on {report.date} {report.runId ? `(Run #${report.runId})` : ''}
                   </p>
                 </div>
               </div>
@@ -40,7 +40,7 @@ export default function DailyFailures({
                   rel="noreferrer"
                   className="inline-flex items-center justify-center gap-2 px-4 py-2 rounded-md bg-destructive-600 hover:bg-destructive-700 text-white font-semibold text-xs transition shadow-sm"
                 >
-                  <span>Open Playwright HTML Report</span>
+                  <span>Open Full Report</span>
                   <ExternalLink className="h-3.5 w-3.5" />
                 </a>
               )}
@@ -85,16 +85,9 @@ export default function DailyFailures({
           </div>
         ))
       ) : (
-        <div className="bg-white border border-gray-200 rounded-lg p-4 flex items-center justify-between text-xs text-gray-500">
-          <div className="flex items-center gap-2.5">
-            <FileCode className="h-4 w-4 text-success-500" />
-            <span>
-              Daily Playwright Report: <strong className="text-gray-700 font-semibold">Clean Run</strong> — No failures reported today ({new Date().toISOString().split('T')[0]}).
-            </span>
-          </div>
-          <span className="text-[11px] text-success-700 bg-success-50 border border-success-200 px-2.5 py-0.5 rounded-full font-medium">
-            Section Empty (All Passed)
-          </span>
+        <div className="bg-white border border-gray-200 rounded-lg p-4 flex items-center gap-2.5 text-xs text-gray-500">
+          <FileCode className="h-4 w-4 text-success-500" />
+          <span>No failures reported today ({new Date().toISOString().split('T')[0]}).</span>
         </div>
       )}
     </div>

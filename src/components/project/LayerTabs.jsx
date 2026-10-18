@@ -35,7 +35,7 @@ export default function LayerTabs({
             <span>{tab.name}</span>
             <span
               className={cn(
-                'text-[10px] px-1.5 py-0.2 rounded-full',
+                'text-[10px] px-1.5 py-0.5 rounded-full',
                 isSelected ? 'bg-white/20 text-white' : 'bg-gray-200 text-gray-600'
               )}
             >

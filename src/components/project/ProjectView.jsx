@@ -144,12 +144,7 @@ export default function ProjectView({ projectData, onSelectTest }) {
         flakyCount={totalFlakyInLayer}
       />
 
-      {/* Playwright Offline Report & Zip Archive Section */}
-      <PlaywrightZipBanner
-        selectedLayer={selectedLayer}
-        onSelectLayer={setSelectedLayer}
-        layers={layers}
-      />
+      <PlaywrightZipBanner selectedLayer={selectedLayer} layers={layers} />
 
       {/* Daily Playwright Report Section */}
       <DailyFailures

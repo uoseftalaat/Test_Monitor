@@ -30,7 +30,7 @@ export default function GlobalOverview({ globalSummary, onSelectProject }) {
       <div className="flex items-center gap-3 sm:gap-4">
         <div className="w-1 h-8 bg-primary-500 rounded shrink-0" />
         <div>
-          <h1 className="text-xl sm:text-2xl font-semibold text-gray-900 tracking-tight">Executive QA Dashboard</h1>
+          <h1 className="text-xl sm:text-2xl font-semibold text-gray-900 tracking-tight">QA Dashboard</h1>
           <p className="text-sm text-gray-500 mt-0.5">
             Unified test execution health across all platforms and automated test suites.
           </p>
@@ -84,7 +84,7 @@ export default function GlobalOverview({ globalSummary, onSelectProject }) {
           <span className="text-xs text-gray-500">{projects.length} integrated test suites</span>
         </div>
 
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-5">
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
           {sortedProjects.map((proj) => (
             <ProjectCard
               key={proj.id}
