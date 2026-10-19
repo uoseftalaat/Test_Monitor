@@ -1,8 +1,8 @@
 {
-  "projectId": "kuiper",
-  "projectName": "Kuiper",
-  "layer": "api",
-  "layerName": "API",
+  "projectId": "ibusiness",
+  "projectName": "IBusiness",
+  "layer": "mobile",
+  "layerName": "Mobile",
   "lastUpdated": null,
   "summary": {
     "total": 0,
@@ -12,8 +12,6 @@
     "skipped": 0,
     "passRate": 100
   },
-  "playwrightZip": null,
-  "playwrightZipUrl": null,
   "tests": [],
   "runsHistory": []
 }

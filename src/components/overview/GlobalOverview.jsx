@@ -12,7 +12,25 @@ import MetricCard from '../common/MetricCard';
 export default function GlobalOverview({ globalSummary, onSelectProject }) {
   if (!globalSummary) return null;
 
-  const { overallSummary, projects = [] } = globalSummary;
+  const { projects = [] } = globalSummary;
+
+  // Derive overall numbers from the live per-project summaries rather than the
+  // separately-stored overallSummary field, which can drift out of sync with it.
+  const overallSummary = projects.reduce(
+    (acc, p) => {
+      acc.totalTests += p.summary?.total || 0;
+      acc.totalPassed += p.summary?.passed || 0;
+      acc.totalFailed += p.summary?.failed || 0;
+      acc.totalFlaky += p.summary?.flaky || 0;
+      acc.totalSkipped += p.summary?.skipped || 0;
+      return acc;
+    },
+    { totalTests: 0, totalPassed: 0, totalFailed: 0, totalFlaky: 0, totalSkipped: 0 }
+  );
+  overallSummary.passRate =
+    overallSummary.totalTests > 0
+      ? Number(((overallSummary.totalPassed / overallSummary.totalTests) * 100).toFixed(1))
+      : 100;
 
   // Prioritize projects with active failures first so testers see issues immediately
   const sortedProjects = [...projects].sort((a, b) => {

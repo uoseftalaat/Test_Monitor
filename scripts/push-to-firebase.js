@@ -516,25 +516,53 @@ async function main() {
   const summaryDoc = await summaryRef.get();
   if (summaryDoc.exists) {
     const summaryData = summaryDoc.data();
-    const projIdx = (summaryData.projects || []).findIndex(p => p.id === projectId);
-    if (projIdx >= 0) {
-      if (!summaryData.projects[projIdx].layers) summaryData.projects[projIdx].layers = {};
-      for (const [lKey, lVal] of Object.entries(currentLayers)) {
-        summaryData.projects[projIdx].layers[lKey] = lVal.passRate;
-      }
-      summaryData.projects[projIdx].lastUpdated = now.toISOString();
-      summaryData.projects[projIdx].summary = {
-        total: mTotal,
-        passed: mPassed,
-        failed: mFailed,
-        flaky: mFlaky,
-        skipped: mSkipped,
-        passRate: mPassRate
-      };
-      summaryData.lastUpdated = now.toISOString();
-      await summaryRef.set(summaryData, { merge: true });
-      console.log(`✅ Updated global summary in Firestore.`);
+    if (!summaryData.projects) summaryData.projects = [];
+    let projIdx = summaryData.projects.findIndex(p => p.id === projectId);
+    if (projIdx < 0) {
+      // First sync for this project — add it to the dashboard's project list
+      // instead of silently skipping (this previously left newly-added
+      // projects invisible in the nav until someone manually seeded them).
+      summaryData.projects.push({
+        id: projectId,
+        name: existingProjData.projectName || projectId.toUpperCase(),
+        layers: {}
+      });
+      projIdx = summaryData.projects.length - 1;
+      console.log(`ℹ️ Added new project [${projectId}] to the dashboard's project list.`);
     }
+
+    if (!summaryData.projects[projIdx].layers) summaryData.projects[projIdx].layers = {};
+    for (const [lKey, lVal] of Object.entries(currentLayers)) {
+      summaryData.projects[projIdx].layers[lKey] = lVal.passRate;
+    }
+    summaryData.projects[projIdx].lastUpdated = now.toISOString();
+    summaryData.projects[projIdx].summary = {
+      total: mTotal,
+      passed: mPassed,
+      failed: mFailed,
+      flaky: mFlaky,
+      skipped: mSkipped,
+      passRate: mPassRate
+    };
+
+    const oTotal = summaryData.projects.reduce((acc, p) => acc + (p.summary?.total || 0), 0);
+    const oPassed = summaryData.projects.reduce((acc, p) => acc + (p.summary?.passed || 0), 0);
+    const oFailed = summaryData.projects.reduce((acc, p) => acc + (p.summary?.failed || 0), 0);
+    const oFlaky = summaryData.projects.reduce((acc, p) => acc + (p.summary?.flaky || 0), 0);
+    const oSkipped = summaryData.projects.reduce((acc, p) => acc + (p.summary?.skipped || 0), 0);
+    const oPassRate = oTotal > 0 ? Number(((oPassed / oTotal) * 100).toFixed(1)) : 100;
+    summaryData.overallSummary = {
+      totalTests: oTotal,
+      totalPassed: oPassed,
+      totalFailed: oFailed,
+      totalFlaky: oFlaky,
+      totalSkipped: oSkipped,
+      passRate: oPassRate
+    };
+
+    summaryData.lastUpdated = now.toISOString();
+    await summaryRef.set(summaryData, { merge: true });
+    console.log(`✅ Updated global summary in Firestore.`);
   }
 
   console.log(`🎉 Finished syncing test results for [${projectId}] to Firebase!`);

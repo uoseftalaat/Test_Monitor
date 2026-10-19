@@ -1,0 +1,17 @@
+{
+  "projectId": "ibusiness",
+  "projectName": "IBusiness",
+  "layer": "api",
+  "layerName": "API",
+  "lastUpdated": null,
+  "summary": {
+    "total": 0,
+    "passed": 0,
+    "failed": 0,
+    "flaky": 0,
+    "skipped": 0,
+    "passRate": 100
+  },
+  "tests": [],
+  "runsHistory": []
+}

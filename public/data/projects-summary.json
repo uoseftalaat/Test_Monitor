@@ -1,6 +1,6 @@
 {
   "lastUpdated": null,
-  "totalProjects": 4,
+  "totalProjects": 6,
   "overallSummary": {
     "totalTests": 0,
     "totalPassed": 0,
@@ -51,9 +51,49 @@
       }
     },
     {
-      "id": "kuiper",
-      "name": "Kuiper",
-      "description": "High-Throughput Analytics & Telemetry Engine",
+      "id": "domo",
+      "name": "Domo",
+      "description": "Kuiper — Domo workspace",
+      "repoUrl": "https://github.com/Areeb-Innovative-Technologies/kuiper_test",
+      "lastUpdated": null,
+      "summary": {
+        "total": 0,
+        "passed": 0,
+        "failed": 0,
+        "flaky": 0,
+        "skipped": 0,
+        "passRate": 100
+      },
+      "layers": {
+        "web": 100,
+        "api": 100,
+        "mobile": 100
+      }
+    },
+    {
+      "id": "dib",
+      "name": "Dib",
+      "description": "Kuiper — Dib workspace",
+      "repoUrl": "https://github.com/Areeb-Innovative-Technologies/kuiper_test",
+      "lastUpdated": null,
+      "summary": {
+        "total": 0,
+        "passed": 0,
+        "failed": 0,
+        "flaky": 0,
+        "skipped": 0,
+        "passRate": 100
+      },
+      "layers": {
+        "web": 100,
+        "api": 100,
+        "mobile": 100
+      }
+    },
+    {
+      "id": "ibusiness",
+      "name": "IBusiness",
+      "description": "Kuiper — public landing & central auth/workspace picker",
       "repoUrl": "https://github.com/Areeb-Innovative-Technologies/kuiper_test",
       "lastUpdated": null,
       "summary": {
@@ -74,7 +114,7 @@
       "id": "atlas",
       "name": "Atlas",
       "description": "Enterprise Geolocation & Fleet Tracking",
-      "repoUrl": "https://github.com/Areeb-Innovative-Technologies/atlas_test",
+      "repoUrl": "https://dev.azure.com/areebgroup/Atlas/_git/atlas_test",
       "lastUpdated": null,
       "summary": {
         "total": 0,

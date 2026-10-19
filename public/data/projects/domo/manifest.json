@@ -1,7 +1,7 @@
 {
-  "projectId": "kuiper",
-  "projectName": "Kuiper",
-  "description": "High-Throughput Analytics & Telemetry Engine",
+  "projectId": "domo",
+  "projectName": "Domo",
+  "description": "Kuiper — Domo workspace",
   "repoUrl": "https://github.com/Areeb-Innovative-Technologies/kuiper_test",
   "lastUpdated": null,
   "retentionDays": 30,

@@ -1,0 +1,46 @@
+{
+  "projectId": "ibusiness",
+  "projectName": "IBusiness",
+  "description": "Kuiper — IBusiness workspace",
+  "repoUrl": "https://github.com/Areeb-Innovative-Technologies/kuiper_test",
+  "lastUpdated": null,
+  "retentionDays": 30,
+  "summary": {
+    "total": 0,
+    "passed": 0,
+    "failed": 0,
+    "flaky": 0,
+    "skipped": 0,
+    "passRate": 100
+  },
+  "layers": {
+    "web": {
+      "name": "Web",
+      "total": 0,
+      "passed": 0,
+      "failed": 0,
+      "flaky": 0,
+      "skipped": 0,
+      "passRate": 100
+    },
+    "api": {
+      "name": "API",
+      "total": 0,
+      "passed": 0,
+      "failed": 0,
+      "flaky": 0,
+      "skipped": 0,
+      "passRate": 100
+    },
+    "mobile": {
+      "name": "Mobile",
+      "total": 0,
+      "passed": 0,
+      "failed": 0,
+      "flaky": 0,
+      "skipped": 0,
+      "passRate": 100,
+      "notConfigured": false
+    }
+  }
+}

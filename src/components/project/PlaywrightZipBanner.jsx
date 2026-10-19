@@ -1,5 +1,5 @@
 import React from 'react';
-import { FileArchive, Download, Globe, Zap, Smartphone } from 'lucide-react';
+import { FileArchive, Download, ExternalLink, Globe, Zap, Smartphone } from 'lucide-react';
 import { formatBytes, formatUploadTime } from '../../utils/formatters';
 import { cn } from '../../utils/cn';
 
@@ -7,6 +7,14 @@ function zipMeta(zip) {
   return [zip?.fileName, formatBytes(zip?.sizeBytes), zip?.uploadedAt && formatUploadTime(zip.uploadedAt)]
     .filter(Boolean)
     .join(' · ');
+}
+
+// Reports now link to the GitHub Actions artifact that already holds them
+// (no Firebase Storage bucket exists to host a direct zip download) — that's
+// an HTML page requiring GitHub sign-in, not a file, so it needs different
+// copy/affordance than a true direct-download link.
+function isGithubArtifactLink(url) {
+  return typeof url === 'string' && /github\.com\/[^/]+\/[^/]+\/actions\/runs\/[^/]+\/artifacts\//.test(url);
 }
 
 export default function PlaywrightZipBanner({
@@ -41,20 +49,28 @@ export default function PlaywrightZipBanner({
           {currentLayerZipUrl && (
             <a
               href={currentLayerZipUrl}
-              download={currentLayerZip?.fileName || `playwright-report-${selectedLayer}.zip`}
+              {...(!isGithubArtifactLink(currentLayerZipUrl) && {
+                download: currentLayerZip?.fileName || `playwright-report-${selectedLayer}.zip`
+              })}
               target="_blank"
               rel="noreferrer"
               className="shrink-0 inline-flex items-center gap-2 px-4 py-2 rounded-md bg-primary-600 hover:bg-primary-700 text-white text-xs font-semibold transition"
             >
-              <Download className="h-3.5 w-3.5" />
-              Download
+              {isGithubArtifactLink(currentLayerZipUrl) ? (
+                <ExternalLink className="h-3.5 w-3.5" />
+              ) : (
+                <Download className="h-3.5 w-3.5" />
+              )}
+              {isGithubArtifactLink(currentLayerZipUrl) ? 'View on GitHub' : 'Download'}
             </a>
           )}
         </div>
 
         {currentLayerZipUrl && (
           <p className="mt-3 text-[11px] text-gray-400">
-            Unzip the file and open it in your browser to view the report offline.
+            {isGithubArtifactLink(currentLayerZipUrl)
+              ? 'Opens the run on GitHub Actions — sign in and download the zip from its Artifacts section.'
+              : 'Unzip the file and open it in your browser to view the report offline.'}
           </p>
         )}
       </div>
@@ -95,13 +111,19 @@ export default function PlaywrightZipBanner({
               {hasZip && (
                 <a
                   href={item.url}
-                  download={item.zip?.fileName || `playwright-report-${item.id}.zip`}
+                  {...(!isGithubArtifactLink(item.url) && {
+                    download: item.zip?.fileName || `playwright-report-${item.id}.zip`
+                  })}
                   target="_blank"
                   rel="noreferrer"
                   className="shrink-0 inline-flex items-center gap-1.5 text-xs font-semibold text-primary-600 hover:text-primary-700"
                 >
-                  <Download className="h-3.5 w-3.5" />
-                  Download
+                  {isGithubArtifactLink(item.url) ? (
+                    <ExternalLink className="h-3.5 w-3.5" />
+                  ) : (
+                    <Download className="h-3.5 w-3.5" />
+                  )}
+                  {isGithubArtifactLink(item.url) ? 'View on GitHub' : 'Download'}
                 </a>
               )}
             </div>

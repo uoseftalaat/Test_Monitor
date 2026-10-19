@@ -1,8 +1,8 @@
 {
-  "projectId": "kuiper",
-  "projectName": "Kuiper",
-  "layer": "mobile",
-  "layerName": "Mobile",
+  "projectId": "dib",
+  "projectName": "Dib",
+  "layer": "api",
+  "layerName": "API",
   "lastUpdated": null,
   "summary": {
     "total": 0,
@@ -12,8 +12,6 @@
     "skipped": 0,
     "passRate": 100
   },
-  "playwrightZip": null,
-  "playwrightZipUrl": null,
   "tests": [],
   "runsHistory": []
 }
